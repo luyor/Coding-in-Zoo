@@ -32,7 +32,7 @@ void Game::GameLoop()
                 break;
             case MISSION_END:
                 my_graphic_engine.MissionComplete();
-                //check mission
+
                 break;
            }
        }
