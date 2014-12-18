@@ -15,7 +15,8 @@ public:
     virtual void Fire(Game& my_game);
 private:
     int health;
-    const int HIT_SCORE,DESTROY_SCORE;
+    int HIT_SCORE;
+    int DESTROY_SCORE;
 };
 
 #endif // ENEMY_H

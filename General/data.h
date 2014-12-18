@@ -11,12 +11,14 @@ public:
     int FRAME_PER_SECOND;
     int MAX_LIFE;
     int MAX_HEALTH;
+    int CRUSH_DAMAGE;
 private:
     static const Point DEFAULT_GAME_AREA_BOTTOM_LEFT;
     static const Point DEFAULT_GAME_AREA_TOP_RIGHT;
     static const int DEFAULT_FRAME_PER_SECOND;
     static const int DEFAULT_MAX_LIFE;
     static const int DEFAULT_MAX_HEALTH;
+    static const int DEFAULT_CRUSH_DAMAGE;
 };
 
 #endif // DATA_H

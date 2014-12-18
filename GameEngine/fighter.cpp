@@ -26,10 +26,20 @@ void Fighter::Hit(int damage)
     }
 }
 
-void Destroy()
+void Fighter::Destroy()
 {
     //add score
     if (!my_player->IsDead()){
         //register new fighter
     }
+}
+
+int Fighter::Crush()
+{
+    SetDestroy();
+    return data.CRUSH_DAMAGE;
+}
+
+void Fighter::GetItem(enum Item::ItemType type){
+
 }
