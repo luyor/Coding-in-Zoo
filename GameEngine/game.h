@@ -58,15 +58,16 @@ private:
     vector<Item> items;
 
     //private functions
+    //change velocity,auto-destroy,create,move,fire
     void AllChangeStatus(double time);
-        //change velocity,auto-destroy,create,move,fire
+    //minus life,send hit message,destroy
     void AllCheckCollision();
-        //minus life,send hit message,destroy
+    //clean all objects that finish paint
     void AllPaint(double time);
     void AllClean();
-        //clean all objects that finish paint
+    //respond pause/insert coin key,return pause status
     bool IsPaused();
-        //respond pause/insert coin key,return pause status
+
 };
 
 #endif // GAME_H
