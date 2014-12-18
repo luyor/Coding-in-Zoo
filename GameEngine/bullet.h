@@ -12,12 +12,14 @@ public:
         LASER
     }bullet_type;
 
+    //constructor of friendly bullet
     Bullet(Point v,Point p,double angle0,vector<Circle>& hit_point0,
            Graphic graphic0,int damage0,enum BulletType type,Player* belonging0);
-//constructor of friendly bullet
+
+    //constructor of enemy bullet
     Bullet(Point v,Point p,double angle0,vector<Circle>& hit_point0,
            Graphic graphic0,enum BulletType type,int damage0);
-//constructor of enemy bullet
+
 
     int Hit();//return damage
     void AddScore(int score0){belonging->AddScore(score0);}

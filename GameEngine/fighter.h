@@ -15,17 +15,18 @@ public:
     void Fire(Game& my_game);
     void Bombard(Game& my_game);
     void GetItem(enum Item::ItemType type);
+    //constrain fighter in visible area
     void FighterMove(double time,Point visible_area,Point fighter_size);
-        //constrain fighter in visible area
 
-    void AddScore(int score0){my_player->AddScore(score0);}//add score after crush
+    //add score after crush
+    void AddScore(int score0){my_player->AddScore(score0);}
+    //destroy,return crush damage
     int Crush();
-        //destroy,return crush damage
+
 
     void Hit(int damage);//do damage
+    //check if acting when crush enemy
     bool IsActing(){if (status==ACTING)return true;return false;}
-        //check if acting when crush enemy
-
 private:
     enum{
         FLYING=0,

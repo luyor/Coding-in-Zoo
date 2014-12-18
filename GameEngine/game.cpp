@@ -99,6 +99,7 @@ void Game::AllChangeStatus(double time)
 
 void Game::AllCheckCollision()
 {
+    //friendly bullet collide enemy
     for (vector<Bullet>::iterator i=friendly_bullets.begin();i!=friendly_bullets.end();++i){
         for (vector<Enemy>::iterator j=enemies.begin();j!=enemies.end();++j){
             if(!i->IsDestroyed()&&!j->IsDestroyed()&&IsColliding(*i,*j)){
@@ -108,6 +109,7 @@ void Game::AllCheckCollision()
         }
     }
 
+    //enemy bullet collide fighter
     for (vector<Bullet>::iterator i=enemy_bullets.begin();i!=enemy_bullets.end();++i){
         for (vector<Fighter>::iterator j=fighters.begin();j!=fighters.end();++j){
             if(!i->IsDestroyed()&&!j->IsDestroyed()&&IsColliding(*i,*j)){
@@ -117,6 +119,7 @@ void Game::AllCheckCollision()
         }
     }
 
+    //fighter collide enemy
     for (vector<Fighter>::iterator i=fighters.begin();i!=fighters.end();++i){
         if (i->IsActing()){
             for (vector<Enemy>::iterator j=enemies.begin();j!=enemies.end();++j){
@@ -128,11 +131,13 @@ void Game::AllCheckCollision()
         }
     }
 
+    //fighter collide item
     for (vector<Fighter>::iterator i=fighters.begin();i!=fighters.end();++i){
         for (vector<Item>::iterator j=items.begin();j!=items.end();++j){
             i->GetItem(j->Hit());
         }
     }
+
 
 }
 
