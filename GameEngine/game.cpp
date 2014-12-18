@@ -54,7 +54,7 @@ void Game::FriendlyBulletRegister(Bullet& bullet)
     friendly_bullets.push_back(bullet);
 }
 
-void Game::EnemyBulletRegister(FlyingObject& bullet)
+void Game::EnemyBulletRegister(Bullet& bullet)
 {
     enemy_bullets.push_back(bullet);
 }
@@ -75,7 +75,7 @@ void Game::AllChangeStatus(double time)
         it->ChangeStatus(time,*this);
         it->Move(time);
     }
-    for(vector<FlyingObject>::iterator it=enemy_bullets.begin();it!=enemy_bullets.end();++it){
+    for(vector<Bullet>::iterator it=enemy_bullets.begin();it!=enemy_bullets.end();++it){
         it->ChangeStatus(time,*this);
         it->Move(time);
     }
@@ -109,13 +109,31 @@ void Game::AllCheckCollision()
     }
 
     for (vector<Bullet>::iterator i=enemy_bullets.begin();i!=enemy_bullets.end();++i){
-        for (vector<Enemy>::iterator j=fighters.begin();j!=fighters.end();++j){
+        for (vector<Fighter>::iterator j=fighters.begin();j!=fighters.end();++j){
             if(!i->IsDestroyed()&&!j->IsDestroyed()&&IsColliding(*i,*j)){
                 j->Hit(i->Hit());
                 //i->Hit return damage,j->Hit return score
             }
         }
     }
+
+    for (vector<Fighter>::iterator i=fighters.begin();i!=fighters.end();++i){
+        if (i->IsActing()){
+            for (vector<Enemy>::iterator j=enemies.begin();j!=enemies.end();++j){
+                if(!i->IsDestroyed()&&!j->IsDestroyed()&&IsColliding(*i,*j)){
+                    i->AddScore(j->Hit(i->Crush()));
+                    //i->Crush return damage,j->Hit return score
+                }
+            }
+        }
+    }
+
+    for (vector<Fighter>::iterator i=fighters.begin();i!=fighters.end();++i){
+        for (vector<Item>::iterator j=items.begin();j!=items.end();++j){
+            i->GetItem(j->Hit());
+        }
+    }
+
 }
 
 void Game::AllPaint(double time)
@@ -124,7 +142,7 @@ void Game::AllPaint(double time)
     for(vector<Bullet>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
         it->Paint(time);
     }
-    for(vector<FlyingObject>::iterator it=enemy_bullets.begin();it!=enemy_bullets.end();++it){
+    for(vector<Bullet>::iterator it=enemy_bullets.begin();it!=enemy_bullets.end();++it){
         it->Paint(time);
     }
     for(vector<Fighter>::iterator it=fighters.begin();it!=fighters.end();++it){

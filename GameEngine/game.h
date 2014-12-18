@@ -16,24 +16,24 @@
 class Game
 {
 public:
+    enum GameMode{
+        SINGLE=0,
+        COOP
+    };
+
     Game(enum GameMode game_mode,int coins0,Control* control0,Control* control1);
     void GameLoop();
 
     void FighterRegister(Fighter& fighter);
     void EnemyRegister(Enemy& enemy);
     void FriendlyBulletRegister(Bullet& bullet);
-    void EnemyBulletRegister(FlyingObject& bullet);
+    void EnemyBulletRegister(Bullet& bullet);
     void BombRegister(Bomb& bomb);
     void ItemRegister(Item& item);
 private:
     //private variables
     QTime physics_time;
     QTime graphics_time;
-
-    enum GameMode{
-        SINGLE=0,
-        COOP
-    };
 
     enum{
         MISSION_START=0,

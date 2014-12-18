@@ -18,11 +18,17 @@ public:
     void FighterMove(double time,Point visible_area,Point fighter_size);
         //constrain fighter in visible area
 
+    void AddScore(int score0){my_player->AddScore(score0);}//add score after crush
+    int Crush();
+        //destroy,return crush damage
+
     void Hit(int damage);//do damage
+    bool IsActing(){if (status==ACTING)return true;return false;}
+        //check if acting when crush enemy
+
 private:
     enum{
-        FLYING_UP=0,
-        FROZEN,
+        FLYING=0,
         BULLET_PROOF,
         ACTING
     }status;
