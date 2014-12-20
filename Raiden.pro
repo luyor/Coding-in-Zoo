@@ -27,7 +27,16 @@ SOURCES += main.cpp\
     General/data.cpp \
     GameEngine/bomb.cpp \
     General/hitpoint.cpp \
-    GameEngine/player.cpp
+    GameEngine/player.cpp \
+    UI/difficultyui.cpp \
+    UI/graphui.cpp \
+    UI/keypress.cpp \
+    UI/main.cpp \
+    UI/mainwindow.cpp \
+    UI/operationui.cpp \
+    UI/screenui.cpp \
+    UI/soundui.cpp \
+    UI/value.cpp
 
 HEADERS  += mainwindow.h \
     stdafx.h \
@@ -48,6 +57,15 @@ HEADERS  += mainwindow.h \
     General/data.h \
     res.h \
     General/hitpoint.h \
-    GameEngine/player.h
+    GameEngine/player.h \
+    GameDesign/enemytype.h \
+    UI/difficultyUI.h \
+    UI/graphUI.h \
+    UI/keypress.h \
+    UI/mainwindow.h \
+    UI/operationUI.h \
+    UI/screenUI.h \
+    UI/soundUI.h \
+    UI/value.h
 
 FORMS    += mainwindow.ui
