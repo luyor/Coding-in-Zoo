@@ -42,7 +42,7 @@ private:
     }status;
 
     QTime my_time;
-    int backgrond_position;
+    double backgrond_position;
     int coins;
     bool PAUSED,END;
 

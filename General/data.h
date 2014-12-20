@@ -8,6 +8,7 @@ class Data
 public:
     Data();
     Point GAME_AREA_BOTTOM_LEFT,GAME_AREA_TOP_RIGHT;//valid area of game
+    Point PAINT_AREA_BOTTOM_LEFT,PAINT_AREA_TOP_RIGHT;//valid area of paint
     int FRAME_PER_SECOND;
     int MAX_LIFE;
     int MAX_HEALTH;
@@ -15,6 +16,8 @@ public:
 private:
     static const Point DEFAULT_GAME_AREA_BOTTOM_LEFT;
     static const Point DEFAULT_GAME_AREA_TOP_RIGHT;
+    static const Point DEFAULT_PAINT_AREA_BOTTOM_LEFT;
+    static const Point DEFAULT_PAINT_AREA_TOP_RIGHT;
     static const int DEFAULT_FRAME_PER_SECOND;
     static const int DEFAULT_MAX_LIFE;
     static const int DEFAULT_MAX_HEALTH;

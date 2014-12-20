@@ -8,7 +8,7 @@ class Design
 public:
     Design();
     //NewEnemy is used to register new enemy in game engine, using game.EnemyRegister()
-    void NewEnemy(Game& game,int backgrond_position);
+    void NewEnemy(Game& game,double backgrond_position);
     void Reset();//reset level
 };
 

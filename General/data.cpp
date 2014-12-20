@@ -6,6 +6,8 @@ const int Data::DEFAULT_FRAME_PER_SECOND=30;
 const int Data::DEFAULT_MAX_LIFE=3;
 const int Data::DEFAULT_MAX_HEALTH=100;
 const int Data::DEFAULT_CRUSH_DAMAGE=100;
+static const Point Data::DEFAULT_PAINT_AREA_BOTTOM_LEFT;
+static const Point Data::DEFAULT_PAINT_AREA_TOP_RIGHT;
 
 Data::Data():
     GAME_AREA_BOTTOM_LEFT(DEFAULT_GAME_AREA_BOTTOM_LEFT),
