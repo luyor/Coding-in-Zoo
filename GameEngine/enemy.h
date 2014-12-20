@@ -26,5 +26,4 @@ private:
     int HIT_SCORE;
     int DESTROY_SCORE;
 };
-
 #endif // ENEMY_H
