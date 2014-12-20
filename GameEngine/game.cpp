@@ -29,6 +29,9 @@ void Game::GameLoop()
                 if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND)//flash a frame
                     AllPaint((double)graphics_time.restart()/1000);
                 AllClean();
+                if (design.MissionFinish()&&enemies.empty()){
+                    status=MISSION_END;
+                }
                 break;
             case MISSION_END:
                 my_graphic_engine.MissionComplete();
@@ -113,7 +116,7 @@ void Game::AllCheckCollision()
     for (vector<Bullet>::iterator i=enemy_bullets.begin();i!=enemy_bullets.end();++i){
         for (vector<Fighter>::iterator j=fighters.begin();j!=fighters.end();++j){
             if(!i->IsDestroyed()&&!j->IsDestroyed()&&IsColliding(*i,*j)){
-                j->Hit(i->Hit());
+                j->AddScore(j->Hit(i->Hit()));
                 //i->Hit return damage,j->Hit return score
             }
         }
@@ -134,11 +137,19 @@ void Game::AllCheckCollision()
     //fighter collide item
     for (vector<Fighter>::iterator i=fighters.begin();i!=fighters.end();++i){
         for (vector<Item>::iterator j=items.begin();j!=items.end();++j){
-            i->GetItem(j->Hit());
+            if(!i->IsDestroyed()&&!j->IsDestroyed()&&IsColliding(*i,*j))
+                i->GetItem(j->Hit());
         }
     }
 
     //Enemy collide bomb
+    for (vector<Bomb>::iterator i=bombs.begin();i!=bombs.end();++i){
+        for (vector<Enemy>::iterator j=enemies.begin();j!=enemies.end();++j){
+            if(!i->IsDestroyed()&&!j->IsDestroyed()&&IsColliding(*i,*j))
+                i->AddScore(j->Hit(i->Hit()));
+        }
+    }
+
 }
 
 void Game::AllPaint(double time)

@@ -7,7 +7,13 @@
 class Bomb:public Bullet
 {
 public:
-    Bomb(Point v,Point p,double angle0,Graphic graphic0);
+    Bomb(Point v,Point p,double angle0,Graphic graphic0,int damage0,Player* belonging0);
+    //change status if explode then destroy
+private:
+    enum {
+        FLYING,
+        EXPLODED
+    }status;
 };
 
 #endif // BOMB_H
