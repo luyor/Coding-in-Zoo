@@ -14,6 +14,7 @@ private:
         FLYING,
         EXPLODED
     }status;
+    int elapsed_time;
 };
 
 #endif // BOMB_H

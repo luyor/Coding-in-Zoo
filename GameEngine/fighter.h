@@ -55,6 +55,9 @@ private:
     //private const
     static const int max_bullet_level;
     static const int max_missile_level;
+    static const int FLYING_TIME;
+    static const int BULLET_PROOF_TIME;
+    static const int SPEED;
 };
 
 #endif // FIGHTER_H

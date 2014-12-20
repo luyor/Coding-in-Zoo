@@ -23,8 +23,8 @@ void Game::GameLoop()
                 physics_time.start();
                 break;
             case MISSION_ON:
-                design.NewEnemy(*this,backgrond_position);
                 AllChangeStatus((double)physics_time.restart()/1000);
+                design.NewEnemy(*this,backgrond_position);
                 AllCheckCollision();
                 if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND)//flash a frame
                     AllPaint((double)graphics_time.restart()/1000);
@@ -35,7 +35,14 @@ void Game::GameLoop()
                 break;
             case MISSION_END:
                 my_graphic_engine.MissionComplete();
-
+                if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND){//flash a frame
+                    my_graphic_engine.PaintBackground(time);
+                    my_graphic_engine.PaintEnd((double)graphics_time.restart()/1000);
+                    if (my_graphic_engine.PaintEndFinish()&&design.HaveNextMission()){
+                        design.NextMission();
+                        status=MISSION_START;
+                    }
+                }
                 break;
            }
        }
@@ -74,6 +81,7 @@ void Game::ItemRegister(Item& item)
 
 void Game::AllChangeStatus(double time)
 {
+    if (background_position<1<<60)backgrond_position+=time*data.BACKGROUND_SPEED;
     for(vector<Bullet>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
         it->ChangeStatus(time,*this);
         it->Move(time);
@@ -116,7 +124,7 @@ void Game::AllCheckCollision()
     for (vector<Bullet>::iterator i=enemy_bullets.begin();i!=enemy_bullets.end();++i){
         for (vector<Fighter>::iterator j=fighters.begin();j!=fighters.end();++j){
             if(!i->IsDestroyed()&&!j->IsDestroyed()&&IsColliding(*i,*j)){
-                j->AddScore(j->Hit(i->Hit()));
+                j->Hit(i->Hit());
                 //i->Hit return damage,j->Hit return score
             }
         }
