@@ -64,6 +64,8 @@ void Design::NewEnemy(Game &game, double background_position)
                 Enemy4 x();
                 break;
         }
+        game.EnemyRegister(x);
+        CurrentEnemyNumber++;
     }
 }
 
