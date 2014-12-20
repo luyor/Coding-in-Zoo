@@ -12,4 +12,6 @@ public:
     void Reset();//reset level
 };
 
+
+
 #endif // DESIGN_H
