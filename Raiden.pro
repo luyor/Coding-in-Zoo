@@ -48,6 +48,7 @@ HEADERS  += mainwindow.h \
     General/data.h \
     res.h \
     General/hitpoint.h \
-    GameEngine/player.h
+    GameEngine/player.h \
+    GameDesign/enemytype.h
 
 FORMS    += mainwindow.ui
