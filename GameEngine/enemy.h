@@ -12,11 +12,16 @@ public:
           Graphic graphic0,int health0,int HIT_SCORE0,int DESTROY_SCORE0);
     //do damge and return score
     int Hit(int damage);
-    virtual void Fire(Game& my_game);
+//    virtual void Fire(Game& my_game);
 private:
     int health;
     int HIT_SCORE;
     int DESTROY_SCORE;
+};
+
+class Enemy1:public Enemy
+{
+
 };
 
 #endif // ENEMY_H
