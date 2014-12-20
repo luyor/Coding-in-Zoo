@@ -138,7 +138,7 @@ void Game::AllCheckCollision()
         }
     }
 
-
+    //Enemy collide bomb
 }
 
 void Game::AllPaint(double time)
