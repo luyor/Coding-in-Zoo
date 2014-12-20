@@ -19,6 +19,7 @@ public:
     Enemy(Point v,Point p,double angle0,vector<Circle>& hit_point0,
           Graphic graphic0,int health0,int HIT_SCORE0,int DESTROY_SCORE0);
     //do damge and return score
+    //enemy was hit, use Hit();
     int Hit(int damage);
 //    virtual void Fire(Game& my_game);
 private:
