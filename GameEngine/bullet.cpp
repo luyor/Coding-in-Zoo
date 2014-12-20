@@ -19,3 +19,8 @@ int Bullet::Hit()
     if (bullet_type==LASER)SetDestroy();
     return damage;
 }
+
+void Bullet::ChangeStatus(double time, Game &my_game)
+{
+    //do nothing
+}

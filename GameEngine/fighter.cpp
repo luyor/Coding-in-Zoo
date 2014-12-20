@@ -43,3 +43,35 @@ int Fighter::Crush()
 void Fighter::GetItem(enum Item::ItemType type){
 
 }
+
+void Fighter::ChangeStatus(double time, Game &my_game)
+{
+    elapsed_time+=time;
+    switch (status){
+    case FLYING:
+        if (elapsed_time>FLYING_TIME){
+            status=BULLET_PROOF;
+            velocity=Point(0,0);
+            elapsed_time=0;
+        }
+        break;
+    case BULLET_PROOF:
+        if (elapsed_time>BULLET_PROOF_TIME){
+            status=ACTING;
+            elapsed_time=0;
+        }
+    case ACTING:
+        velocity=Point(0,0);
+        if (my_player->my_control->LeftPressed())velocity.x-=SPEED;
+        if (my_player->my_control->RightPressed())velocity.x+=SPEED;
+        if (my_player->my_control->DownPressed())velocity.y-=SPEED;
+        if (my_player->my_control->UpPressed())velocity.x+=SPEED;
+        if (my_player->my_control->BulletPressed()){
+            //register bullet
+        }
+        if (my_player->my_control->BombClicked()){
+            //register bomb
+        }
+        break;
+    }
+}

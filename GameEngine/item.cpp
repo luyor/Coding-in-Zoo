@@ -4,3 +4,11 @@ Item::Item(Point v,Point p,double angle0,vector<Circle>& hit_point0,Graphic grap
     FlyingObject(v,p,angle0,hit_point0,graphic0),my_item_type(type0),elapsed_time(0)
 {
 }
+
+void Item::ChangeStatus(double time, Game &my_game)
+{
+    elapsed_time+=time;
+    switch(item_type){
+        //change item type
+    }
+}
