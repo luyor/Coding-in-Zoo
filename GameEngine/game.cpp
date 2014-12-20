@@ -1,7 +1,7 @@
 #include "game.h"
 
 Game::Game(enum GameMode game_mode,int coins0,Control* control0,Control* control1):
-    backgrond_position(0),coins(coins0),PAUSED(false),END(false),
+    background_position(0),coins(coins0),PAUSED(false),END(false),
     player0(data.MAX_LIFE,control0),player1(data.MAX_LIFE,control1)
 {
     design.Reset();
@@ -24,7 +24,7 @@ void Game::GameLoop()
                 break;
             case MISSION_ON:
                 AllChangeStatus((double)physics_time.restart()/1000);
-                design.NewEnemy(*this,backgrond_position);
+                design.NewEnemy(*this,background_position);
                 AllCheckCollision();
                 if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND)//flash a frame
                     AllPaint((double)graphics_time.restart()/1000);
@@ -81,7 +81,7 @@ void Game::ItemRegister(Item& item)
 
 void Game::AllChangeStatus(double time)
 {
-    if (background_position<1<<60)backgrond_position+=time*data.BACKGROUND_SPEED;
+    if (background_position<(1<<60))background_position+=time*data.BACKGROUND_SPEED;
     for(vector<Bullet>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
         it->ChangeStatus(time,*this);
         it->Move(time);
