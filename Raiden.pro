@@ -68,4 +68,3 @@ HEADERS  += mainwindow.h \
     UI/soundUI.h \
     UI/value.h
 
-FORMS    += mainwindow.ui

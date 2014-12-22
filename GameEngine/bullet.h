@@ -13,14 +13,14 @@ public:
     }bullet_type;
 
     //constructor of friendly bullet
-    Bullet(Point v,Point p,double angle0,vector<Circle>& hit_point0,
-           Graphic graphic0,int damage0,enum BulletType type,Player* belonging0);
+    Bullet(Point v,Point p,double angle0,const HitPoint* hit_point0,
+           Graphic graphic0,enum BulletType type,int damage0,Player* belonging0);
 
     //constructor of enemy bullet
-    Bullet(Point v,Point p,double angle0,vector<Circle>& hit_point0,
+    Bullet(Point v,Point p,double angle0,const HitPoint* hit_point0,
            Graphic graphic0,enum BulletType type,int damage0);
 
-
+    void ChangeStatus(double time, Game &my_game);
     int Hit();//return damage
     void AddScore(int score0){belonging->AddScore(score0);}
 private:

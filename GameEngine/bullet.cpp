@@ -1,16 +1,16 @@
 #include "bullet.h"
 
-Bullet::Bullet(Point v,Point p,double angle0,vector<Circle>& hit_point0,
-               Graphic graphic0,int damage0,enum BulletType type,Player*belonging0):
+Bullet::Bullet(Point v,Point p,double angle0,const HitPoint* hit_point0,
+               Graphic graphic0,enum BulletType type,int damage0,Player*belonging0):
     FlyingObject(v,p,angle0,hit_point0,graphic0),
-    damage(damage0),bullet_type(type),belonging(belonging0)
+    bullet_type(type),damage(damage0),belonging(belonging0)
 {
 }
 
-Bullet::Bullet(Point v,Point p,double angle0,vector<Circle>& hit_point0,
-               Graphic graphic0,int damage0,enum BulletType type):
+Bullet::Bullet(Point v,Point p,double angle0,const HitPoint* hit_point0,
+               Graphic graphic0,enum BulletType type,int damage0):
     FlyingObject(v,p,angle0,hit_point0,graphic0),
-    damage(damage0),bullet_type(type)
+    bullet_type(type),damage(damage0)
 {
 }
 

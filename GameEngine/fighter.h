@@ -1,16 +1,17 @@
 #ifndef FIGHTER_H
 #define FIGHTER_H
 
+#include "../stdafx.h"
 #include "flyingobject.h"
 #include "item.h"
+#include "player.h"
 
 class Game;
-class Player;
 
 class Fighter:public FlyingObject
 {
 public:
-    Fighter(Point v,Point p,vector<Circle>& hit_point0,
+    Fighter(Point v,Point p,const HitPoint* hit_point0,
             Graphic graphic0,Player* player);
     void Fire(Game& my_game);
     void Bombard(Game& my_game);
