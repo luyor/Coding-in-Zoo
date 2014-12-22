@@ -1,6 +1,6 @@
 #include "fighter.h"
 
-Fighter::Fighter(Point v,Point p,vector<Circle>& hit_point0,
+Fighter::Fighter(Point v,Point p,const HitPoint* hit_point0,
                  Graphic graphic0,Player* player):
     FlyingObject(v,p,M_PI/2,hit_point0,graphic0),
     elapsed_time(0), bullet_level(1),missile_level(1),

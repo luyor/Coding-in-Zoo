@@ -7,7 +7,7 @@
 class Missile:public Bullet
 {
 public:
-    Missile(Point v,Point p,double angle0,vector<Circle>& hit_point0,Graphic graphic0,int damage0,Player* belonging0,Enemy* target0);
+    Missile(Point v,Point p,double angle0,const HitPoint* hit_point0,Graphic graphic0,int damage0,Player* belonging0,Enemy* target0);
 private:
     Enemy* target;
     int damage;

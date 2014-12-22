@@ -1,9 +1,6 @@
 #ifndef ENEMYTYPE_H
 #define ENEMYTYPE_H
 
-#ifndef ENEMYTYPE_H
-#define ENEMYTYPE_H
-
 class Enemy;
 
 class Enemy1:public Enemy
@@ -48,5 +45,3 @@ public:
 
 #endif // ENEMYTYPE_H
 
-
-#endif // ENEMYTYPE_H

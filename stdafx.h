@@ -12,4 +12,6 @@
 #include <QTime>
 using namespace std;
 
+#include "res.h"
+
 #endif // STDAFX_H

@@ -11,7 +11,6 @@
 #include "player.h"
 #include "../GameDesign/design.h"
 #include "../GraphicEngine/graphicengine.h"
-#include "res.h"
 
 class Game
 {
