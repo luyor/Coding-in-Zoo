@@ -1,25 +1,23 @@
 #include "fighter1graphic.h"
-#include "../stdafx.h"
 #include <QMatrix>
 
-QImage* Fighter1Graphic::pics[PicStatus::CREATE]         = NULL;
-QImage* Fighter1Graphic::pics[PicStatus::NORMAL]         = new QImage("player1.png");
-QImage* Fighter1Graphic::pics[PicStatus::HIT1]           = new QImage("player1_hit1.png");
-QImage* Fighter1Graphic::pics[PicStatus::HIT2]           = new QImage("player1_hit2.png");
-QImage* Fighter1Graphic::pics[PicStatus::HIT3]           = new QImage("player1_hit3.png");
-QImage* Fighter1Graphic::pics[PicStatus::DESTROY1]       = new QImage("player1_destroy1.png");
-QImage* Fighter1Graphic::pics[PicStatus::DESTROY2]       = new QImage("player1_destroy2.png");
-QImage* Fighter1Graphic::pics[PicStatus::DESTORY_FINISH] = NULL;
+QImage* Fighter1Graphic::pics[Fighter1Graphic::PicStatus::CREATE]         = NULL;
+QImage* Fighter1Graphic::pics[Fighter1Graphic::PicStatus::NORMAL]         = new QImage("player1.png");
+QImage* Fighter1Graphic::pics[Fighter1Graphic::PicStatus::HIT1]           = new QImage("player1_hit1.png");
+QImage* Fighter1Graphic::pics[Fighter1Graphic::PicStatus::HIT2]           = new QImage("player1_hit2.png");
+QImage* Fighter1Graphic::pics[Fighter1Graphic::PicStatus::HIT3]           = new QImage("player1_hit3.png");
+QImage* Fighter1Graphic::pics[Fighter1Graphic::PicStatus::DESTROY1]       = new QImage("player1_destroy1.png");
+QImage* Fighter1Graphic::pics[Fighter1Graphic::PicStatus::DESTROY2]       = new QImage("player1_destroy2.png");
+QImage* Fighter1Graphic::pics[Fighter1Graphic::PicStatus::DESTROY_FINISH] = NULL;
 
-static const double TIME[];
-const double TIME[PicStatus::CREATE]         = 0;
-const double TIME[PicStatus::NORMAL]         = 0;
-const double TIME[PicStatus::HIT1]           = 0;
-const double TIME[PicStatus::HIT2]           = 0;
-const double TIME[PicStatus::HIT3]           = 0;
-const double TIME[PicStatus::DESTROY1]       = 0;
-const double TIME[PicStatus::DESTROY2]       = 0;
-const double TIME[PicStatus::DESTROY_FINISH] = 0;
+const double Fighter1Graphic::TIME[Fighter1Graphic::PicStatus::CREATE]         = 0;
+const double Fighter1Graphic::TIME[Fighter1Graphic::PicStatus::NORMAL]         = 0;
+const double Fighter1Graphic::TIME[Fighter1Graphic::PicStatus::HIT1]           = 0;
+const double Fighter1Graphic::TIME[Fighter1Graphic::PicStatus::HIT2]           = 0;
+const double Fighter1Graphic::TIME[Fighter1Graphic::PicStatus::HIT3]           = 0;
+const double Fighter1Graphic::TIME[Fighter1Graphic::PicStatus::DESTROY1]       = 0;
+const double Fighter1Graphic::TIME[Fighter1Graphic::PicStatus::DESTROY2]       = 0;
+const double Fighter1Graphic::TIME[Fighter1Graphic::PicStatus::DESTROY_FINISH] = 0;
 
 Fighter1Graphic::Fighter1Graphic()
 {
@@ -27,13 +25,6 @@ Fighter1Graphic::Fighter1Graphic()
     elapsed_time = 0;
     finish = false;
 }
-/*
-QImage* imgRatate = new QImage;
-
-matrix.rotate(270);
-*imgRotate = img->transformed(matrix);
-*/
-//image_to_show = img->transformed(matrix);
 
 void Fighter1Graphic::Paint(Point position,Point velocity,double angle,double time)
 {
@@ -42,10 +33,10 @@ void Fighter1Graphic::Paint(Point position,Point velocity,double angle,double ti
     QImage image_to_show;
 
     elapsed_time += time;
-    if(sig == CREATE)  status = PicStatus::CREATE;
-    if(sig == HIT)     status = PicStatus::HIT1;
-    if(sig == DESTROY) status = PicStatus::DESTROY1;
-    if(sig == NO_SIGNAL)
+    if(sig == Signal::CREATE)  status = PicStatus::CREATE;
+    if(sig == Signal::HIT)     status = PicStatus::HIT1;
+    if(sig == Signal::DESTROY) status = PicStatus::DESTROY1;
+    if(sig == Signal::NO_SIGNAL)
     {
         switch(status)
         {
@@ -107,7 +98,7 @@ void Fighter1Graphic::Paint(Point position,Point velocity,double angle,double ti
             break;
         }
     }
-    sig = NO_SIGNAL;
+    sig = Signal::NO_SIGNAL;
     img = pics[status];
     if(img != NULL)
     {

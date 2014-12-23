@@ -38,7 +38,9 @@ SOURCES += main.cpp\
     UI/soundui.cpp \
     UI/value.cpp \
     GraphicEngine/picnode.cpp \
-    GraphicEngine/fighter1graphic.cpp
+    GraphicEngine/fighter1graphic.cpp \
+    GraphicEngine/bulletyellowgraphic.cpp \
+    GraphicEngine/paintwidget.cpp
 
 HEADERS  += mainwindow.h \
     stdafx.h \
@@ -70,5 +72,7 @@ HEADERS  += mainwindow.h \
     UI/soundUI.h \
     UI/value.h \
     GraphicEngine/picnode.h \
-    GraphicEngine/fighter1graphic.h
+    GraphicEngine/fighter1graphic.h \
+    GraphicEngine/bulletyellowgraphic.h \
+    GraphicEngine/paintwidget.h
 
