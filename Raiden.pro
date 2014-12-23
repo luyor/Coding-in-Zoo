@@ -36,7 +36,9 @@ SOURCES += main.cpp\
     UI/operationui.cpp \
     UI/screenui.cpp \
     UI/soundui.cpp \
-    UI/value.cpp
+    UI/value.cpp \
+    GraphicEngine/picnode.cpp \
+    GraphicEngine/fighter1graphic.cpp
 
 HEADERS  += mainwindow.h \
     stdafx.h \
@@ -66,5 +68,7 @@ HEADERS  += mainwindow.h \
     UI/operationUI.h \
     UI/screenUI.h \
     UI/soundUI.h \
-    UI/value.h
+    UI/value.h \
+    GraphicEngine/picnode.h \
+    GraphicEngine/fighter1graphic.h
 
