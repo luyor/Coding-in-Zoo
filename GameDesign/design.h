@@ -4,6 +4,7 @@
 
 #include "../GameEngine/game.h"
 #include "../GameEngine/enemy.h"
+#include "enemytype.h"
 class Game;
 
 class Enemy;
