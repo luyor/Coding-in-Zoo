@@ -9,8 +9,9 @@
 #include "item.h"
 #include "bomb.h"
 #include "player.h"
-#include "../GameDesign/design.h"
+//#include "../GameDesign/design.h"
 #include "../GraphicEngine/graphicengine.h"
+#include "../UI/control.h"
 
 class Game
 {
@@ -22,13 +23,14 @@ public:
 
     Game(enum GameMode game_mode,int coins0,Control* control0,Control* control1);
     void GameLoop();
+    void EndGame(){END=true;}
 
-    void FighterRegister(Fighter& fighter);
-    void EnemyRegister(Enemy& enemy);
-    void FriendlyBulletRegister(Bullet& bullet);
-    void EnemyBulletRegister(Bullet& bullet);
-    void BombRegister(Bomb& bomb);
-    void ItemRegister(Item& item);
+    void FighterRegister(Fighter* fighter);
+    void EnemyRegister(Enemy* enemy);
+    void FriendlyBulletRegister(Bullet* bullet);
+    void EnemyBulletRegister(Bullet* bullet);
+    void BombRegister(Bomb* bomb);
+    void ItemRegister(Item* item);
 private:
     //private variables
     QTime physics_time;
@@ -49,12 +51,12 @@ private:
 
     Player player0,player1;
 
-    vector<Bullet> friendly_bullets;
-    vector<Bullet> enemy_bullets;
-    vector<Fighter> fighters;
-    vector<Enemy> enemies;
-    vector<Bomb> bombs;
-    vector<Item> items;
+    vector<Bullet*> friendly_bullets;
+    vector<Bullet*> enemy_bullets;
+    vector<Fighter*> fighters;
+    vector<Enemy*> enemies;
+    vector<Bomb*> bombs;
+    vector<Item*> items;
 
     //private functions
     //change velocity,auto-destroy,create,move,fire

@@ -13,12 +13,12 @@ public:
     }bullet_type;
 
     //constructor of friendly bullet
-    Bullet(Point v,Point p,double angle0,const HitPoint* hit_point0,
-           Graphic graphic0,enum BulletType type,int damage0,Player* belonging0);
+    Bullet(Point v,Point p,double angle0,HitPoint* hit_point0,
+           Graphic *graphic0,enum BulletType type,int damage0,Player* belonging0);
 
     //constructor of enemy bullet
-    Bullet(Point v,Point p,double angle0,const HitPoint* hit_point0,
-           Graphic graphic0,enum BulletType type,int damage0);
+    Bullet(Point v,Point p,double angle0,HitPoint* hit_point0,
+           Graphic *graphic0,enum BulletType type,int damage0);
 
     void ChangeStatus(double time, Game &my_game);
     int Hit();//return damage

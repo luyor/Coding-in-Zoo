@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2014-12-09T13:35:41
+# Project created by QtCreator 2014-12-24T10:06:13
 #
 #-------------------------------------------------
 
@@ -8,12 +8,13 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Raiden
+TARGET = he1
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
         mainwindow.cpp \
+    GameEngine/bomb.cpp \
     GameEngine/bullet.cpp \
     GameEngine/enemy.cpp \
     GameEngine/fighter.cpp \
@@ -21,27 +22,19 @@ SOURCES += main.cpp\
     GameEngine/game.cpp \
     GameEngine/item.cpp \
     GameEngine/missile.cpp \
+    GameEngine/player.cpp \
+    General/data.cpp \
+    General/hitpoint.cpp \
+    GraphicEngine/fighter1graphic.cpp \
     GraphicEngine/graphic.cpp \
     GraphicEngine/graphicengine.cpp \
+    GraphicEngine/paintwidget.cpp \
+    GraphicEngine/picnode.cpp \
     UI/control.cpp \
-    General/data.cpp \
-    GameEngine/bomb.cpp \
-    General/hitpoint.cpp \
-    GameEngine/player.cpp \
-    UI/difficultyui.cpp \
-    UI/graphui.cpp \
-    UI/keypress.cpp \
-    UI/main.cpp \
-    UI/mainwindow.cpp \
-    UI/operationui.cpp \
-    UI/screenui.cpp \
-    UI/soundui.cpp \
-    UI/value.cpp
+    GameEngine/mythread.cpp
 
 HEADERS  += mainwindow.h \
-    stdafx.h \
     GameEngine/bomb.h \
-    GameDesign/design.h \
     GameEngine/bullet.h \
     GameEngine/enemy.h \
     GameEngine/fighter.h \
@@ -49,22 +42,19 @@ HEADERS  += mainwindow.h \
     GameEngine/game.h \
     GameEngine/item.h \
     GameEngine/missile.h \
+    GameEngine/player.h \
     General/circle.h \
+    General/data.h \
+    General/hitpoint.h \
     General/point.h \
+    GraphicEngine/fighter1graphic.h \
     GraphicEngine/graphic.h \
     GraphicEngine/graphicengine.h \
-    UI/control.h \
-    General/data.h \
+    GraphicEngine/paintwidget.h \
+    GraphicEngine/picnode.h \
     res.h \
-    General/hitpoint.h \
-    GameEngine/player.h \
-    GameDesign/enemytype.h \
-    UI/difficultyUI.h \
-    UI/graphUI.h \
-    UI/keypress.h \
-    UI/mainwindow.h \
-    UI/operationUI.h \
-    UI/screenUI.h \
-    UI/soundUI.h \
-    UI/value.h
+    stdafx.h \
+    UI/control.h \
+    GameEngine/mythread.h
 
+FORMS    += mainwindow.ui

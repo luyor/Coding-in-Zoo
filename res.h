@@ -2,9 +2,11 @@
 #define RES_H
 
 #include "General/data.h"
-#include "GameDesign/design.h"
+//#include "GameDesign/design.h"
+#include "GraphicEngine/graphicengine.h"
 
-Data data;
-Design design;
+extern GraphicEngine graphic_engine;
+extern Data data;
+//Design design;
 
 #endif // RES_H

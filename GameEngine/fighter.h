@@ -5,14 +5,17 @@
 #include "flyingobject.h"
 #include "item.h"
 #include "player.h"
+#include "res.h"
+
+#include "../GraphicEngine/fighter1graphic.h"
 
 class Game;
 
 class Fighter:public FlyingObject
 {
 public:
-    Fighter(Point v,Point p,const HitPoint* hit_point0,
-            Graphic graphic0,Player* player);
+    Fighter(Point v,Point p,HitPoint* hit_point0,
+            Graphic *graphic0,Player* player);
     void Fire(Game& my_game);
     void Bombard(Game& my_game);
     void GetItem(enum Item::ItemType type);
@@ -23,8 +26,8 @@ public:
     void AddScore(int score0){my_player->AddScore(score0);}
     //destroy,return crush damage
     int Crush();
-
-
+    void Destroy();
+    void ChangeStatus(double time, Game &my_game);
     void Hit(int damage);//do damage
     //check if acting when crush enemy
     bool IsActing(){if (status==ACTING)return true;return false;}

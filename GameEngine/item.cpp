@@ -1,6 +1,6 @@
 #include "item.h"
 
-Item::Item(Point v,Point p,double angle0,const HitPoint* hit_point0,Graphic graphic0,enum ItemType type0):
+Item::Item(Point v,Point p,double angle0,HitPoint* hit_point0,Graphic *graphic0,enum ItemType type0):
     FlyingObject(v,p,angle0,hit_point0,graphic0),my_item_type(type0),elapsed_time(0)
 {
 }
@@ -8,7 +8,7 @@ Item::Item(Point v,Point p,double angle0,const HitPoint* hit_point0,Graphic grap
 void Item::ChangeStatus(double time, Game &my_game)
 {
     elapsed_time+=time;
-    switch(item_type){
+    switch(my_item_type){
         //change item type
     }
 }
