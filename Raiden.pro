@@ -31,7 +31,22 @@ SOURCES += main.cpp\
     GraphicEngine/paintwidget.cpp \
     GraphicEngine/picnode.cpp \
     UI/control.cpp \
-    GameEngine/mythread.cpp
+    GameEngine/mythread.cpp \
+    UI/difficulty.cpp \
+    UI/difficultyui.cpp \
+    UI/gamepara.cpp \
+    UI/graphui.cpp \
+    UI/keypress.cpp \
+    UI/operation.cpp \
+    UI/operationui.cpp \
+    UI/res.cpp \
+    UI/screen.cpp \
+    UI/screenui.cpp \
+    UI/sound.cpp \
+    UI/soundui.cpp \
+    UI/value.cpp \
+    UI/valueshow.cpp \
+    GraphicEngine/bulletyellowgraphic.cpp
 
 HEADERS  += mainwindow.h \
     GameEngine/bomb.h \
@@ -55,6 +70,25 @@ HEADERS  += mainwindow.h \
     res.h \
     stdafx.h \
     UI/control.h \
-    GameEngine/mythread.h
+    GameEngine/mythread.h \
+    GraphicEngine/bulletyellowgraphic.h \
+    UI/difficulty.h \
+    UI/difficultyUI.h \
+    UI/gamepara.h \
+    UI/graphUI.h \
+    UI/keypress.h \
+    UI/operation.h \
+    UI/operationUI.h \
+    UI/screen.h \
+    UI/screenUI.h \
+    UI/sound.h \
+    UI/soundUI.h \
+    UI/ui_difficulty.h \
+    UI/ui_operation.h \
+    UI/ui_screen.h \
+    UI/ui_sound.h \
+    UI/ui_valueshow.h \
+    UI/value.h \
+    UI/valueshow.h
 
 FORMS    += mainwindow.ui

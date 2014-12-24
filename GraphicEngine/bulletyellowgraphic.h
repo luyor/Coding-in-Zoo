@@ -4,20 +4,25 @@
 #include "../stdafx.h"
 #include "graphic.h"
 #include <QImage>
-
+#include "picnode.h"
 
 class BulletYellowGraphic : public Graphic
 {
 public:
     enum PicStatus{
-        CREATE = 0,
+        EMPTY,
+        CREATE,
         NORMAL,
         DESTROY
     };
     enum PicStatus status;
-    static const QImage *pics[BulletYellowGraphic::DESTROY + 1];
-    static const double TIME[BulletYellowGraphic::DESTROY + 1];
+    QImage* image_to_show;
+    PicNode node;
+    static QImage *pics[DESTROY + 1];
+    static double TIME[DESTROY + 1];
+    static void InitBulletYellow();
     BulletYellowGraphic();
+    Point Size();
     void Paint(Point position,Point velocity,double angle,double time);
 };
 

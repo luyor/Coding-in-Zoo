@@ -6,7 +6,7 @@ Game::Game(enum GameMode game_mode,int coins0,Control* control0,Control* control
 {
     //design.Reset();
 
-    Fighter *tmp = new Fighter(Point(5,5),Point(60,60),NULL,new Fighter1Graphic(),&player1);
+    Fighter *tmp = new Fighter(Point(5,5),Point(60,60),NULL,new Fighter1Graphic(),&player0);
 
     FighterRegister(tmp);
     if(game_mode==COOP){
@@ -29,9 +29,7 @@ void Game::GameLoop()
                 AllChangeStatus((double)physics_time.restart()/1000);
                 //design.NewEnemy(*this,background_position);
                 AllCheckCollision();
-                //cout<<graphics_time.elapsed()<<endl;
                 if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND){//flash a frame
-                    cout<<"all paint"<<endl;
                     AllPaint((double)graphics_time.restart()/1000);
                 }
                 //AllClean();
@@ -58,7 +56,6 @@ void Game::GameLoop()
 
 void Game::FighterRegister(Fighter* fighter)
 {
-    cout<<fighter->GetPosition().x<<"++"<<fighter->GetPosition().y<<endl;
     fighters.push_back(fighter);
 }
 
@@ -100,7 +97,7 @@ void Game::AllChangeStatus(double time)
     }
     for(vector<Fighter*>::iterator it=fighters.begin();it!=fighters.end();++it){
         (*it)->ChangeStatus(time,*this);
-        (*it)->FighterMove(time,data.PAINT_AREA_TOP_RIGHT,my_graphic_engine.GetFighterSize());
+        (*it)->FighterMove(time);
     }
     for(vector<Enemy*>::iterator it=enemies.begin();it!=enemies.end();++it){
         (*it)->ChangeStatus(time,*this);

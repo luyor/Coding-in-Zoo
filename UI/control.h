@@ -12,6 +12,12 @@ public:
     bool FirePressed;
     bool BombClicked;
     bool PauseClicked;
+
+    bool BombValue();
+    bool PauseValue();
+
+
+
 };
 
 #endif // CONTROL_H

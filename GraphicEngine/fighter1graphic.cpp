@@ -8,19 +8,18 @@ QImage* Fighter1Graphic::pics[] = {
 
 double Fighter1Graphic::TIME[] = {0};
 
-Fighter1Graphic::Fighter1Graphic():node(Point(0,0),QPixmap())
+Fighter1Graphic::Fighter1Graphic():node(Point(0,0),QPixmap()),status(EMPTY)
 {
-    InitFighter1();
+
 }
 
 void Fighter1Graphic::Paint(Point position,Point velocity,double angle,double time)
 {
-    cout<<"in fighter paint"<<endl;
     QMatrix matrix;
     QImage* img;
     image_to_show = new QImage;
     elapsed_time += time;
-    cout<< sig << "  " << elapsed_time << "    " << time <<endl;
+    //cout<< sig << "  " << elapsed_time << "    " << time <<endl;
     if(sig == Graphic::CREATE)  status = Fighter1Graphic::CREATE;
     if(sig == Graphic::HIT)     status = Fighter1Graphic::HIT1;
     if(sig == Graphic::DESTROY) status = Fighter1Graphic::DESTROY1;
@@ -87,18 +86,22 @@ void Fighter1Graphic::Paint(Point position,Point velocity,double angle,double ti
         }
     }
     sig = Graphic::NO_SIGNAL;
-    cout<<status<<endl;
+    //cout<<status<<endl;
     img = pics[status];
     if(img != NULL)
     {
-        cout<<"lll:"<<img->isNull()<<endl;
         matrix.rotate(360 - angle * M_PI/180);
         *image_to_show = img->transformed(matrix);
         node = PicNode(position, QPixmap::fromImage(*image_to_show));
         graphic_engine.pics_to_show.push_back(node);
-        cout<<"aaa:"<< (*image_to_show).isNull()<<"qqq:"<<node.pixmap.isNull()<<endl;
     }
     delete image_to_show;
+}
+
+Point Fighter1Graphic::Size()
+{
+    if(pics[status] == NULL) return Point(0,0);
+    return Point(pics[status]->width(),pics[status]->height());
 }
 
 void Fighter1Graphic::InitFighter1()

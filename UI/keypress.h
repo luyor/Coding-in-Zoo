@@ -6,15 +6,14 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
+
+
 class KeyPress : public QWidget
 {
     Q_OBJECT
 public:
     KeyPress(QWidget *parent = 0);
 
-protected:
-    void keyPressEvent(QKeyEvent *);
-    void keyReleaseEvent(QKeyEvent *);
 
 private:
     QLabel *up;

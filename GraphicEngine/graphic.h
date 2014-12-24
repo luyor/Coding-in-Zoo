@@ -18,6 +18,7 @@ public:
     double elapsed_time;
     bool finish;
     bool DestroyFinished();        //death animation finish
+    virtual Point Size(){}
     virtual void Paint(Point position,Point velocity,double angle,double time){cout<<"wrong paint"<<endl;}
 };
 

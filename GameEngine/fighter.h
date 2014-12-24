@@ -6,7 +6,6 @@
 #include "item.h"
 #include "player.h"
 #include "res.h"
-
 #include "../GraphicEngine/fighter1graphic.h"
 
 class Game;
@@ -20,7 +19,7 @@ public:
     void Bombard(Game& my_game);
     void GetItem(enum Item::ItemType type);
     //constrain fighter in visible area
-    void FighterMove(double time,Point visible_area,Point fighter_size);
+    void FighterMove(double time);
 
     //add score after crush
     void AddScore(int score0){my_player->AddScore(score0);}
@@ -38,6 +37,7 @@ private:
         ACTING
     }status;
     double elapsed_time;
+    double bullet_time;
 
     //private variables
     Player* my_player;
@@ -48,6 +48,7 @@ private:
     int missile_level;
 
     enum BulletType{
+        YELLOW=0
     }my_bullet_type;
     enum MissileType{
     }my_missile_type;
@@ -61,7 +62,8 @@ private:
     static const int max_missile_level;
     static const int FLYING_TIME;
     static const int BULLET_PROOF_TIME;
-    static const int SPEED;
+    static const double SPEED;
+    static const double BULLET_FREQUENCY;
 };
 
 #endif // FIGHTER_H

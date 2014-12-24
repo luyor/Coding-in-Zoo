@@ -9,13 +9,14 @@ PaintWidget::PaintWidget(QWidget *parent) :
 
 void PaintWidget::paintEvent(QPaintEvent* event)
 {
-    cout<<"successful   "<< graphic_engine.pics_to_show.size()<<endl;
+    //cout<<"successful   "<< graphic_engine.pics_to_show.size()<<endl;
     QPainter painter(this);
     vector<PicNode>::iterator iter = graphic_engine.pics_to_show.begin();
     for(;iter != graphic_engine.pics_to_show.end();iter++)
     {
-        cout<<"NULL?"<<iter->pixmap.isNull()<<endl;
-        painter.drawPixmap((int)iter->position.x, (int)(this->height() - iter->position.y), iter->pixmap);
+        //cout<<this->height()<<endl;
+        //cout<<this->height() - iter->position.y + iter->pixmap.height()<<endl;
+        painter.drawPixmap((int)iter->position.x, (int)(this->height() - iter->position.y - iter->pixmap.height()), iter->pixmap);
     }
     graphic_engine.pics_to_show.clear();
 }

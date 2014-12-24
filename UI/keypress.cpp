@@ -2,6 +2,12 @@
 #include <QApplication>
 #include <QKeyEvent>
 #include "control.h"
+#include "res.h"
+#include <iostream>
+
+using namespace std;
+
+
 
 KeyPress::KeyPress(QWidget *parent) :
     QWidget(parent)
@@ -28,71 +34,7 @@ KeyPress::KeyPress(QWidget *parent) :
 
 }
 
-void KeyPress::keyPressEvent(QKeyEvent *event)
-{
-    if(event->key() == Qt::Key_W)
-    {
-        up->setText("You pressed Up");
-    }
 
-    if(event->key() == Qt::Key_S)
-    {
-        down->setText("You pressed Down");
-    }
 
-    if(event->key() == Qt::Key_A)
-    {
-        left->setText("You pressed Left");
-    }
 
-    if(event->key() == Qt::Key_D)
-    {
-        right->setText("You pressed Right");
-    }
-
-    if(event->key() == Qt::Key_Comma)
-    {
-        fire->setText("You pressed Fire");
-    }
-
-    if(event->key() == Qt::Key_Period)
-    {
-        bomb->setText("You pressed Bomb");
-    }
-}
-
-void KeyPress::keyReleaseEvent(QKeyEvent *event)
-{
-
-    if(event->key() == Qt::Key_W)
-    {
-        up->setText("You released Up");
-    }
-
-    if(event->key() == Qt::Key_S)
-    {
-        down->setText("You realeased Down");
-    }
-
-    if(event->key() == Qt::Key_A)
-    {
-        left->setText("You released Left");
-    }
-
-    if(event->key() == Qt::Key_D)
-    {
-        right->setText("You released Right");
-    }
-
-    if(event->key() == Qt::Key_Comma)
-    {
-        fire->setText("You released Fire");
-    }
-
-    if(event->key() == Qt::Key_Period)
-    {
-        bomb->setText("You released Bomb");
-    }
-
-}
 

@@ -9,13 +9,17 @@
 
 GraphicEngine graphic_engine;
 Data data;
+Control control;
+GamePara gamepara;
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-
+    w.setWindowTitle("Raiden");
     w.show();
+
+
 
     return a.exec();
 }

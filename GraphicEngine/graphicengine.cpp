@@ -1,7 +1,11 @@
 #include "graphicengine.h"
+#include "fighter1graphic.h"
+#include "bulletyellowgraphic.h"
 
 GraphicEngine::GraphicEngine()
 {
+    Fighter1Graphic::InitFighter1();
+    BulletYellowGraphic::InitBulletYellow();
 }
 
 void GraphicEngine::PaintBackground(double time)

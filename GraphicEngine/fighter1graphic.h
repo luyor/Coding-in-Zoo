@@ -9,7 +9,8 @@ class Fighter1Graphic : public Graphic
 {
 public:
     enum PicStatus{
-        CREATE = 0,
+        EMPTY=0,
+        CREATE,
         NORMAL,
         HIT1,
         HIT2,
@@ -25,6 +26,7 @@ public:
     static double TIME[DESTROY_FINISH + 1];
     static void InitFighter1();
     Fighter1Graphic();
+    Point Size();
     void Paint(Point position,Point velocity,double angle,double time);
 };
 
