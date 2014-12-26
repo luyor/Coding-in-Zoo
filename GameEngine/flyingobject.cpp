@@ -26,6 +26,7 @@ void FlyingObject::SetDestroy()
 
 bool IsColliding(FlyingObject *f1,FlyingObject *f2)
 {
+
     double x=f1->position.x-f2->position.x,y=f1->position.y-f2->position.y,
             dis=f1->hit_point->max_distance+f2->hit_point->max_distance;
     if(x*x+y*y>=dis*dis)return false;
@@ -42,4 +43,10 @@ bool IsColliding(FlyingObject *f1,FlyingObject *f2)
         }
     }
     return false;
+}
+
+double AimAt(FlyingObject* f1,FlyingObject* f2)//get the angle of f1 aim at f2
+{
+    double x=f1->GetPosition().x-f2->GetPosition().x,y=f1->GetPosition().y-f2->GetPosition().y;
+    return atan(y/x);
 }

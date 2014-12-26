@@ -33,6 +33,9 @@ public:
     void EnemyBulletRegister(Bullet* bullet);
     void BombRegister(Bomb* bomb);
     void ItemRegister(Item* item);
+
+    Fighter* SelectRandomFighter();
+    Enemy* SelectRandomEnemy();
 private:
     //private variables
     QTime physics_time;
