@@ -4,8 +4,8 @@
 #include "../stdafx.h"
 #include "bullet.h"
 #include "enemy.h"
-#include "missile.h"
 #include "fighter.h"
+#include "missile.h"
 #include "item.h"
 #include "bomb.h"
 #include "player.h"
@@ -21,7 +21,9 @@ public:
         COOP
     };
 
-    Game(enum GameMode game_mode,int coins0,Control* control0,Control* control1);
+    Game();
+    void Start(enum GameMode game_mode,int coins0,Control* control0,Control* control1);
+    void Init();
     void GameLoop();
     void EndGame(){END=true;}
 
@@ -49,7 +51,7 @@ private:
 
     GraphicEngine my_graphic_engine;
 
-    Player player0,player1;
+    Player *player0,*player1;
 
     vector<Bullet*> friendly_bullets;
     vector<Bullet*> enemy_bullets;

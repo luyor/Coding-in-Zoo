@@ -11,6 +11,7 @@ GraphicEngine graphic_engine;
 Data data;
 Control control;
 GamePara gamepara;
+Game game;
 
 int main(int argc, char *argv[])
 {

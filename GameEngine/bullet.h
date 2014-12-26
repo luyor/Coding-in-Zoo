@@ -5,6 +5,8 @@
 #include "player.h"
 #include "../General/hitpoint.h"
 
+static HitPoint yellow_bullet_hit_point;
+
 class Bullet : public FlyingObject
 {
 public:
@@ -24,9 +26,8 @@ public:
     void ChangeStatus(double time, Game &my_game);
     int Hit();//return damage
     void AddScore(int score0){belonging->AddScore(score0);}
-    static void InitHitPoint();
+    static void Init();
 
-    static HitPoint yellow_bullet_hit_point;
 private:
     int damage;
     Player* belonging;//used to increase score of a player
