@@ -20,14 +20,14 @@ MainWindow::MainWindow()
     setGeometry(100,100,800,600);
     this->setCentralWidget(centralwidget);
     createMenus();
-    my_thread=new MyThread(Game::SINGLE,4,&control,NULL);
+    my_thread=new MyThread();
     my_thread->start();
 
 }
 
 MainWindow::~MainWindow()
 {
-    my_thread->my_game->EndGame();
+    game.EndGame();
     my_thread->quit();
 }
 

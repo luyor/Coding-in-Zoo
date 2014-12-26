@@ -8,6 +8,8 @@
 #include "res.h"
 #include "../GraphicEngine/fighter1graphic.h"
 
+static HitPoint fighter_hitpoint;
+
 class Game;
 
 class Fighter:public FlyingObject
@@ -30,6 +32,10 @@ public:
     void Hit(int damage);//do damage
     //check if acting when crush enemy
     bool IsActing(){if (status==ACTING)return true;return false;}
+
+    void FireYellowBullet(double angle0, Game &my_game);
+
+    static void Init();//init hitpoint
 private:
     enum{
         FLYING=0,

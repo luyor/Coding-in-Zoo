@@ -1,6 +1,6 @@
 #include "bullet.h"
 
-HitPoint Bullet::yellow_bullet_hit_point=HitPoint();
+
 
 Bullet::Bullet(Point v,Point p,double angle0,HitPoint* hit_point0,
                Graphic *graphic0,enum BulletType type,int damage0,Player*belonging0):
@@ -27,7 +27,7 @@ void Bullet::ChangeStatus(double time, Game &my_game)
     //do nothing
 }
 
-void Bullet::InitHitPoint()
+void Bullet::Init()
 {
     Circle tmp(10,10,10);
     yellow_bullet_hit_point.AddCircle(tmp);

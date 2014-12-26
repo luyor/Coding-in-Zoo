@@ -16,7 +16,7 @@ public:
     ~FlyingObject();
     void SetDestroy();//actual destroy
     bool IsDestroyed(){return destroyed;}//used to check collision
-    bool IsFinish(){return my_graphics->DestroyFinished();}//used to clean object
+    bool DestroyFinished(){return my_graphics->DestroyFinished();}//used to clean object
     virtual void ChangeStatus(double time,Game& my_game){}//change velocity,position,angle
     void Move(double time);
     Point GetVelocity(){return velocity;}

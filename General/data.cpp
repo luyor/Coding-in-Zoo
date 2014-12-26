@@ -1,7 +1,7 @@
 #include "data.h"
 
-const Point Data::DEFAULT_GAME_AREA_BOTTOM_LEFT=Point(0,0);
-const Point Data::DEFAULT_GAME_AREA_TOP_RIGHT=Point(0,0);
+const Point Data::DEFAULT_GAME_AREA_BOTTOM_LEFT=Point(-250,-250);
+const Point Data::DEFAULT_GAME_AREA_TOP_RIGHT=Point(750,750);
 const int Data::DEFAULT_FRAME_PER_SECOND=30;
 const int Data::DEFAULT_MAX_LIFE=3;
 const int Data::DEFAULT_MAX_HEALTH=100;

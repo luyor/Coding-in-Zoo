@@ -90,7 +90,7 @@ void Fighter1Graphic::Paint(Point position,Point velocity,double angle,double ti
     img = pics[status];
     if(img != NULL)
     {
-        matrix.rotate(360 - angle * M_PI/180);
+        matrix.rotate(90 - angle * 180/M_PI);
         *image_to_show = img->transformed(matrix);
         node = PicNode(position, QPixmap::fromImage(*image_to_show));
         graphic_engine.pics_to_show.push_back(node);
