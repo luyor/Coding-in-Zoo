@@ -19,7 +19,7 @@ void Game::Start(enum GameMode game_mode,int coins0,Control* control0,Control* c
 
 {
     background_position=0;
-    coins=coins0;;
+    coins=coins0;
     PAUSED=false;
     END=false;
     status=MISSION_START;
@@ -294,4 +294,16 @@ bool Game::IsPaused()
             PAUSED=!PAUSED;
     }*/
     return PAUSED;
+}
+
+Fighter* Game::SelectRandomFighter()
+{
+    if (fighters.empty())return NULL;
+    return fighters[rand()%fighters.size()];
+}
+
+Enemy* Game::SelectRandomEnemy()
+{
+    if (enemies.empty())return NULL;
+    return enemies[rand()%enemies.size()];
 }

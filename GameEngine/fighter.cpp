@@ -4,12 +4,14 @@
 
 const double Fighter::SPEED=100;
 const double Fighter::BULLET_FREQUENCY=0.5;
+const double Fighter::MISSILE_FREQUENCY=0.7;
 
 Fighter::Fighter(Point v,Point p,HitPoint* hit_point0,
                  Graphic *graphic0,Player* player):
     FlyingObject(v,p,M_PI/2,hit_point0,graphic0),
-    elapsed_time(0), bullet_level(4),missile_level(1),
-    my_player(player),health(data.MAX_HEALTH),status(FLYING),bullet_time(100),my_bullet_type(YELLOW)
+    elapsed_time(0), bullet_level(4),missile_level(0),
+    my_player(player),health(data.MAX_HEALTH),status(FLYING),bullet_time(100),my_bullet_type(YELLOW),
+    missile_time(100)
 {
 }
 
@@ -57,6 +59,7 @@ void Fighter::ChangeStatus(double time, Game &my_game)
 {
     elapsed_time+=time;
     bullet_time+=time;
+    missile_time+=time;
     switch (status){
     case FLYING:
         if (elapsed_time>1){
@@ -105,8 +108,25 @@ void Fighter::ChangeStatus(double time, Game &my_game)
                 }
             }
         }
+        if (missile_time>MISSILE_FREQUENCY){
+            switch(my_missile_type){
+            case TRACKING:
+                break;
+            case STRAIGHT:
+                break;
+            }
+        }
         if (my_player->my_control->BombValue()){
-
+            if (!bomb_list.empty()){
+                vector<BombType>::iterator it=bomb_list.end()-1;
+                switch(*it){
+                case ATOMIC:
+                    break;
+                case DISPERSE:
+                    break;
+                }
+                bomb_list.erase(it);
+            }
         }
         //cout<<velocity.x<<" "<<velocity.y<<endl;
 

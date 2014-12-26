@@ -44,6 +44,7 @@ private:
     }status;
     double elapsed_time;
     double bullet_time;
+    double missile_time;
 
     //private variables
     Player* my_player;
@@ -57,19 +58,22 @@ private:
         YELLOW=0
     }my_bullet_type;
     enum MissileType{
+        TRACKING=0,
+        STRAIGHT
     }my_missile_type;
     enum BombType{
+        ATOMIC=0,
+        DISPERSE
     }my_bomb_type;
     vector<BombType> bomb_list;
 
 
     //private const
-    static const int max_bullet_level;
-    static const int max_missile_level;
     static const int FLYING_TIME;
     static const int BULLET_PROOF_TIME;
     static const double SPEED;
     static const double BULLET_FREQUENCY;
+    static const double MISSILE_FREQUENCY;
 };
 
 #endif // FIGHTER_H
