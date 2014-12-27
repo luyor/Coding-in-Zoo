@@ -68,7 +68,7 @@ private:
     //change velocity,auto-destroy,create,move,fire
     void AllChangeStatus(double time);
     //minus life,send hit message,destroy
-    void AllCheckCollision();
+    void AllCheckCollision(double time);
     //clean all objects that finish paint
     void AllPaint(double time);
     void AllClean();

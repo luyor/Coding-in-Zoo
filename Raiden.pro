@@ -46,7 +46,9 @@ SOURCES += main.cpp\
     UI/soundui.cpp \
     UI/value.cpp \
     UI/valueshow.cpp \
-    GraphicEngine/bulletyellowgraphic.cpp
+    GraphicEngine/bulletyellowgraphic.cpp \
+    GraphicEngine/bombatomicgraphic.cpp \
+    GraphicEngine/missilegraphic.cpp
 
 HEADERS  += mainwindow.h \
     GameEngine/bomb.h \
@@ -89,6 +91,8 @@ HEADERS  += mainwindow.h \
     UI/ui_sound.h \
     UI/ui_valueshow.h \
     UI/value.h \
-    UI/valueshow.h
+    UI/valueshow.h \
+    GraphicEngine/bombatomicgraphic.h \
+    GraphicEngine/missilegraphic.h
 
 FORMS    += mainwindow.ui

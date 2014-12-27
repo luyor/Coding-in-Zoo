@@ -17,19 +17,19 @@ public:
 
     //constructor of friendly bullet
     Bullet(Point v,Point p,double angle0,HitPoint* hit_point0,
-           Graphic *graphic0,enum BulletType type,int damage0,Player* belonging0);
+           Graphic *graphic0,enum BulletType type,double damage0,Player* belonging0);
 
     //constructor of enemy bullet
     Bullet(Point v,Point p,double angle0,HitPoint* hit_point0,
-           Graphic *graphic0,enum BulletType type,int damage0);
+           Graphic *graphic0,enum BulletType type,double damage0);
 
     void ChangeStatus(double time, Game &my_game);
-    int Hit();//return damage
+    double Hit(double time);//return damage
     void AddScore(int score0){belonging->AddScore(score0);}
     static void Init();
 
-private:
-    int damage;
+protected:
+    double damage;
     Player* belonging;//used to increase score of a player,NULL if is enemy bullet
 };
 

@@ -7,17 +7,17 @@
 class Bomb:public Bullet
 {
 public:
-    Bomb(Point v,Point p,double angle0,Graphic *graphic0,int damage0,Player* belonging0);
+    Bomb(Point v,Point p,double angle0,Graphic *graphic0,double damage0,Player* belonging0);
     //change status if explode then destroy
     void ChangeStatus(double time, Game &my_game);
     static void Init();
+    bool IsExplode(){return status==EXPLODE;}
 private:
     enum {
         FLYING,
-        EXPLODE,
-        EXPLODED
+        EXPLODE
     }status;
-    int elapsed_time;
+    double elapsed_time;
 
     static const double FLYING_TIME;
     static const double EXPLODE_TIME;
