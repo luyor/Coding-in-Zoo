@@ -74,10 +74,11 @@ void Game::GameLoop()
                 graphics_time.start();
                 physics_time.start();
                 break;
-            case MISSION_ON:
-                AllChangeStatus((double)physics_time.restart()/1000);
+            case MISSION_ON:{
+                double time=(double)physics_time.restart()/1000;
+                AllChangeStatus(time);
                 //design.NewEnemy(*this,background_position);
-                AllCheckCollision();
+                AllCheckCollision(time);
                 if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND){//flash a frame
                     AllPaint((double)graphics_time.restart()/1000);
 
@@ -90,6 +91,7 @@ void Game::GameLoop()
                     status=MISSION_END;
                 }*/
                 break;
+            }
             case MISSION_END:
                 my_graphic_engine.MissionComplete(0);
                 if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND){//flash a frame
@@ -166,13 +168,13 @@ void Game::AllChangeStatus(double time)
     }
 }
 
-void Game::AllCheckCollision()
+void Game::AllCheckCollision(double time)
 {
     //friendly bullet collide enemy
     for (vector<Bullet*>::iterator i=friendly_bullets.begin();i!=friendly_bullets.end();++i){
         for (vector<Enemy*>::iterator j=enemies.begin();j!=enemies.end();++j){
             if(!(*i)->IsDestroyed()&&!(*j)->IsDestroyed()&&IsColliding(*i,*j)){
-                (*i)->AddScore((*j)->Hit((*i)->Hit()));
+                (*i)->AddScore((*j)->Hit((*i)->Hit(time)));
                 //i->Hit return damage,j->Hit return score
             }
         }
@@ -184,9 +186,19 @@ void Game::AllCheckCollision()
             for (vector<Bullet*>::iterator j=enemy_bullets.begin();j!=enemy_bullets.end();++j){
                 if(!(*i)->IsDestroyed()&&!(*j)->IsDestroyed()&&IsColliding(*i,*j)){
                     //cout<<"collide"<<endl;
-                    (*i)->Hit((*j)->Hit());
+                    (*i)->Hit((*j)->Hit(time));
                     //i->Hit return score,j->Hit return damage
                 }
+            }
+        }
+    }
+
+    //enemy bullet collide bomb
+    for (vector<Bomb*>::iterator i=bombs.begin();i!=bombs.end();++i){
+        if ((*i)->IsExplode()){
+            for (vector<Bullet*>::iterator j=enemy_bullets.begin();j!=enemy_bullets.end();++j){
+                if(!(*i)->IsDestroyed()&&!(*j)->IsDestroyed()&&IsColliding(*i,*j))
+                    (*j)->SetDestroy();
             }
         }
     }
@@ -213,9 +225,11 @@ void Game::AllCheckCollision()
 
     //Enemy collide bomb
     for (vector<Bomb*>::iterator i=bombs.begin();i!=bombs.end();++i){
-        for (vector<Enemy*>::iterator j=enemies.begin();j!=enemies.end();++j){
-            if(!(*i)->IsDestroyed()&&!(*j)->IsDestroyed()&&IsColliding(*i,*j))
-                (*i)->AddScore((*j)->Hit((*i)->Hit()));
+        if ((*i)->IsExplode()){
+            for (vector<Enemy*>::iterator j=enemies.begin();j!=enemies.end();++j){
+                if(!(*i)->IsDestroyed()&&!(*j)->IsDestroyed()&&IsColliding(*i,*j))
+                    (*i)->AddScore((*j)->Hit((*i)->Hit(time)));
+            }
         }
     }
 

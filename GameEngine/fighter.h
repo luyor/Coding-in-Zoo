@@ -8,6 +8,8 @@
 #include "res.h"
 #include "../GraphicEngine/fighter1graphic.h"
 #include "../GraphicEngine/bulletyellowgraphic.h"
+#include "../GraphicEngine/bombatomicgraphic.h"
+#include "../GraphicEngine/missilegraphic.h"
 
 extern HitPoint fighter_hitpoint;
 
@@ -30,11 +32,9 @@ public:
     int Crush();
     void Destroy();
     void ChangeStatus(double time, Game &my_game);
-    void Hit(int damage);//do damage
+    void Hit(double damage);//do damage
     //check if acting when crush enemy
     bool IsActing(){if (status==ACTING)return true;return false;}
-
-    void FireYellowBullet(double angle0, Game &my_game);
 
     static void Init();//init hitpoint
 private:
@@ -50,7 +50,7 @@ private:
     //private variables
     Player* my_player;
 
-    int health;
+    double health;
 
     int bullet_level;
     int missile_level;
@@ -67,8 +67,8 @@ private:
     enum BombType{
         ATOMIC=0,
         DISPERSE
-    }my_bomb_type;
-    vector<BombType> bomb_list;
+    };
+    vector<enum BombType> bomb_list;
 
 
     //private const
@@ -80,6 +80,10 @@ private:
     static const double MAX_BULLET_LEVEL;
     static const double MAX_MISSILE_LEVEL;
     static const double MAX_BOMB_NUMBER;
+
+    //private function
+    void FireYellowBullet(double angle0, Game &my_game);
+    void FireBomb(Game &my_game);
 };
 
 #endif // FIGHTER_H

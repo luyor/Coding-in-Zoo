@@ -19,6 +19,9 @@ Fighter::Fighter(Point v,Point p,HitPoint* hit_point0,
     my_player(player),health(data.MAX_HEALTH),status(FLYING),bullet_time(100),my_bullet_type(YELLOW),
     missile_time(100)
 {
+    bomb_list.push_back(ATOMIC);
+    bomb_list.push_back(ATOMIC);
+    bomb_list.push_back(ATOMIC);
 }
 
 void Fighter::FighterMove(double time)
@@ -34,7 +37,7 @@ void Fighter::FighterMove(double time)
     }
 }
 
-void Fighter::Hit(int damage)
+void Fighter::Hit(double damage)
 {
     my_graphics->GetSignal(Graphic::HIT);
     health-=damage;
@@ -175,6 +178,7 @@ void Fighter::ChangeStatus(double time, Game &my_game)
                 vector<BombType>::iterator it=bomb_list.end()-1;
                 switch(*it){
                 case ATOMIC:
+                    FireBomb(my_game);
                     break;
                 case DISPERSE:
                     break;
@@ -204,6 +208,19 @@ void Fighter::FireYellowBullet(double angle0,Game &my_game)
         tmp,
         Bullet::NORMAL,
         10,
+        my_player
+        ));
+}
+
+void Fighter::FireBomb(Game &my_game)
+{
+    BombAtomicGraphic *tmp=new BombAtomicGraphic();
+    my_game.BombRegister(
+        new Bomb(Point(0,150),
+        Point(position.x,position.y+my_graphics->Size().y/2),
+        M_PI/2,
+        tmp,
+        100,
         my_player
         ));
 }
