@@ -14,8 +14,8 @@ public:
         STRAIGHT_MISSILE,
         ATOMIC_BOMB,
         DISPERSE_BOMB,
-        ADD_SCORE_10,
         ADD_SCORE_100,
+        ADD_SCORE_1000,
         ADD_LIFE
     }my_item_type;
 

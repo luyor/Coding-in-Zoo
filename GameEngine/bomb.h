@@ -19,7 +19,8 @@ private:
     }status;
     int elapsed_time;
 
-    static const int FLYING_TIME;
+    static const double FLYING_TIME;
+    static const double EXPLODE_TIME;
 };
 
 #endif // BOMB_H

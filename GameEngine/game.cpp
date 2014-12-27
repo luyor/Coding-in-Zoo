@@ -24,8 +24,36 @@ void Game::Start(enum GameMode game_mode,int coins0,Control* control0,Control* c
     PAUSED=false;
     END=false;
     status=MISSION_START;
+
+    delete player0;
+    delete player1;
     player0=new Player(data.MAX_LIFE,control0);
     player1=new Player(data.MAX_LIFE,control1);
+
+    for(vector<Bullet*>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
+        delete (*it);
+    }
+    friendly_bullets.clear();
+    for(vector<Bullet*>::iterator it=enemy_bullets.begin();it!=enemy_bullets.end();++it){
+        delete (*it);
+    }
+    enemy_bullets.clear();
+    for(vector<Fighter*>::iterator it=fighters.begin();it!=fighters.end();++it){
+        delete (*it);
+    }
+    fighters.clear();
+    for(vector<Enemy*>::iterator it=enemies.begin();it!=enemies.end();++it){
+        delete (*it);
+    }
+    enemies.clear();
+    for(vector<Bomb*>::iterator it=bombs.begin();it!=bombs.end();++it){
+        delete (*it);
+    }
+    bombs.clear();
+    for(vector<Item*>::iterator it=items.begin();it!=items.end();++it){
+        delete (*it);
+    }
+    items.clear();
 
     Fighter *tmp = new Fighter(Point(0,200),Point(200,-50),&fighter_hitpoint,new Fighter1Graphic(),player0);
 
@@ -33,10 +61,6 @@ void Game::Start(enum GameMode game_mode,int coins0,Control* control0,Control* c
     if(game_mode==COOP){
         //register second fighter
     }
-
-    Missile *t=new Missile(200,Point(500,500),AimAt(Point(600,600),tmp->GetPosition()),
-                           &yellow_bullet_hitpoint,new BulletYellowGraphic(),100,tmp,M_PI,M_PI*2);
-    EnemyBulletRegister(t);
 }
 
 void Game::GameLoop()
@@ -56,6 +80,10 @@ void Game::GameLoop()
                 AllCheckCollision();
                 if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND){//flash a frame
                     AllPaint((double)graphics_time.restart()/1000);
+
+                    Missile *t=new Missile(50,Point(500,500),AimAt(Point(600,600),SelectRandomFighter()->GetPosition()),
+                                           &yellow_bullet_hitpoint,new BulletYellowGraphic(),0,SelectRandomFighter(),M_PI,M_PI*500);
+                    EnemyBulletRegister(t);
                 }
                 AllClean();
                 /*if (design.MissionFinish()&&enemies.empty()){

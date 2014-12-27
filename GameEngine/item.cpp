@@ -53,9 +53,9 @@ void Item::ChangeStatus(double time, Game &my_game)
             elapsed_time=0;
         }
         break;
-    case ADD_SCORE_10:
-        break;
     case ADD_SCORE_100:
+        break;
+    case ADD_SCORE_1000:
         break;
     case ADD_LIFE:
         break;

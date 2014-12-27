@@ -15,7 +15,7 @@ class FlyingObject
 {
 public:
     FlyingObject(Point v,Point p,double angle0,HitPoint* hit_point0,Graphic *graphics0);
-    ~FlyingObject();
+    virtual ~FlyingObject();
     void SetDestroy();//actual destroy
     bool IsDestroyed(){return destroyed;}//used to check collision
     bool DestroyFinished(){return my_graphics->DestroyFinished();}//used to clean object

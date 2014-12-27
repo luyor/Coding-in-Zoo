@@ -3,8 +3,8 @@
 
 HitPoint fighter_hitpoint;
 
-const double Fighter::SPEED=100;
-const double Fighter::BULLET_FREQUENCY=0.5;
+const double Fighter::SPEED=500;
+const double Fighter::BULLET_FREQUENCY=0.01;
 const double Fighter::MISSILE_FREQUENCY=0.7;
 const double Fighter::FLYING_TIME=1;
 const double Fighter::BULLET_PROOF_TIME=0;
@@ -15,7 +15,7 @@ const double Fighter::MAX_BOMB_NUMBER=6;
 Fighter::Fighter(Point v,Point p,HitPoint* hit_point0,
                  Graphic *graphic0,Player* player):
     FlyingObject(v,p,M_PI/2,hit_point0,graphic0),
-    elapsed_time(0), bullet_level(1),missile_level(0),
+    elapsed_time(0), bullet_level(4),missile_level(0),
     my_player(player),health(data.MAX_HEALTH),status(FLYING),bullet_time(100),my_bullet_type(YELLOW),
     missile_time(100)
 {
@@ -27,9 +27,9 @@ void Fighter::FighterMove(double time)
     if (status!=FLYING){
         if (position.x<my_graphics->Size().x/2)position.x=my_graphics->Size().x/2;
         if (position.y<my_graphics->Size().y/2)position.y=my_graphics->Size().y/2;
-        if (position.x+my_graphics->Size().x>data.PAINT_AREA_TOP_RIGHT.x-my_graphics->Size().x/2)
+        if (position.x>data.PAINT_AREA_TOP_RIGHT.x-my_graphics->Size().x/2)
             position.x=data.PAINT_AREA_TOP_RIGHT.x-my_graphics->Size().x/2;
-        if (position.y+my_graphics->Size().y>data.PAINT_AREA_TOP_RIGHT.y-my_graphics->Size().y/2)
+        if (position.y>data.PAINT_AREA_TOP_RIGHT.y-my_graphics->Size().y/2)
             position.y=data.PAINT_AREA_TOP_RIGHT.y-my_graphics->Size().y/2;
     }
 }
@@ -97,10 +97,10 @@ void Fighter::GetItem(enum Item::ItemType type)
             bomb_list.push_back(DISPERSE);
         }
         break;
-    case Item::ADD_SCORE_10:
+    case Item::ADD_SCORE_100:
         AddScore(10);
         break;
-    case Item::ADD_SCORE_100:
+    case Item::ADD_SCORE_1000:
         AddScore(100);
         break;
     case Item::ADD_LIFE:
@@ -158,7 +158,7 @@ void Fighter::ChangeStatus(double time, Game &my_game)
                         FireYellowBullet(M_PI*3/12,my_game);
                         FireYellowBullet(M_PI*9/12,my_game);
                     }
-                    break;
+                    break;                    
                 }
             }
         }
@@ -197,7 +197,7 @@ void Fighter::FireYellowBullet(double angle0,Game &my_game)
 {
     BulletYellowGraphic *tmp=new BulletYellowGraphic();
     my_game.FriendlyBulletRegister(
-        new Bullet(Point(200*cos(angle0),200*sin(angle0)),
+        new Bullet(Point(200*cos(angle0)+velocity.x,200*sin(angle0)),
         Point(position.x,position.y+my_graphics->Size().y/2),
         angle0,
         &yellow_bullet_hitpoint,
