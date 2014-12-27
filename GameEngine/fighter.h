@@ -7,8 +7,9 @@
 #include "player.h"
 #include "res.h"
 #include "../GraphicEngine/fighter1graphic.h"
+#include "../GraphicEngine/bulletyellowgraphic.h"
 
-static HitPoint fighter_hitpoint;
+extern HitPoint fighter_hitpoint;
 
 class Game;
 
@@ -55,7 +56,9 @@ private:
     int missile_level;
 
     enum BulletType{
-        YELLOW=0
+        YELLOW=0,
+        BLUE,
+        PURPLE
     }my_bullet_type;
     enum MissileType{
         TRACKING=0,
@@ -69,11 +72,14 @@ private:
 
 
     //private const
-    static const int FLYING_TIME;
-    static const int BULLET_PROOF_TIME;
+    static const double FLYING_TIME;
+    static const double BULLET_PROOF_TIME;
     static const double SPEED;
     static const double BULLET_FREQUENCY;
     static const double MISSILE_FREQUENCY;
+    static const double MAX_BULLET_LEVEL;
+    static const double MAX_MISSILE_LEVEL;
+    static const double MAX_BOMB_NUMBER;
 };
 
 #endif // FIGHTER_H

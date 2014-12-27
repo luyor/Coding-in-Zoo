@@ -1,5 +1,7 @@
 #include "game.h"
 
+const double Game::BACKGROUND_SPEED=20;
+
 Game::Game()
 {
     Init();
@@ -16,17 +18,44 @@ void Game::Init()
 }
 
 void Game::Start(enum GameMode game_mode,int coins0,Control* control0,Control* control1)
-
 {
     background_position=0;
     coins=coins0;
     PAUSED=false;
     END=false;
     status=MISSION_START;
+
+    delete player0;
+    delete player1;
     player0=new Player(data.MAX_LIFE,control0);
     player1=new Player(data.MAX_LIFE,control1);
 
-    Fighter *tmp = new Fighter(Point(0,200),Point(200,-100),&fighter_hitpoint,new Fighter1Graphic(),player0);
+    for(vector<Bullet*>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
+        delete (*it);
+    }
+    friendly_bullets.clear();
+    for(vector<Bullet*>::iterator it=enemy_bullets.begin();it!=enemy_bullets.end();++it){
+        delete (*it);
+    }
+    enemy_bullets.clear();
+    for(vector<Fighter*>::iterator it=fighters.begin();it!=fighters.end();++it){
+        delete (*it);
+    }
+    fighters.clear();
+    for(vector<Enemy*>::iterator it=enemies.begin();it!=enemies.end();++it){
+        delete (*it);
+    }
+    enemies.clear();
+    for(vector<Bomb*>::iterator it=bombs.begin();it!=bombs.end();++it){
+        delete (*it);
+    }
+    bombs.clear();
+    for(vector<Item*>::iterator it=items.begin();it!=items.end();++it){
+        delete (*it);
+    }
+    items.clear();
+
+    Fighter *tmp = new Fighter(Point(0,200),Point(200,-50),&fighter_hitpoint,new Fighter1Graphic(),player0);
 
     FighterRegister(tmp);
     if(game_mode==COOP){
@@ -51,6 +80,10 @@ void Game::GameLoop()
                 AllCheckCollision();
                 if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND){//flash a frame
                     AllPaint((double)graphics_time.restart()/1000);
+
+                    Missile *t=new Missile(50,Point(500,500),AimAt(Point(600,600),SelectRandomFighter()->GetPosition()),
+                                           &yellow_bullet_hitpoint,new BulletYellowGraphic(),0,SelectRandomFighter(),M_PI,M_PI*500);
+                    EnemyBulletRegister(t);
                 }
                 AllClean();
                 /*if (design.MissionFinish()&&enemies.empty()){
@@ -106,7 +139,7 @@ void Game::ItemRegister(Item* item)
 
 void Game::AllChangeStatus(double time)
 {
-    if (background_position<(1<<60))background_position+=time*1;
+    if (background_position<(1<<60))background_position+=time*BACKGROUND_SPEED;
     for(vector<Bullet*>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
         (*it)->ChangeStatus(time,*this);
         (*it)->Move(time);
@@ -147,11 +180,12 @@ void Game::AllCheckCollision()
 
     //enemy bullet collide fighter
     for (vector<Fighter*>::iterator i=fighters.begin();i!=fighters.end();++i){
-        if ((*i)->IsActing()){
+        if ((*i)->IsActing()){   
             for (vector<Bullet*>::iterator j=enemy_bullets.begin();j!=enemy_bullets.end();++j){
                 if(!(*i)->IsDestroyed()&&!(*j)->IsDestroyed()&&IsColliding(*i,*j)){
+                    //cout<<"collide"<<endl;
                     (*i)->Hit((*j)->Hit());
-                    //i->Hit return damage,j->Hit return score
+                    //i->Hit return score,j->Hit return damage
                 }
             }
         }
@@ -224,6 +258,14 @@ void Game::AllClean()
          }
          if(it==friendly_bullets.end())
              break;
+    }
+    for(vector<Fighter*>::iterator it=fighters.begin();it!=fighters.end();++it){
+        if ((*it)->DestroyFinished()){
+            delete (*it);
+            fighters.erase(it);
+        }
+        if(it==fighters.end())
+            break;
     }
     for(vector<Bullet*>::iterator it=enemy_bullets.begin();it!=enemy_bullets.end();++it){
         if ((*it)->DestroyFinished()||

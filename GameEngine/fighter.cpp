@@ -1,10 +1,16 @@
 #include "fighter.h"
 #include "game.h"
-#include "../GraphicEngine/bulletyellowgraphic.h"
 
-const double Fighter::SPEED=100;
-const double Fighter::BULLET_FREQUENCY=0.5;
+HitPoint fighter_hitpoint;
+
+const double Fighter::SPEED=500;
+const double Fighter::BULLET_FREQUENCY=0.01;
 const double Fighter::MISSILE_FREQUENCY=0.7;
+const double Fighter::FLYING_TIME=1;
+const double Fighter::BULLET_PROOF_TIME=0;
+const double Fighter::MAX_BULLET_LEVEL=4;
+const double Fighter::MAX_MISSILE_LEVEL=0;
+const double Fighter::MAX_BOMB_NUMBER=6;
 
 Fighter::Fighter(Point v,Point p,HitPoint* hit_point0,
                  Graphic *graphic0,Player* player):
@@ -19,18 +25,20 @@ void Fighter::FighterMove(double time)
 {
     Move(time);
     if (status!=FLYING){
-        if (position.x<0)position.x=0;
-        if (position.y<0)position.y=0;
-        if (position.x+my_graphics->Size().x>data.PAINT_AREA_TOP_RIGHT.x)
-            position.x=data.PAINT_AREA_TOP_RIGHT.x-my_graphics->Size().x;
-        if (position.y+my_graphics->Size().y>data.PAINT_AREA_TOP_RIGHT.y)
-            position.y=data.PAINT_AREA_TOP_RIGHT.y-my_graphics->Size().y;
+        if (position.x<my_graphics->Size().x/2)position.x=my_graphics->Size().x/2;
+        if (position.y<my_graphics->Size().y/2)position.y=my_graphics->Size().y/2;
+        if (position.x>data.PAINT_AREA_TOP_RIGHT.x-my_graphics->Size().x/2)
+            position.x=data.PAINT_AREA_TOP_RIGHT.x-my_graphics->Size().x/2;
+        if (position.y>data.PAINT_AREA_TOP_RIGHT.y-my_graphics->Size().y/2)
+            position.y=data.PAINT_AREA_TOP_RIGHT.y-my_graphics->Size().y/2;
     }
 }
 
 void Fighter::Hit(int damage)
 {
+    my_graphics->GetSignal(Graphic::HIT);
     health-=damage;
+    //cout<<health<<endl;
     if (health<=0){
         my_player->LoseLife();
         SetDestroy();
@@ -51,8 +59,54 @@ int Fighter::Crush()
     return data.CRUSH_DAMAGE;
 }
 
-void Fighter::GetItem(enum Item::ItemType type){
-
+void Fighter::GetItem(enum Item::ItemType type)
+{
+    switch(type){
+    case Item::YELLOW_BULLET:
+        if (my_bullet_type==YELLOW&&bullet_level<MAX_BULLET_LEVEL){
+            ++bullet_level;
+        }else my_bullet_type=YELLOW;
+        break;
+    case Item::BLUE_BULLET:
+        if (my_bullet_type==BLUE&&bullet_level<MAX_BULLET_LEVEL){
+            ++bullet_level;
+        }else my_bullet_type=BLUE;
+        break;
+    case Item::PURPLE_BULLET:
+        if (my_bullet_type==PURPLE&&bullet_level<MAX_BULLET_LEVEL){
+            ++bullet_level;
+        }else my_bullet_type=PURPLE;
+        break;
+    case Item::TRACKING_MISSILE:
+        if (my_missile_type==TRACKING&&missile_level<MAX_MISSILE_LEVEL){
+            ++missile_level;
+        }else my_missile_type=TRACKING;
+        break;
+    case Item::STRAIGHT_MISSILE:
+        if (my_missile_type==STRAIGHT&&missile_level<MAX_MISSILE_LEVEL){
+            ++missile_level;
+        }else my_missile_type=STRAIGHT;
+        break;
+    case Item::ATOMIC_BOMB:
+        if (bomb_list.size()<MAX_BOMB_NUMBER){
+            bomb_list.push_back(ATOMIC);
+        }
+        break;
+    case Item::DISPERSE_BOMB:
+        if (bomb_list.size()<MAX_BOMB_NUMBER){
+            bomb_list.push_back(DISPERSE);
+        }
+        break;
+    case Item::ADD_SCORE_100:
+        AddScore(10);
+        break;
+    case Item::ADD_SCORE_1000:
+        AddScore(100);
+        break;
+    case Item::ADD_LIFE:
+        my_player->IncreaseLife();
+        break;
+    }
 }
 
 void Fighter::ChangeStatus(double time, Game &my_game)
@@ -62,14 +116,14 @@ void Fighter::ChangeStatus(double time, Game &my_game)
     missile_time+=time;
     switch (status){
     case FLYING:
-        if (elapsed_time>1){
+        if (elapsed_time>FLYING_TIME){
             status=BULLET_PROOF;
             velocity=Point(0,0);
             elapsed_time=0;
         }
         break;
     case BULLET_PROOF:
-        if (elapsed_time>1){
+        if (elapsed_time>BULLET_PROOF_TIME){
             status=ACTING;
             elapsed_time=0;
         }
@@ -77,10 +131,10 @@ void Fighter::ChangeStatus(double time, Game &my_game)
     case ACTING:
         break;
     }
-    if (status==BULLET_PROOF||status==ACTING){
-        velocity=Point(0,0);
-        //cout<<"in acting"<<endl;
 
+    if (!IsDestroyed()&&(status==BULLET_PROOF||status==ACTING)){
+        //cout<<"in acting"<<endl;
+        velocity=Point(0,0);
         if (my_player->my_control->LeftPressed)velocity.x-=SPEED;
         if (my_player->my_control->RightPressed)velocity.x+=SPEED;
         if (my_player->my_control->DownPressed)velocity.y-=SPEED;
@@ -104,7 +158,7 @@ void Fighter::ChangeStatus(double time, Game &my_game)
                         FireYellowBullet(M_PI*3/12,my_game);
                         FireYellowBullet(M_PI*9/12,my_game);
                     }
-                    break;
+                    break;                    
                 }
             }
         }
@@ -135,7 +189,7 @@ void Fighter::ChangeStatus(double time, Game &my_game)
 
 void Fighter::Init()
 {
-    Circle tmp(30,30,30);
+    Circle tmp(0,0,30);
     fighter_hitpoint.AddCircle(tmp);
 }
 
@@ -143,10 +197,10 @@ void Fighter::FireYellowBullet(double angle0,Game &my_game)
 {
     BulletYellowGraphic *tmp=new BulletYellowGraphic();
     my_game.FriendlyBulletRegister(
-        new Bullet(Point(200*cos(angle0),200*sin(angle0)),
-        Point(position.x+(my_graphics->Size().x-tmp->Size().x)/2,position.y+my_graphics->Size().y),
+        new Bullet(Point(200*cos(angle0)+velocity.x,200*sin(angle0)),
+        Point(position.x,position.y+my_graphics->Size().y/2),
         angle0,
-        &yellow_bullet_hit_point,
+        &yellow_bullet_hitpoint,
         tmp,
         Bullet::NORMAL,
         10,

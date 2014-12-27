@@ -22,6 +22,7 @@ public:
     };
 
     Game();
+    //clear all vector,set all to default
     void Start(enum GameMode game_mode,int coins0,Control* control0,Control* control1);
     void Init();
     void GameLoop();
@@ -74,6 +75,7 @@ private:
     //respond pause/insert coin key,return pause status
     bool IsPaused();
 
+    static const double BACKGROUND_SPEED;
 };
 
 #endif // GAME_H
