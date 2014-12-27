@@ -21,6 +21,7 @@ void FlyingObject::SetDestroy()
 {
     destroyed=true;
     my_graphics->GetSignal(Graphic::DESTROY);
+    velocity=Point(0,0);
     Destroy();
 }
 
@@ -31,22 +32,24 @@ bool IsColliding(FlyingObject *f1,FlyingObject *f2)
             dis=f1->hit_point->max_distance+f2->hit_point->max_distance;
     if(x*x+y*y>=dis*dis)return false;
     for (vector<Circle>::iterator i=f1->hit_point->points.begin();i!=f1->hit_point->points.end();++i){
-        Point tmp1(f1->position.x+i->x*cos(f1->angle)-i->y*sin(f1->angle),
-                   f1->position.y+i->y*cos(f1->angle)+i->x*sin(f1->angle));
+        Point tmp1(f1->position.x+i->x*cos(f1->angle)+i->y*sin(f1->angle),
+                   f1->position.y+i->y*cos(f1->angle)-i->x*sin(f1->angle));
         for (vector<Circle>::iterator j=f2->hit_point->points.begin();j!=f2->hit_point->points.end();++j){
-            Point tmp2(f2->position.x+j->x*cos(f2->angle)-j->y*sin(f2->angle),
-                       f2->position.y+j->y*cos(f2->angle)+j->x*sin(f2->angle));
+            Point tmp2(f2->position.x+j->x*cos(f2->angle)+j->y*sin(f2->angle),
+                       f2->position.y+j->y*cos(f2->angle)-j->x*sin(f2->angle));
             double x=tmp1.x-tmp2.x,y=tmp1.y-tmp2.y,
                     dis=i->radius+j->radius;
-            if(x*x+y*y<dis*dis)
+
+            if(x*x+y*y<dis*dis){
                 return true;
+            }
         }
     }
     return false;
 }
 
-double AimAt(FlyingObject* f1,FlyingObject* f2)//get the angle of f1 aim at f2
+double AimAt(Point p1,Point p2)//get the angle of p1 aim at p2
 {
-    double x=f1->GetPosition().x-f2->GetPosition().x,y=f1->GetPosition().y-f2->GetPosition().y;
-    return atan(y/x);
+    double dx=p2.x-p1.x,dy=p2.y-p1.y;
+    return atan2(dy,dx);
 }

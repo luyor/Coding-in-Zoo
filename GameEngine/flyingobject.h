@@ -7,6 +7,8 @@
 #include "../General/hitpoint.h"
 #include "../GraphicEngine/graphic.h"
 
+extern double AimAt(Point,Point);
+
 class Game;
 
 class FlyingObject

@@ -5,7 +5,7 @@
 #include "player.h"
 #include "../General/hitpoint.h"
 
-static HitPoint yellow_bullet_hit_point;
+extern HitPoint yellow_bullet_hitpoint;
 
 class Bullet : public FlyingObject
 {
@@ -30,7 +30,7 @@ public:
 
 private:
     int damage;
-    Player* belonging;//used to increase score of a player
+    Player* belonging;//used to increase score of a player,NULL if is enemy bullet
 };
 
 #endif // BULLET_H

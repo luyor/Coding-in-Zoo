@@ -16,7 +16,8 @@ void PaintWidget::paintEvent(QPaintEvent* event)
     {
         //cout<<this->height()<<endl;
         //cout<<this->height() - iter->position.y + iter->pixmap.height()<<endl;
-        painter.drawPixmap((int)iter->position.x, (int)(this->height() - iter->position.y - iter->pixmap.height()), iter->pixmap);
+        painter.drawPixmap((int)(iter->position.x-iter->pixmap.width()/2),
+                           (int)(this->height() - iter->position.y - iter->pixmap.height()/2), iter->pixmap);
     }
     graphic_engine.pics_to_show.clear();
 }
