@@ -83,7 +83,8 @@ private:
 
     //private function
     void FireYellowBullet(double angle0, Game &my_game);
-    void FireBomb(Game &my_game);
+    void FireAtomicBomb(Game &my_game);
+    void FireTrackingMissile(Game &my_game,Point p);
 };
 
 #endif // FIGHTER_H

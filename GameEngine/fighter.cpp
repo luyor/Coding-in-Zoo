@@ -15,9 +15,9 @@ const double Fighter::MAX_BOMB_NUMBER=6;
 Fighter::Fighter(Point v,Point p,HitPoint* hit_point0,
                  Graphic *graphic0,Player* player):
     FlyingObject(v,p,M_PI/2,hit_point0,graphic0),
-    elapsed_time(0), bullet_level(4),missile_level(0),
+    elapsed_time(0), bullet_level(4),missile_level(1),
     my_player(player),health(data.MAX_HEALTH),status(FLYING),bullet_time(100),my_bullet_type(YELLOW),
-    missile_time(100)
+    missile_time(100),my_missile_type(TRACKING)
 {
     bomb_list.push_back(ATOMIC);
     bomb_list.push_back(ATOMIC);
@@ -168,17 +168,22 @@ void Fighter::ChangeStatus(double time, Game &my_game)
         if (missile_time>MISSILE_FREQUENCY){
             switch(my_missile_type){
             case TRACKING:
+                if (missile_level>0){
+                    FireTrackingMissile(my_game,Point(position.x+my_graphics->Size().x/2,position.y));
+                    FireTrackingMissile(my_game,Point(position.x-my_graphics->Size().x/2,position.y));
+                }
                 break;
             case STRAIGHT:
                 break;
             }
+            missile_time=0;
         }
         if (my_player->my_control->BombValue()){
             if (!bomb_list.empty()){
                 vector<BombType>::iterator it=bomb_list.end()-1;
                 switch(*it){
                 case ATOMIC:
-                    FireBomb(my_game);
+                    FireAtomicBomb(my_game);
                     break;
                 case DISPERSE:
                     break;
@@ -212,7 +217,7 @@ void Fighter::FireYellowBullet(double angle0,Game &my_game)
         ));
 }
 
-void Fighter::FireBomb(Game &my_game)
+void Fighter::FireAtomicBomb(Game &my_game)
 {
     BombAtomicGraphic *tmp=new BombAtomicGraphic();
     my_game.BombRegister(
@@ -222,5 +227,21 @@ void Fighter::FireBomb(Game &my_game)
         tmp,
         100,
         my_player
+        ));
+}
+
+void Fighter::FireTrackingMissile(Game &my_game,Point p)
+{
+    MissileGraphic *tmp=new MissileGraphic();
+    my_game.FriendlyBulletRegister(
+        new Missile(200,
+        p,
+        M_PI/2,
+        &yellow_bullet_hitpoint,
+        tmp,
+        10,
+        my_player,
+        M_PI*2,
+        1000
         ));
 }
