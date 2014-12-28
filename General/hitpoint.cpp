@@ -10,3 +10,9 @@ void HitPoint::AddCircle(Circle &circle)
     if (dis>max_distance)max_distance=dis;
     points.push_back(circle);
 }
+
+double Distance(Point i,Point j)
+{
+    int x=i.x-j.x,y=i.y-j.y;
+    return sqrt(x*x+y*y);
+}

@@ -82,9 +82,9 @@ void Game::GameLoop()
                 if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND){//flash a frame
                     AllPaint((double)graphics_time.restart()/1000);
 
-                    Missile *t=new Missile(50,Point(500,500),AimAt(Point(600,600),SelectRandomFighter()->GetPosition()),
-                                           &yellow_bullet_hitpoint,new BulletYellowGraphic(),0,SelectRandomFighter(),M_PI,M_PI*500);
-                    EnemyBulletRegister(t);
+                    //Missile *t=new Missile(50,Point(500,500),AimAt(Point(600,600),SelectRandomFighter()->GetPosition()),
+                    //                       &yellow_bullet_hitpoint,new MissileGraphic(),0,M_PI/4,M_PI*500);
+                    //EnemyBulletRegister(t);
                 }
                 AllClean();
                 /*if (design.MissionFinish()&&enemies.empty()){
@@ -362,4 +362,32 @@ Enemy* Game::SelectRandomEnemy()
 {
     if (enemies.empty())return NULL;
     return enemies[rand()%enemies.size()];
+}
+
+Fighter* Game::SelectNearestFighter(Point p)
+{
+    if (fighters.empty())return NULL;
+    vector<Fighter*>::iterator t=fighters.begin();
+    double dis=Distance(p,(*t)->GetPosition());
+    for (vector<Fighter*>::iterator i=fighters.begin()+1;i!=fighters.end();++i){
+        int d=Distance(p,(*i)->GetPosition());
+        if (d<dis){
+            t=i;dis=d;
+        }
+    }
+    return (*t);
+}
+
+Enemy* Game::SelectNearestEnemy(Point p)
+{
+    if (enemies.empty())return NULL;
+    vector<Enemy*>::iterator t=enemies.begin();
+    double dis=Distance(p,(*t)->GetPosition());
+    for (vector<Enemy*>::iterator i=enemies.begin()+1;i!=enemies.end();++i){
+        int d=Distance(p,(*i)->GetPosition());
+        if (d<dis){
+            t=i;dis=d;
+        }
+    }
+    return (*t);
 }

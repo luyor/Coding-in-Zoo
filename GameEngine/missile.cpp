@@ -2,15 +2,15 @@
 #include "game.h"
 
 Missile::Missile(double speed0,Point p,double angle0,HitPoint* hit_point0,Graphic *graphic0,double damage0,
-                 Player* belonging0,FlyingObject* target0,double max_turn_angle0,double miss_target_angle0):
-    Bullet(Point(0,0),p,angle0,hit_point0,graphic0,NORMAL,damage0,belonging0),target(target0),
+                 Player* belonging0,double max_turn_angle0,double miss_target_angle0):
+    Bullet(Point(speed0*cos(angle0),speed0*sin(angle0)),p,angle0,hit_point0,graphic0,NORMAL,damage0,belonging0),target(NULL),
     max_turn_angle(max_turn_angle0),speed(speed0),miss_target_angle(miss_target_angle0),turned_angle(0)
 {
 }
 
 Missile::Missile(double speed0,Point p,double angle0,HitPoint* hit_point0,Graphic *graphic0,double damage0,
-        FlyingObject* target0,double max_turn_angle0,double miss_target_angle0):
-    Bullet(Point(0,0),p,angle0,hit_point0,graphic0,NORMAL,damage0),target(target0),max_turn_angle(max_turn_angle0),
+        double max_turn_angle0,double miss_target_angle0):
+    Bullet(Point(speed0*cos(angle0),speed0*sin(angle0)),p,angle0,hit_point0,graphic0,NORMAL,damage0),target(NULL),max_turn_angle(max_turn_angle0),
     speed(speed0),miss_target_angle(miss_target_angle0),turned_angle(0)
 {
 }
@@ -20,9 +20,9 @@ void Missile::ChangeStatus(double time, Game &my_game)
     if (target==NULL){
         if (turned_angle<miss_target_angle){
             if (belonging==NULL){
-                target=my_game.SelectRandomFighter();
+                target=my_game.SelectNearestFighter(position);
             }else{
-                target=my_game.SelectRandomEnemy();
+                target=my_game.SelectNearestEnemy(position);
             }
         }
     }else{

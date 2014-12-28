@@ -37,6 +37,8 @@ public:
 
     Fighter* SelectRandomFighter();
     Enemy* SelectRandomEnemy();
+    Fighter* SelectNearestFighter(Point p);
+    Enemy* SelectNearestEnemy(Point p);
 private:
     //private variables
     QTime physics_time;

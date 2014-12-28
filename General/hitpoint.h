@@ -4,6 +4,8 @@
 #include "../stdafx.h"
 #include "circle.h"
 
+extern double Distance(Point i,Point j);
+
 class HitPoint
 {
 public:
