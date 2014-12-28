@@ -1,27 +1,40 @@
 #ifndef DESIGN_H
 #define DESIGN_H
-#define N_ENEMY 1000
-
-#include "../General/data.h"
-#include "enemy1.h"
+const int N_ENEMY = 10000;
+const int N_STAGE = 1;
 
 class Game;
-class Enemy;
 
-struct MeetingPoint{
-    int EmemyType;
+enum Enemies{
+    No=0,
+    EnemyType1,
+    EnemyType2,
+    EnemyType3,
+    EnemyType4,
+    BossType1,
+    BossType2,
+    BossType3
+};
+
+struct CheckPoint{
+    Enemies EnemyType;
     //Be careful! OccurPosition is not the position where the enemy would be born
     //Instead, when the "background_position">"occurposition", this enemy should appear now
     //the position where the enemy would born is DEFAULT_GAME_AREA_TOP_RIGHT
     double OccurPosition;
+    CheckPoint(){}
+    CheckPoint(double y,enum Enemies x):OccurPosition(y),EnemyType(x)
+    {
+    }
 };
-
-typedef struct MeetingPoint *Pointer;
 
 class Design
 {
 public:
-    Design();
+    Design():CurrentEnemyNumber(0), CurrentStageNumber(0)
+    {
+    }
+
     //NewEnemy is used to register new enemy in game engine, using game.EnemyRegister()
     //background_position started with 0
     void NewEnemy(Game& game, double backgrond_position);
@@ -38,35 +51,10 @@ public:
     }
 
 private:
-    int CurrentEnemyNumber = 0;
-
-    Pointer EnemyLists[N_ENEMY];
+    int CurrentEnemyNumber;
+    int CurrentStageNumber;
+    static struct CheckPoint EnemyLists[N_STAGE][N_ENEMY];
 };
 
-void Design::NewEnemy(Game &game, double background_position)
-{
-    if (!EnemyLists[CurrentEnemyNumber]) return;
-    while (EnemyLists[CurrentEnemyNumber]->OccurPosition < background_position)
-    {
-        switch (EnemyLists[CurrentEnemyNumber]->EmemyType) {
-            case 0:
-                break;
-            case 1:
-                //Enemy1 x();
-                break;
-            case 2:
-                //Enemy2 x();
-                break;
-            case 3:
-                //Enemy3 x();
-                break;
-            case 4:
-                //Enemy4 x();
-                break;
-        }
-        //game.EnemyRegister(x);
-        CurrentEnemyNumber++;
-    }
-}
 
 #endif // DESIGN_H

@@ -1,5 +1,5 @@
 #include "game.h"
-
+#include "../res.h"
 #include "../GameDesign/enemy1.h"
 
 Game::Game()
@@ -56,6 +56,8 @@ void Game::Start(enum GameMode game_mode,int coins0,Control* control0,Control* c
     }
     items.clear();
 
+    design.Reset();
+
     Fighter *tmp = new Fighter(Point(0,200),Point(200,-50),&fighter_hitpoint,new Fighter1Graphic(),player0);
 
     FighterRegister(tmp);
@@ -63,11 +65,11 @@ void Game::Start(enum GameMode game_mode,int coins0,Control* control0,Control* c
         //register second fighter
     }
 
-    Enemy1 *t= new Enemy1(Point(0,-100),Point(200,400),-M_PI/2,&enemy1_hitpoint,10000,100,100);
-    EnemyRegister(t);
+    //Enemy1 *t= new Enemy1(Point(0,-100),Point(200,400),-M_PI/2,&enemy1_hitpoint,10000,100,100);
+    //EnemyRegister(t);
 
-    t= new Enemy1(Point(0,-100),Point(600,400),-M_PI/2,&enemy1_hitpoint,100,100,100);
-    EnemyRegister(t);
+    //t= new Enemy1(Point(0,-100),Point(600,400),-M_PI/2,&enemy1_hitpoint,100,100,100);
+    //EnemyRegister(t);
 }
 
 void Game::GameLoop()
@@ -76,7 +78,7 @@ void Game::GameLoop()
         if (!IsPaused()){
             switch(status){
             case MISSION_START:
-                my_graphic_engine.MissionStart(0);
+                graphic_engine.MissionStart(0);
                 status=MISSION_ON;
                 graphics_time.start();
                 physics_time.start();
@@ -84,7 +86,7 @@ void Game::GameLoop()
             case MISSION_ON:{
                 double time=(double)physics_time.restart()/1000;
                 AllChangeStatus(time);
-                //design.NewEnemy(*this,background_position);
+                design.NewEnemy(*this,background_position);
                 AllCheckCollision(time);
                 if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND){//flash a frame
                     AllPaint((double)graphics_time.restart()/1000);
@@ -100,12 +102,12 @@ void Game::GameLoop()
                 break;
             }
             case MISSION_END:
-                my_graphic_engine.MissionComplete(0);
+                graphic_engine.MissionComplete(0);
                 if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND){//flash a frame
                     double time=(double)graphics_time.restart()/1000;
-                    my_graphic_engine.PaintBackground(time);
-                    my_graphic_engine.MissionComplete(time);
-                    if (my_graphic_engine.MissionCompleteFinish()){
+                    graphic_engine.PaintBackground(time);
+                    graphic_engine.MissionComplete(time);
+                    if (graphic_engine.MissionCompleteFinish()){
                         //design.NextMission();
                         status=MISSION_START;
                     }
@@ -148,7 +150,9 @@ void Game::ItemRegister(Item* item)
 
 void Game::AllChangeStatus(double time)
 {
-    if (background_position<(1<<60))background_position+=time*data.BACKGROUND_SPEED;
+    if (background_position<(1<<30)){
+        background_position+=time*data.BACKGROUND_SPEED;
+    }
     for(vector<Bullet*>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
         (*it)->ChangeStatus(time,*this);
         (*it)->Move(time);
@@ -245,7 +249,7 @@ void Game::AllCheckCollision(double time)
 
 void Game::AllPaint(double time)
 {
-    my_graphic_engine.PaintBackground(time);
+    graphic_engine.PaintBackground(time);
     for(vector<Bullet*>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
         (*it)->Paint(time);
     }
@@ -365,42 +369,34 @@ bool Game::IsPaused()
     return PAUSED;
 }
 
-Fighter* Game::SelectRandomFighter()
-{
-    if (fighters.empty())return NULL;
-    return fighters[rand()%fighters.size()];
-}
-
-Enemy* Game::SelectRandomEnemy()
-{
-    if (enemies.empty())return NULL;
-    return enemies[rand()%enemies.size()];
-}
-
 Fighter* Game::SelectNearestFighter(Point p)
 {
     if (fighters.empty())return NULL;
-    vector<Fighter*>::iterator t=fighters.begin();
-    double dis=Distance(p,(*t)->GetPosition());
-    for (vector<Fighter*>::iterator i=fighters.begin()+1;i!=fighters.end();++i){
-        int d=Distance(p,(*i)->GetPosition());
-        if (d<dis){
-            t=i;dis=d;
+    Fighter* t=NULL;
+    double dis=10000000;
+    for (vector<Fighter*>::iterator i=fighters.begin();i!=fighters.end();++i){
+        if (!(*i)->IsDestroyed()){
+            int d=Distance(p,(*i)->GetPosition());
+            if (d<dis){
+                t=*i;dis=d;
+            }
         }
     }
-    return (*t);
+    return t;
 }
 
 Enemy* Game::SelectNearestEnemy(Point p)
 {
     if (enemies.empty())return NULL;
-    vector<Enemy*>::iterator t=enemies.begin();
-    double dis=Distance(p,(*t)->GetPosition());
-    for (vector<Enemy*>::iterator i=enemies.begin()+1;i!=enemies.end();++i){
-        int d=Distance(p,(*i)->GetPosition());
-        if (d<dis){
-            t=i;dis=d;
+    Enemy* t=NULL;
+    double dis=10000000;
+    for (vector<Enemy*>::iterator i=enemies.begin();i!=enemies.end();++i){
+        if (!(*i)->IsDestroyed()){
+            int d=Distance(p,(*i)->GetPosition());
+            if (d<dis){
+                t=*i;dis=d;
+            }
         }
     }
-    return (*t);
+    return t;
 }

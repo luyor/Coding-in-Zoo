@@ -1,5 +1,6 @@
 #include "enemy1.h"
-#include "../GameEngine/game.h"
+#include "../res.h"
+#include "GameEngine/game.h"
 
 const double STAY_RATIO = 0.3;
 
@@ -13,17 +14,20 @@ void Enemy1::ChangeStatus(double time, Game &my_game)
         position.y < (STAY_RATIO + ((rand() % 11) / 100.0))*data.PAINT_AREA_TOP_RIGHT.y) velocity = Point(0,0);
     // I assume fighters[] started with 0
     if (fabs(velocity.y) < DELTA) {
-        if (tar == 0) tar = my_game.SelectRandomFighter();
+        if (tar == 0) tar = my_game.SelectNearestFighter(position);
+        if (tar!=0&&tar->IsDestroyed()) tar = my_game.SelectNearestFighter(position);
+        if (tar!=0){
 
-        proper_angle = AimAt(position, tar->GetPosition());
-        if (fabs(proper_angle - angle) < max_turn_angle) angle = proper_angle;
-        else {
-            if (proper_angle > angle) angle += max_turn_angle;
-            else angle -= max_turn_angle;
-        }
-        if (fabs(proper_angle - angle) < DELTA && fire_time >=0.5) {
-            Fire(my_game);
-            fire_time = 0;
+            proper_angle = AimAt(position, tar->GetPosition());
+            if (fabs(proper_angle - angle) < max_turn_angle) angle = proper_angle;
+            else {
+                if (proper_angle > angle) angle += max_turn_angle;
+                else angle -= max_turn_angle;
+            }
+            if (fabs(proper_angle - angle) < DELTA && fire_time >=0.5) {
+                Fire(my_game);
+                fire_time = 0;
+            }
         }
     }
 }

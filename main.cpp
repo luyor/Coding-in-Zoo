@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "GameEngine/game.h"
 #include "UI/control.h"
+#include "GameDesign/design.h"
 
 
 #include "res.h"
@@ -12,6 +13,7 @@ Data data;
 Control control;
 GamePara gamepara;
 Game game;
+Design design;
 
 int main(int argc, char *argv[])
 {

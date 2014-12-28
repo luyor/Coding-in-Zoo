@@ -39,7 +39,6 @@ SOURCES += main.cpp\
     UI/keypress.cpp \
     UI/operation.cpp \
     UI/operationui.cpp \
-    UI/res.cpp \
     UI/screen.cpp \
     UI/screenui.cpp \
     UI/sound.cpp \
@@ -51,7 +50,8 @@ SOURCES += main.cpp\
     GraphicEngine/missilegraphic.cpp \
     GraphicEngine/bombdispersegraphic.cpp \
     GameDesign/enemy1.cpp \
-    GraphicEngine/enemy1graphic.cpp
+    GraphicEngine/enemy1graphic.cpp \
+    GameDesign/design.cpp
 
 HEADERS  += mainwindow.h \
     GameEngine/bomb.h \
@@ -98,9 +98,8 @@ HEADERS  += mainwindow.h \
     GraphicEngine/bombatomicgraphic.h \
     GraphicEngine/missilegraphic.h \
     GraphicEngine/bombdispersegraphic.h \
-    GameDesign/design.h \
     GameDesign/enemy1.h \
-    GameDesign/enemy2.h \
-    GraphicEngine/enemy1graphic.h
+    GraphicEngine/enemy1graphic.h \
+    GameDesign/design.h
 
 FORMS    += mainwindow.ui

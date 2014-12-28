@@ -2,7 +2,6 @@
 #define ENEMY1_H
 
 #include "../GameEngine/enemy.h"
-#include "../GameEngine/fighter.h"
 #include "../GraphicEngine/enemy1graphic.h"
 #include "../GraphicEngine/bulletyellowgraphic.h"
 
@@ -12,6 +11,8 @@ const double DELTA = 0.0001;
 const double SLOW_BULLET = 50;
 const double NORMAL_BULLET = 100;
 const double FAST_BULLET = 150;
+
+class Fighter;
 
 extern HitPoint enemy1_hitpoint;
 

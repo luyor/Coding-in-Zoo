@@ -5,7 +5,6 @@
 #include "flyingobject.h"
 #include "item.h"
 #include "player.h"
-#include "res.h"
 #include "../GraphicEngine/fighter1graphic.h"
 #include "../GraphicEngine/bulletyellowgraphic.h"
 #include "../GraphicEngine/bombatomicgraphic.h"

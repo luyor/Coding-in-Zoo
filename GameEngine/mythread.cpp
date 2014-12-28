@@ -1,4 +1,5 @@
 #include "mythread.h"
+#include "res.h"
 
 MyThread::MyThread()
 {

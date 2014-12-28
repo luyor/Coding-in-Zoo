@@ -1,5 +1,6 @@
 #include "fighter.h"
 #include "game.h"
+#include "res.h"
 
 HitPoint fighter_hitpoint;
 
@@ -7,7 +8,7 @@ const double Fighter::SPEED=500;
 const double Fighter::BULLET_FREQUENCY=0.3;
 const double Fighter::MISSILE_FREQUENCY=0.7;
 const double Fighter::FLYING_TIME=1;
-const double Fighter::BULLET_PROOF_TIME=0;
+const double Fighter::BULLET_PROOF_TIME=1;
 const double Fighter::MAX_BULLET_LEVEL=4;
 const double Fighter::MAX_MISSILE_LEVEL=0;
 const double Fighter::MAX_BOMB_NUMBER=6;
