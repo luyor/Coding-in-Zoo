@@ -1,6 +1,6 @@
 #include "game.h"
 
-const double Game::BACKGROUND_SPEED=20;
+#include "../GameDesign/enemy1.h"
 
 Game::Game()
 {
@@ -15,6 +15,7 @@ void Game::Init()
     Fighter::Init();
     //Item::Init();
     Missile::Init();
+    Enemy1::Init();
 }
 
 void Game::Start(enum GameMode game_mode,int coins0,Control* control0,Control* control1)
@@ -61,6 +62,12 @@ void Game::Start(enum GameMode game_mode,int coins0,Control* control0,Control* c
     if(game_mode==COOP){
         //register second fighter
     }
+
+    Enemy1 *t= new Enemy1(Point(0,-100),Point(200,400),-M_PI/2,&enemy1_hitpoint,10000,100,100);
+    EnemyRegister(t);
+
+    t= new Enemy1(Point(0,-100),Point(600,400),-M_PI/2,&enemy1_hitpoint,100,100,100);
+    EnemyRegister(t);
 }
 
 void Game::GameLoop()
@@ -141,7 +148,7 @@ void Game::ItemRegister(Item* item)
 
 void Game::AllChangeStatus(double time)
 {
-    if (background_position<(1<<60))background_position+=time*BACKGROUND_SPEED;
+    if (background_position<(1<<60))background_position+=time*data.BACKGROUND_SPEED;
     for(vector<Bullet*>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
         (*it)->ChangeStatus(time,*this);
         (*it)->Move(time);
@@ -227,8 +234,9 @@ void Game::AllCheckCollision(double time)
     for (vector<Bomb*>::iterator i=bombs.begin();i!=bombs.end();++i){
         if ((*i)->IsExplode()){
             for (vector<Enemy*>::iterator j=enemies.begin();j!=enemies.end();++j){
-                if(!(*i)->IsDestroyed()&&!(*j)->IsDestroyed()&&IsColliding(*i,*j))
+                if(!(*i)->IsDestroyed()&&!(*j)->IsDestroyed()&&IsColliding(*i,*j)){
                     (*i)->AddScore((*j)->Hit((*i)->Hit(time)));
+                }
             }
         }
     }
@@ -275,8 +283,13 @@ void Game::AllClean()
     }
     for(vector<Fighter*>::iterator it=fighters.begin();it!=fighters.end();++it){
         if ((*it)->DestroyFinished()){
+            Player* p=(*it)->GetPlayer();
             delete (*it);
             fighters.erase(it);
+            if (!p->IsDead()){
+                Fighter *f=new Fighter(Point(0,200),Point(300,-50),&fighter_hitpoint,new Fighter1Graphic(),p);
+                FighterRegister(f);
+            }
         }
         if(it==fighters.end())
             break;

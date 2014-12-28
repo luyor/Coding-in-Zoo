@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "../stdafx.h"
 #include "../UI/control.h"
 
 class Player

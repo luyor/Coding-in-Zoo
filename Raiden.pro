@@ -48,7 +48,10 @@ SOURCES += main.cpp\
     UI/valueshow.cpp \
     GraphicEngine/bulletyellowgraphic.cpp \
     GraphicEngine/bombatomicgraphic.cpp \
-    GraphicEngine/missilegraphic.cpp
+    GraphicEngine/missilegraphic.cpp \
+    GraphicEngine/bombdispersegraphic.cpp \
+    GameDesign/enemy1.cpp \
+    GraphicEngine/enemy1graphic.cpp
 
 HEADERS  += mainwindow.h \
     GameEngine/bomb.h \
@@ -93,6 +96,11 @@ HEADERS  += mainwindow.h \
     UI/value.h \
     UI/valueshow.h \
     GraphicEngine/bombatomicgraphic.h \
-    GraphicEngine/missilegraphic.h
+    GraphicEngine/missilegraphic.h \
+    GraphicEngine/bombdispersegraphic.h \
+    GameDesign/design.h \
+    GameDesign/enemy1.h \
+    GameDesign/enemy2.h \
+    GraphicEngine/enemy1graphic.h
 
 FORMS    += mainwindow.ui

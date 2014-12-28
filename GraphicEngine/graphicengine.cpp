@@ -3,6 +3,8 @@
 #include "bulletyellowgraphic.h"
 #include "bombatomicgraphic.h"
 #include "missilegraphic.h"
+#include "bombdispersegraphic.h"
+#include "enemy1graphic.h"
 
 GraphicEngine::GraphicEngine()
 {
@@ -10,6 +12,8 @@ GraphicEngine::GraphicEngine()
     BulletYellowGraphic::InitBulletYellow();
     BombAtomicGraphic::InitBombAtomic();
     MissileGraphic::InitMissile();
+    BombDisperseGraphic::InitBombDisperse();
+    Enemy1Graphic::InitEnemy1();
 }
 
 void GraphicEngine::PaintBackground(double time)

@@ -10,6 +10,7 @@
 #include "../GraphicEngine/bulletyellowgraphic.h"
 #include "../GraphicEngine/bombatomicgraphic.h"
 #include "../GraphicEngine/missilegraphic.h"
+#include "../GraphicEngine/bombdispersegraphic.h"
 
 extern HitPoint fighter_hitpoint;
 
@@ -35,6 +36,7 @@ public:
     void Hit(double damage);//do damage
     //check if acting when crush enemy
     bool IsActing(){if (status==ACTING)return true;return false;}
+    Player* GetPlayer(){return my_player;}
 
     static void Init();//init hitpoint
 private:
@@ -80,11 +82,14 @@ private:
     static const double MAX_BULLET_LEVEL;
     static const double MAX_MISSILE_LEVEL;
     static const double MAX_BOMB_NUMBER;
+    static const int DISPERSE_BOMB_NUMBER;
 
     //private function
     void FireYellowBullet(double angle0, Game &my_game);
     void FireAtomicBomb(Game &my_game);
+    void FireDisperseBomb(Game &my_game);
     void FireTrackingMissile(Game &my_game,Point p);
+    //void FireStraightMissile(Game &my_game,Point p);
 };
 
 #endif // FIGHTER_H

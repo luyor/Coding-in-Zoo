@@ -77,7 +77,6 @@ private:
     //respond pause/insert coin key,return pause status
     bool IsPaused();
 
-    static const double BACKGROUND_SPEED;
 };
 
 #endif // GAME_H
