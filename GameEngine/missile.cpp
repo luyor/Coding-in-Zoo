@@ -1,5 +1,6 @@
 #include "missile.h"
 #include "game.h"
+#include "enemy.h"
 
 Missile::Missile(double speed0,Point p,double angle0,HitPoint* hit_point0,Graphic *graphic0,double damage0,
                  Player* belonging0,double max_turn_angle0,double miss_target_angle0):

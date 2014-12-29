@@ -1,27 +1,29 @@
 #include "fighter.h"
 #include "game.h"
+#include "res.h"
 
 HitPoint fighter_hitpoint;
 
 const double Fighter::SPEED=500;
-const double Fighter::BULLET_FREQUENCY=0.01;
+const double Fighter::BULLET_FREQUENCY=0.3;
 const double Fighter::MISSILE_FREQUENCY=0.7;
 const double Fighter::FLYING_TIME=1;
-const double Fighter::BULLET_PROOF_TIME=0;
+const double Fighter::BULLET_PROOF_TIME=1;
 const double Fighter::MAX_BULLET_LEVEL=4;
 const double Fighter::MAX_MISSILE_LEVEL=0;
 const double Fighter::MAX_BOMB_NUMBER=6;
+const int Fighter::DISPERSE_BOMB_NUMBER=50;
 
 Fighter::Fighter(Point v,Point p,HitPoint* hit_point0,
                  Graphic *graphic0,Player* player):
     FlyingObject(v,p,M_PI/2,hit_point0,graphic0),
-    elapsed_time(0), bullet_level(4),missile_level(1),
+    elapsed_time(0), bullet_level(1),missile_level(0),
     my_player(player),health(data.MAX_HEALTH),status(FLYING),bullet_time(100),my_bullet_type(YELLOW),
     missile_time(100),my_missile_type(TRACKING)
 {
-    bomb_list.push_back(ATOMIC);
-    bomb_list.push_back(ATOMIC);
-    bomb_list.push_back(ATOMIC);
+    for (int i=0;i<100;++i){
+        bomb_list.push_back(DISPERSE);
+    }
 }
 
 void Fighter::FighterMove(double time)
@@ -42,18 +44,14 @@ void Fighter::Hit(double damage)
     my_graphics->GetSignal(Graphic::HIT);
     health-=damage;
     //cout<<health<<endl;
-    if (health<=0){
-        my_player->LoseLife();
+    if (health<=0)
         SetDestroy();
-    }
 }
 
 void Fighter::Destroy()
 {
+    my_player->LoseLife();
     //add score
-    if (!my_player->IsDead()){
-        //register new fighter
-    }
 }
 
 int Fighter::Crush()
@@ -186,6 +184,7 @@ void Fighter::ChangeStatus(double time, Game &my_game)
                     FireAtomicBomb(my_game);
                     break;
                 case DISPERSE:
+                    FireDisperseBomb(my_game);
                     break;
                 }
                 bomb_list.erase(it);
@@ -244,4 +243,21 @@ void Fighter::FireTrackingMissile(Game &my_game,Point p)
         M_PI*2,
         1000
         ));
+}
+
+void Fighter::FireDisperseBomb(Game &my_game)
+{
+    for (int i=0;i<DISPERSE_BOMB_NUMBER;++i){
+        double a=2*M_PI*i/DISPERSE_BOMB_NUMBER;
+        BombDisperseGraphic *tmp=new BombDisperseGraphic();
+        my_game.BombRegister(
+            new Bomb(Point(150*cos(a),150*sin(a)),
+            Point(position.x+cos(a)*my_graphics->Size().x/2,position.y+sin(a)*my_graphics->Size().y/2),
+            a,
+            tmp,
+            10,
+            my_player,
+            (rand()%800+200.0)/1000
+            ));
+    }
 }

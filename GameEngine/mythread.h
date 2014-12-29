@@ -2,7 +2,6 @@
 #define MYTREAD_H
 
 #include <qthread.h>
-#include "game.h"
 
 class MyThread: public QThread
 {

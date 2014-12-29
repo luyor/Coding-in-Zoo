@@ -3,15 +3,12 @@
 
 #include "../stdafx.h"
 #include "bullet.h"
-#include "enemy.h"
 #include "fighter.h"
 #include "missile.h"
 #include "item.h"
 #include "bomb.h"
 #include "player.h"
-//#include "../GameDesign/design.h"
-#include "../GraphicEngine/graphicengine.h"
-#include "../UI/control.h"
+class Enemy;
 
 class Game
 {
@@ -35,8 +32,6 @@ public:
     void BombRegister(Bomb* bomb);
     void ItemRegister(Item* item);
 
-    Fighter* SelectRandomFighter();
-    Enemy* SelectRandomEnemy();
     Fighter* SelectNearestFighter(Point p);
     Enemy* SelectNearestEnemy(Point p);
 private:
@@ -54,8 +49,6 @@ private:
     double background_position;
     int coins;
     bool PAUSED,END;
-
-    GraphicEngine my_graphic_engine;
 
     Player *player0,*player1;
 
@@ -77,7 +70,6 @@ private:
     //respond pause/insert coin key,return pause status
     bool IsPaused();
 
-    static const double BACKGROUND_SPEED;
 };
 
 #endif // GAME_H

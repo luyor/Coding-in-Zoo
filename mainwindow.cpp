@@ -13,6 +13,7 @@
 #include "UI/valueshow.h"
 #include "UI/ui_valueshow.h"
 #include "GraphicEngine/paintwidget.h"
+#include "res.h"
 
 MainWindow::MainWindow()
 {
