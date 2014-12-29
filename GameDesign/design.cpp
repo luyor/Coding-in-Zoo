@@ -13,13 +13,12 @@ struct CheckPoint Design::EnemyLists[N_STAGE][N_ENEMY] ={
         CheckPoint(160,EnemyType1),
         CheckPoint(180,EnemyType1),
         CheckPoint(190,EnemyType1),
-        CheckPoint(1<<30,No)
+        CheckPoint(1e60,No)
     }
 };
 
 void Design::NewEnemy(Game& game, double background_position)
 {
-    if (EnemyLists[CurrentStageNumber][CurrentEnemyNumber].OccurPosition==0) return;
     while (EnemyLists[CurrentStageNumber][CurrentEnemyNumber].OccurPosition < background_position) {
         cout<<"make"<<endl;
         double y = data.PAINT_AREA_TOP_RIGHT.y + 120;

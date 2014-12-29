@@ -150,7 +150,7 @@ void Game::ItemRegister(Item* item)
 
 void Game::AllChangeStatus(double time)
 {
-    if (background_position<(1<<30)){
+    if (background_position<(1e50)){
         background_position+=time*data.BACKGROUND_SPEED;
     }
     for(vector<Bullet*>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
