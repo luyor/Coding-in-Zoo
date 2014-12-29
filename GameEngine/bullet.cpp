@@ -38,4 +38,6 @@ void Bullet::Init()
 {
     Circle tmp(0,0,10);
     yellow_bullet_hitpoint.AddCircle(tmp);
+    tmp=Circle(0,0,2.5);
+    enemy_bullet_hitpoint.AddCircle(tmp);
 }

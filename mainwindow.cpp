@@ -18,7 +18,7 @@
 MainWindow::MainWindow()
 {
     PaintWidget* centralwidget= new PaintWidget();
-    setGeometry(100,100,800,600);
+    setGeometry(100,100,500,520);
     this->setCentralWidget(centralwidget);
     createMenus();
     my_thread=new MyThread();

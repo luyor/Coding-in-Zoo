@@ -5,8 +5,13 @@
 #include "missilegraphic.h"
 #include "bombdispersegraphic.h"
 #include "enemy1graphic.h"
+#include "enemybullet1graphic.h"
+#include "itembulletlvupgraphic.h"
+#include "itemscore1000graphic.h"
 
-GraphicEngine::GraphicEngine()
+
+//*back_ground = QPixmap::fromImage(QImage());
+GraphicEngine::GraphicEngine() : bk_time(0)
 {
     Fighter1Graphic::InitFighter1();
     BulletYellowGraphic::InitBulletYellow();
@@ -14,10 +19,12 @@ GraphicEngine::GraphicEngine()
     MissileGraphic::InitMissile();
     BombDisperseGraphic::InitBombDisperse();
     Enemy1Graphic::InitEnemy1();
+    EnemyBullet1Graphic::InitEnemyBullet1();
+    ItemBulletLvupGraphic::InitItemBulletLvup();
+    ItemScore1000Graphic::InitItemScore1000();
 }
 
 void GraphicEngine::PaintBackground(double time)
 {
-//    QImage *img = new QImage("background.png");
-//    pics_to_show.push_back();
+    bk_time += time;
 }

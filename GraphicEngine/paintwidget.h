@@ -4,7 +4,6 @@
 #include <QWidget>
 #include <QPainter>
 #include"../stdafx.h"
-#include "res.h"
 #include "graphicengine.h"
 
 class PaintWidget : public QWidget

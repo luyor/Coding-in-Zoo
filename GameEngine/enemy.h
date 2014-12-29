@@ -21,6 +21,7 @@ public:
     //do damge and return score
     int Hit(double damage);
     virtual void Fire(Game& my_game){}
+    static void Init();
 private:
     double health;
     int HIT_SCORE;

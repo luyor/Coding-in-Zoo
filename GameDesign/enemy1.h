@@ -1,9 +1,8 @@
 #ifndef ENEMY1_H
 #define ENEMY1_H
 
-#include "../GameEngine/enemy.h"
 #include "../GraphicEngine/enemy1graphic.h"
-#include "../GraphicEngine/bulletyellowgraphic.h"
+#include "../GameEngine/enemy.h"
 
 const double max_turn_angle = M_PI / 72.0;
 const double DELTA = 0.0001;
@@ -28,6 +27,7 @@ public:
     void ChangeStatus(double time, Game& my_game);
     void Fire(Game& my_game);
     static void Init();
+    void Destroy();
 private:
     Fighter* tar;
     double fire_time;

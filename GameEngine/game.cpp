@@ -11,9 +11,9 @@ void Game::Init()
 {
     Bullet::Init();
     Bomb::Init();
-    //Enemy::Init();
+    Enemy::Init();
     Fighter::Init();
-    //Item::Init();
+    Item::Init();
     Missile::Init();
     Enemy1::Init();
 }
@@ -154,28 +154,40 @@ void Game::AllChangeStatus(double time)
         background_position+=time*data.BACKGROUND_SPEED;
     }
     for(vector<Bullet*>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
-        (*it)->ChangeStatus(time,*this);
-        (*it)->Move(time);
+        if (!(*it)->IsDestroyed()){
+            (*it)->ChangeStatus(time,*this);
+            (*it)->Move(time);
+        }
     }
     for(vector<Bullet*>::iterator it=enemy_bullets.begin();it!=enemy_bullets.end();++it){
-        (*it)->ChangeStatus(time,*this);
-        (*it)->Move(time);
+        if (!(*it)->IsDestroyed()){
+            (*it)->ChangeStatus(time,*this);
+            (*it)->Move(time);
+        }
     }
     for(vector<Fighter*>::iterator it=fighters.begin();it!=fighters.end();++it){
-        (*it)->ChangeStatus(time,*this);
-        (*it)->FighterMove(time);
+        if (!(*it)->IsDestroyed()){
+            (*it)->ChangeStatus(time,*this);
+            (*it)->FighterMove(time);
+        }
     }
     for(vector<Enemy*>::iterator it=enemies.begin();it!=enemies.end();++it){
-        (*it)->ChangeStatus(time,*this);
-        (*it)->Move(time);
+        if (!(*it)->IsDestroyed()){
+            (*it)->ChangeStatus(time,*this);
+            (*it)->Move(time);
+        }
     }
     for(vector<Bomb*>::iterator it=bombs.begin();it!=bombs.end();++it){
-        (*it)->ChangeStatus(time,*this);
-        (*it)->Move(time);
+        if (!(*it)->IsDestroyed()){
+            (*it)->ChangeStatus(time,*this);
+            (*it)->Move(time);
+        }
     }
     for(vector<Item*>::iterator it=items.begin();it!=items.end();++it){
-        (*it)->ChangeStatus(time,*this);
-        (*it)->Move(time);
+        if (!(*it)->IsDestroyed()){
+            (*it)->ChangeStatus(time,*this);
+            (*it)->Move(time);
+        }
     }
 }
 

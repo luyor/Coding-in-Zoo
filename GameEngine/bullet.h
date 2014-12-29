@@ -6,6 +6,7 @@
 #include "../General/hitpoint.h"
 
 extern HitPoint yellow_bullet_hitpoint;
+extern HitPoint enemy_bullet_hitpoint;
 
 class Bullet : public FlyingObject
 {

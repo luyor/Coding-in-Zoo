@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -51,7 +52,11 @@ SOURCES += main.cpp\
     GraphicEngine/bombdispersegraphic.cpp \
     GameDesign/enemy1.cpp \
     GraphicEngine/enemy1graphic.cpp \
-    GameDesign/design.cpp
+    GameDesign/design.cpp \
+    GraphicEngine/enemybullet1graphic.cpp \
+    GraphicEngine/itembulletlvupgraphic.cpp \
+    GraphicEngine/itemscore1000graphic.cpp \
+    GraphicEngine/soundengine.cpp
 
 HEADERS  += mainwindow.h \
     GameEngine/bomb.h \
@@ -100,6 +105,10 @@ HEADERS  += mainwindow.h \
     GraphicEngine/bombdispersegraphic.h \
     GameDesign/enemy1.h \
     GraphicEngine/enemy1graphic.h \
-    GameDesign/design.h
+    GameDesign/design.h \
+    GraphicEngine/enemybullet1graphic.h \
+    GraphicEngine/itembulletlvupgraphic.h \
+    GraphicEngine/itemscore1000graphic.h \
+    GraphicEngine/soundengine.h
 
 FORMS    += mainwindow.ui
