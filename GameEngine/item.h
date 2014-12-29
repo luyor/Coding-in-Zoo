@@ -3,6 +3,8 @@
 
 #include "flyingobject.h"
 
+extern HitPoint item_hitpoint;
+
 class Item : public FlyingObject
 {
 public:
@@ -24,6 +26,7 @@ public:
 
     enum ItemType Hit(){SetDestroy();return my_item_type;}
     void ChangeStatus(double time, Game &my_game);
+    static void Init();
 private:
     static const double CHANGE_TIME;
 };

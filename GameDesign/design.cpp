@@ -7,12 +7,12 @@ struct CheckPoint Design::EnemyLists[N_STAGE][N_ENEMY] ={
     {
         CheckPoint(70,EnemyType1),
         CheckPoint(80,EnemyType1),
-        CheckPoint(120,EnemyType1),
-        CheckPoint(130,EnemyType1),
-        CheckPoint(150,EnemyType1),
         CheckPoint(160,EnemyType1),
-        CheckPoint(180,EnemyType1),
-        CheckPoint(190,EnemyType1),
+        CheckPoint(200,EnemyType1),
+        CheckPoint(260,EnemyType1),
+        CheckPoint(330,EnemyType1),
+        CheckPoint(350,EnemyType1),
+        CheckPoint(400,EnemyType1),
         CheckPoint(1e60,No)
     }
 };
@@ -20,7 +20,7 @@ struct CheckPoint Design::EnemyLists[N_STAGE][N_ENEMY] ={
 void Design::NewEnemy(Game& game, double background_position)
 {
     while (EnemyLists[CurrentStageNumber][CurrentEnemyNumber].OccurPosition < background_position) {
-        cout<<"make"<<endl;
+        //cout<<"make"<<endl;
         double y = data.PAINT_AREA_TOP_RIGHT.y + 120;
         double x = (rand() % ((int)data.PAINT_AREA_TOP_RIGHT.x - 200)) + 101;
         Enemy1 *xx;

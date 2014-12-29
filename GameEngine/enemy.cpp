@@ -1,4 +1,7 @@
 #include "enemy.h"
+//#include "../GameDesign/enemy1.h"
+
+HitPoint enemy_bullet_hitpoint;
 
 Enemy::Enemy(Point v,Point p,double angle0,HitPoint* hit_point0,
              Graphic *graphic0,double health0,int HIT_SCORE0,int DESTROY_SCORE0):
@@ -17,4 +20,9 @@ int Enemy::Hit(double damage)
     }
     //cout<<HIT_SCORE*damage<<endl;
     return HIT_SCORE*damage;
+}
+
+void Enemy::Init()
+{
+
 }

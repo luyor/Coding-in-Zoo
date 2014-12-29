@@ -4,7 +4,7 @@
 
 HitPoint fighter_hitpoint;
 
-const double Fighter::SPEED=500;
+const double Fighter::SPEED=100;
 const double Fighter::BULLET_FREQUENCY=0.3;
 const double Fighter::MISSILE_FREQUENCY=0.7;
 const double Fighter::FLYING_TIME=1;
@@ -65,18 +65,20 @@ void Fighter::GetItem(enum Item::ItemType type)
     switch(type){
     case Item::YELLOW_BULLET:
         if (my_bullet_type==YELLOW&&bullet_level<MAX_BULLET_LEVEL){
-            ++bullet_level;
+            ++bullet_level;        
         }else my_bullet_type=YELLOW;
         break;
     case Item::BLUE_BULLET:
         if (my_bullet_type==BLUE&&bullet_level<MAX_BULLET_LEVEL){
             ++bullet_level;
         }else my_bullet_type=BLUE;
+        my_bullet_type=YELLOW;
         break;
     case Item::PURPLE_BULLET:
         if (my_bullet_type==PURPLE&&bullet_level<MAX_BULLET_LEVEL){
             ++bullet_level;
         }else my_bullet_type=PURPLE;
+        my_bullet_type=YELLOW;
         break;
     case Item::TRACKING_MISSILE:
         if (my_missile_type==TRACKING&&missile_level<MAX_MISSILE_LEVEL){
@@ -133,7 +135,7 @@ void Fighter::ChangeStatus(double time, Game &my_game)
         break;
     }
 
-    if (!IsDestroyed()&&(status==BULLET_PROOF||status==ACTING)){
+    if (status==BULLET_PROOF||status==ACTING){
         //cout<<"in acting"<<endl;
         velocity=Point(0,0);
         if (my_player->my_control->LeftPressed)velocity.x-=SPEED;
@@ -143,7 +145,6 @@ void Fighter::ChangeStatus(double time, Game &my_game)
         if (my_player->my_control->FirePressed){
             if (bullet_time>BULLET_FREQUENCY){
                 bullet_time=0;
-                //cout<<"fire"<<endl;
                 switch(my_bullet_type){
                 case YELLOW:
                     FireYellowBullet(M_PI/2,my_game);

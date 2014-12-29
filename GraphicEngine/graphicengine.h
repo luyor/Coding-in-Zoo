@@ -11,12 +11,14 @@ class GraphicEngine :public QObject
     Q_OBJECT
 public:
     GraphicEngine();
+    double bk_time;
     void MissionStart(double time){}
     void MissionComplete(double time){}
     void PaintBackground(double time);
     bool MissionCompleteFinish(){return false;}
-    Point GetFighterSize(){return Point(60,60);}
+    QPixmap* back_ground;
     vector<PicNode>pics_to_show;
+    void InitBK();
 signals:
     void Update();
 };

@@ -116,10 +116,10 @@ void Fighter1Graphic::InitFighter1()
     pics[DESTROY_FINISH] = NULL;
     TIME[CREATE]         = 0;
     TIME[NORMAL]         = 0;
-    TIME[HIT1]           = 1;
-    TIME[HIT2]           = 1;
-    TIME[HIT3]           = 1;
-    TIME[DESTROY1]       = 1;
-    TIME[DESTROY2]       = 1;
+    TIME[HIT1]           = 0.3;
+    TIME[HIT2]           = 0.3;
+    TIME[HIT3]           = 0.3;
+    TIME[DESTROY1]       = 0.3;
+    TIME[DESTROY2]       = 0.3;
     TIME[DESTROY_FINISH] = 0;
 }

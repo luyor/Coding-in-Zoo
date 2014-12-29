@@ -1,6 +1,10 @@
 #include "enemy1.h"
 #include "../res.h"
 #include "GameEngine/game.h"
+#include "../GraphicEngine/enemybullet1graphic.h"
+#include "../GraphicEngine/itembulletlvupgraphic.h"
+#include "../GraphicEngine/itemscore1000graphic.h"
+#include "../GraphicEngine/bulletyellowgraphic.h"
 
 const double STAY_RATIO = 0.3;
 
@@ -39,8 +43,14 @@ void Enemy1::Fire(Game &my_game)
     double length = sqrt(v_b.x*v_b.x + v_b.y*v_b.y);
     v_b.x = v_b.x / length * NORMAL_BULLET;
     v_b.y = v_b.y / length * NORMAL_BULLET;
-    Bullet *x=new Bullet(v_b, position, angle, &yellow_bullet_hitpoint,new BulletYellowGraphic() , Bullet::NORMAL, 10);
+    Bullet *x=new Bullet(v_b, position, angle, &enemy_bullet_hitpoint,new EnemyBullet1Graphic() , Bullet::NORMAL, 10);
     my_game.EnemyBulletRegister(x);
+}
+
+void Enemy1::Destroy()
+{
+    Item *i=new Item(Point(0,0),position,M_PI/2,&item_hitpoint,new ItemBulletLvupGraphic(),Item::YELLOW_BULLET);
+    game.ItemRegister(i);
 }
 
 void Enemy1::Init()
