@@ -66,7 +66,7 @@ void MissileGraphic::Paint(Point position,Point velocity,double angle,double tim
 void MissileGraphic::InitMissile()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL]         = new QImage("missile.png");
+    pics[NORMAL]         = new QImage(":/images/Images/bullet_images/missile.png");
     pics[DESTROY]        = NULL;
 
     TIME[CREATE]  = 0;

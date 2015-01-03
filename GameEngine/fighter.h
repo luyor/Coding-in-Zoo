@@ -7,6 +7,8 @@
 #include "player.h"
 #include "../GraphicEngine/fighter1graphic.h"
 #include "../GraphicEngine/bulletyellowgraphic.h"
+#include "../GraphicEngine/bulletbluegraphic.h"
+#include "../GraphicEngine/bulletpurplegraphic.h"
 #include "../GraphicEngine/bombatomicgraphic.h"
 #include "../GraphicEngine/missilegraphic.h"
 #include "../GraphicEngine/bombdispersegraphic.h"
@@ -38,6 +40,12 @@ public:
     Player* GetPlayer(){return my_player;}
 
     static void Init();//init hitpoint
+    
+    enum BombType{
+        ATOMIC=0,
+        DISPERSE
+    };
+    vector<enum BombType> bomb_list;
 private:
     enum{
         FLYING=0,
@@ -65,19 +73,22 @@ private:
         TRACKING=0,
         STRAIGHT
     }my_missile_type;
-    enum BombType{
-        ATOMIC=0,
-        DISPERSE
-    };
-    vector<enum BombType> bomb_list;
+    
+    
+    
+    int bullet_count;
 
 
     //private const
     static const double FLYING_TIME;
     static const double BULLET_PROOF_TIME;
     static const double SPEED;
-    static const double BULLET_FREQUENCY;
-    static const double MISSILE_FREQUENCY;
+    static const double YELLOW_BULLET_FREQUENCY;
+    static const double YELLOW_BULLET_STOP;
+    static const int YELLOW_BULLET_NUMBER;
+    static const double BLUE_BULLET_FREQUENCY;
+    static const double PURPLE_BULLET_FREQUENCY;
+    static const double MISSILE_FREQUENCY[];
     static const double MAX_BULLET_LEVEL;
     static const double MAX_MISSILE_LEVEL;
     static const double MAX_BOMB_NUMBER;
@@ -85,9 +96,12 @@ private:
 
     //private function
     void FireYellowBullet(double angle0, Game &my_game);
+    void FireBlueBullet(int k, Game &my_game);//k is multiple of size to shift bullet position
+    void FirePurpleBullet(int k,Game &my_game);
     void FireAtomicBomb(Game &my_game);
     void FireDisperseBomb(Game &my_game);
     void FireTrackingMissile(Game &my_game,Point p);
+    void FireStraightMissile(Game &my_game,Point p);
     //void FireStraightMissile(Game &my_game,Point p);
 };
 

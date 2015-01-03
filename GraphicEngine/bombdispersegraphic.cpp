@@ -92,11 +92,11 @@ Point BombDisperseGraphic::Size()
 void BombDisperseGraphic::InitBombDisperse()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL]         = new QImage("BombDisperse.png");
-    pics[HIT1]           = new QImage("BombDisperseExplode1.png");
-    pics[HIT2]           = new QImage("BombDisperseExplode2.png");
-    pics[HIT3]           = new QImage("BombDisperseExplode3.png");
-    pics[HIT4]           = new QImage("BombDisperseExplode4.png");
+    pics[NORMAL]         = new QImage(":/images/Images/bullet_images/BombDisperse.png");
+    pics[HIT1]           = new QImage(":/images/Images/bullet_images/BombDisperseExplode1.png");
+    pics[HIT2]           = new QImage(":/images/Images/bullet_images/BombDisperseExplode2.png");
+    pics[HIT3]           = new QImage(":/images/Images/bullet_images/BombDisperseExplode3.png");
+    pics[HIT4]           = new QImage(":/images/Images/bullet_images/BombDisperseExplode4.png");
     pics[DESTROY]        = NULL;
     TIME[CREATE]         = 0;
     TIME[NORMAL]         = 0;

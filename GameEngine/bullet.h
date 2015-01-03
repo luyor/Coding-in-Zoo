@@ -7,6 +7,7 @@
 
 extern HitPoint yellow_bullet_hitpoint;
 extern HitPoint enemy_bullet_hitpoint;
+extern HitPoint blue_bullet_hitpoint;
 
 class Bullet : public FlyingObject
 {

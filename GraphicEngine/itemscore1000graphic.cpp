@@ -67,7 +67,7 @@ void ItemScore1000Graphic::Paint(Point position,Point velocity,double angle,doub
 void ItemScore1000Graphic::InitItemScore1000()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL]         = new QImage("ItemScore1000.png");
+    pics[NORMAL]         = new QImage(":/images/Images/item_image/ItemScore1000.png");
     pics[DESTROY]        = NULL;
 
     TIME[CREATE]  = 0;

@@ -1,10 +1,18 @@
 #include "missile.h"
 #include "game.h"
 #include "enemy.h"
+#include "../res.h"
 
 Missile::Missile(double speed0,Point p,double angle0,HitPoint* hit_point0,Graphic *graphic0,double damage0,
                  Player* belonging0,double max_turn_angle0,double miss_target_angle0):
     Bullet(Point(speed0*cos(angle0),speed0*sin(angle0)),p,angle0,hit_point0,graphic0,NORMAL,damage0,belonging0),target(NULL),
+    max_turn_angle(max_turn_angle0),speed(speed0),miss_target_angle(miss_target_angle0),turned_angle(0)
+{
+}
+
+Missile::Missile(double speed0,Point v,Point p,double angle0,HitPoint* hit_point0,Graphic *graphic0,double damage0,
+        Player* belonging0,double max_turn_angle0,double miss_target_angle0):
+    Bullet(v,p,angle0,hit_point0,graphic0,NORMAL,damage0,belonging0),target(game.SelectNearestEnemy(position)),
     max_turn_angle(max_turn_angle0),speed(speed0),miss_target_angle(miss_target_angle0),turned_angle(0)
 {
 }
@@ -24,6 +32,8 @@ void Missile::ChangeStatus(double time, Game &my_game)
                 target=my_game.SelectNearestFighter(position);
             }else{
                 target=my_game.SelectNearestEnemy(position);
+                if (target!=NULL)
+                    angle=AimAt(position,target->GetPosition());
             }
         }
     }else{

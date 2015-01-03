@@ -6,7 +6,7 @@ QImage* ItemBulletLvupGraphic::pics[] = {NULL};
 
 double ItemBulletLvupGraphic::TIME[] = {0};
 
-ItemBulletLvupGraphic::ItemBulletLvupGraphic():node(Point(0,0),QPixmap()),status(NORMAL1)
+ItemBulletLvupGraphic::ItemBulletLvupGraphic():node(Point(0,0),QPixmap()),status(NORMAL1),order(0)
 {
 
 }
@@ -19,7 +19,6 @@ Point ItemBulletLvupGraphic::Size()
 
 void ItemBulletLvupGraphic::Paint(Point position,Point velocity,double angle,double time)
 {
-    static int order = 0;
     QMatrix matrix;
     QImage* img;
     image_to_show = new QImage;
@@ -96,9 +95,9 @@ void ItemBulletLvupGraphic::Paint(Point position,Point velocity,double angle,dou
 void ItemBulletLvupGraphic::InitItemBulletLvup()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL1]        = new QImage("ItemBulletLvup1.png");
-    pics[NORMAL2]        = new QImage("ItemBulletLvup2.png");
-    pics[NORMAL3]        = new QImage("ItemBulletLvup3.png");
+    pics[NORMAL1]        = new QImage(":/images/Images/item_image/ItemBulletLvup1.png");
+    pics[NORMAL2]        = new QImage(":/images/Images/item_image/ItemBulletLvup2.png");
+    pics[NORMAL3]        = new QImage(":/images/Images/item_image/ItemBulletLvup3.png");
     pics[DESTROY]        = NULL;
 
     TIME[CREATE]  = 0;

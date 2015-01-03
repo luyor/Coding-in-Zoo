@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>Images/player_images/player1.png</file>
+        <file>Images/player_images/player1_destroy1.png</file>
+        <file>Images/player_images/player1_destroy2.png</file>
+        <file>Images/player_images/player1_hit1.png</file>
+        <file>Images/player_images/player1_hit2.png</file>
+        <file>Images/player_images/player1_hit3.png</file>
+        <file>Images/bullet_images/BombAtomic.png</file>
+        <file>Images/bullet_images/BombAtomicExplode0.png</file>
+        <file>Images/bullet_images/BombAtomicExplode1.png</file>
+        <file>Images/bullet_images/BombAtomicExplode2.png</file>
+        <file>Images/bullet_images/BombAtomicExplode3.png</file>
+        <file>Images/bullet_images/BombDisperse.png</file>
+        <file>Images/bullet_images/BombDisperseExplode0.png</file>
+        <file>Images/bullet_images/BombDisperseExplode1.png</file>
+        <file>Images/bullet_images/BombDisperseExplode2.png</file>
+        <file>Images/bullet_images/BombDisperseExplode3.png</file>
+        <file>Images/bullet_images/bullet_yellow.png</file>
+        <file>Images/bullet_images/EnemyBullet1.png</file>
+        <file>Images/bullet_images/missile.png</file>
+        <file>Images/enemy_images/Enemy1.png</file>
+        <file>Images/enemy_images/Enemy1_destroy1.png</file>
+        <file>Images/enemy_images/Enemy1_destroy2.png</file>
+        <file>Images/enemy_images/Enemy1_hit1.png</file>
+        <file>Images/enemy_images/Enemy1_hit2.png</file>
+        <file>Images/background_image/background.png</file>
+        <file>Images/item_image/ItemBulletLvup1.png</file>
+        <file>Images/item_image/ItemBulletLvup2.png</file>
+        <file>Images/item_image/ItemBulletLvup3.png</file>
+        <file>Images/item_image/ItemScore1000.png</file>
+        <file>Images/bullet_images/bullet_blue.png</file>
+        <file>Images/bullet_images/bullet_purple.png</file>
+        <file>Images/item_image/ItemBombAtomic.png</file>
+        <file>Images/item_image/ItemBombDisperse.png</file>
+    </qresource>
+</RCC>

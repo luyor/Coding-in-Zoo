@@ -34,6 +34,8 @@ public:
 
     Fighter* SelectNearestFighter(Point p);
     Enemy* SelectNearestEnemy(Point p);
+    
+    Player *player0,*player1;
 private:
     //private variables
     QTime physics_time;
@@ -49,8 +51,6 @@ private:
     double background_position;
     int coins;
     bool PAUSED,END;
-
-    Player *player0,*player1;
 
     vector<Bullet*> friendly_bullets;
     vector<Bullet*> enemy_bullets;

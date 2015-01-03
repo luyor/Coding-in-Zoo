@@ -92,11 +92,11 @@ Point BombAtomicGraphic::Size()
 void BombAtomicGraphic::InitBombAtomic()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL]         = new QImage("BombAtomic.png");
-    pics[HIT1]       = new QImage("BombAtomicExplode1.png");
-    pics[HIT2]       = new QImage("BombAtomicExplode2.png");
-    pics[HIT3]       = new QImage("BombAtomicExplode3.png");
-    pics[HIT4]       = new QImage("BombAtomicExplode4.png");
+    pics[NORMAL]         = new QImage(":/images/Images/bullet_images/BombAtomic.png");
+    pics[HIT1]       = new QImage(":/images/Images/bullet_images/BombAtomicExplode1.png");
+    pics[HIT2]       = new QImage(":/images/Images/bullet_images/BombAtomicExplode2.png");
+    pics[HIT3]       = new QImage(":/images/Images/bullet_images/BombAtomicExplode3.png");
+    pics[HIT4]       = new QImage(":/images/Images/bullet_images/BombAtomicExplode4.png");
     pics[DESTROY] = NULL;
     TIME[CREATE]         = 0;
     TIME[NORMAL]         = 0;

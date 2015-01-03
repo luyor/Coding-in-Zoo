@@ -67,7 +67,7 @@ void EnemyBullet1Graphic::Paint(Point position,Point velocity,double angle,doubl
 void EnemyBullet1Graphic::InitEnemyBullet1()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL]         = new QImage("EnemyBullet1.png");
+    pics[NORMAL]         = new QImage(":/images/Images/bullet_images/EnemyBullet1.png");
     pics[DESTROY]        = NULL;
 
     TIME[CREATE]  = 0;

@@ -56,7 +56,9 @@ SOURCES += main.cpp\
     GraphicEngine/enemybullet1graphic.cpp \
     GraphicEngine/itembulletlvupgraphic.cpp \
     GraphicEngine/itemscore1000graphic.cpp \
-    GraphicEngine/soundengine.cpp
+    GraphicEngine/soundengine.cpp \
+    GraphicEngine/bulletbluegraphic.cpp \
+    GraphicEngine/bulletpurplegraphic.cpp
 
 HEADERS  += mainwindow.h \
     GameEngine/bomb.h \
@@ -109,6 +111,11 @@ HEADERS  += mainwindow.h \
     GraphicEngine/enemybullet1graphic.h \
     GraphicEngine/itembulletlvupgraphic.h \
     GraphicEngine/itemscore1000graphic.h \
-    GraphicEngine/soundengine.h
+    GraphicEngine/soundengine.h \
+    GraphicEngine/bulletbluegraphic.h \
+    GraphicEngine/bulletpurplegraphic.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    image.qrc
