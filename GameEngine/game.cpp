@@ -262,6 +262,12 @@ void Game::AllCheckCollision(double time)
 void Game::AllPaint(double time)
 {
     graphic_engine.PaintBackground(time);
+    Fighter *tmp0=NULL,*tmp1=NULL;
+    for (vector<Fighter*>::iterator it=fighters.begin();it!=fighters.end();++it){
+        if ((*it)->GetPlayer()==player0)tmp0=*it;
+        if ((*it)->GetPlayer()==player1)tmp1=*it;
+    }
+    graphic_engine.PaintForeground(tmp0,tmp1);
     for(vector<Bullet*>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
         (*it)->Paint(time);
     }

@@ -8,10 +8,13 @@
 #include "enemybullet1graphic.h"
 #include "itembulletlvupgraphic.h"
 #include "itemscore1000graphic.h"
+#include "bulletbluegraphic.h"
+#include "bulletpurplegraphic.h"
 
+#include "../GameEngine/fighter.h"
 
 //*back_ground = QPixmap::fromImage(QImage());
-GraphicEngine::GraphicEngine() : bk_time(0)
+GraphicEngine::GraphicEngine() : bk_time(0), f1(NULL), f2(NULL)
 {
     Fighter1Graphic::InitFighter1();
     BulletYellowGraphic::InitBulletYellow();
@@ -22,6 +25,14 @@ GraphicEngine::GraphicEngine() : bk_time(0)
     EnemyBullet1Graphic::InitEnemyBullet1();
     ItemBulletLvupGraphic::InitItemBulletLvup();
     ItemScore1000Graphic::InitItemScore1000();
+    BulletBlueGraphic::InitBulletBlue();
+    BulletPurpleGraphic::InitBulletPurple();
+}
+
+void GraphicEngine::PaintForeground(Fighter* fighter1, Fighter* fighter2)
+{
+    f1 = fighter1;
+    f2 = fighter2;
 }
 
 void GraphicEngine::PaintBackground(double time)

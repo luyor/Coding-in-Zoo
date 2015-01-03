@@ -15,10 +15,10 @@ public:
     void Revive(){current_life=max_life;}
 
     Control* my_control;
-private:
     int max_life;
     int current_life;
     int score;
+
 };
 
 #endif // PLAYER_H

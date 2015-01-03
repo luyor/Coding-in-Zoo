@@ -25,6 +25,7 @@ public:
     ItemBulletLvupGraphic();
     Point Size();
     void Paint(Point position,Point velocity,double angle,double time);
+    int order;
 };
 
 #endif // ITEMBULLETLvupGRAPHIC_H

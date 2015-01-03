@@ -107,12 +107,12 @@ Point Fighter1Graphic::Size()
 void Fighter1Graphic::InitFighter1()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL]         = new QImage("player1.png");
-    pics[HIT1]           = new QImage("player1_hit1.png");
-    pics[HIT2]           = new QImage("player1_hit2.png");
-    pics[HIT3]           = new QImage("player1_hit3.png");
-    pics[DESTROY1]       = new QImage("player1_destroy1.png");
-    pics[DESTROY2]       = new QImage("player1_destroy2.png");
+    pics[NORMAL]         = new QImage(":/images/Images/player_images/player1.png");
+    pics[HIT1]           = new QImage(":/images/Images/player_images/player1_hit1.png");
+    pics[HIT2]           = new QImage(":/images/Images/player_images/player1_hit2.png");
+    pics[HIT3]           = new QImage(":/images/Images/player_images/player1_hit3.png");
+    pics[DESTROY1]       = new QImage(":/images/Images/player_images/player1_destroy1.png");
+    pics[DESTROY2]       = new QImage(":/images/Images/player_images/player1_destroy2.png");
     pics[DESTROY_FINISH] = NULL;
     TIME[CREATE]         = 0;
     TIME[NORMAL]         = 0;

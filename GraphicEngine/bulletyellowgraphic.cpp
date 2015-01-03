@@ -67,7 +67,7 @@ void BulletYellowGraphic::Paint(Point position,Point velocity,double angle,doubl
 void BulletYellowGraphic::InitBulletYellow()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL]         = new QImage("bullet_yellow.png");
+    pics[NORMAL]         = new QImage(":/images/Images/bullet_images/bullet_yellow.png");
     pics[DESTROY]        = NULL;
 
     TIME[CREATE]  = 0;

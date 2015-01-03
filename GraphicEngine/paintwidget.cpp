@@ -4,8 +4,11 @@
 PaintWidget::PaintWidget(QWidget *parent) :
     QWidget(parent)
 {
-   graphic_engine.back_ground = new QPixmap("background.png");
+   graphic_engine.back_ground = new QPixmap(":/images/Images/background_image/background.png");
    connect(&graphic_engine,SIGNAL(Update()),this,SLOT(PaintFrame()));
+   connect(&graphic_engine,SIGNAL(PlaySoundBulletYellow()),&se,SLOT(PlaySoundBulletYellow()));
+   connect(&graphic_engine,SIGNAL(PlaySoundBulletBlue()),&se,SLOT(PlaySoundBulletBlue()));
+   connect(&graphic_engine,SIGNAL(PlaySoundBulletPurple()),&se,SLOT(PlaySoundBulletPurple()));
 }
 
 void PaintWidget::paintEvent(QPaintEvent* event)
@@ -36,5 +39,28 @@ void PaintWidget::paintEvent(QPaintEvent* event)
                            (int)(this->height() - iter->position.y - iter->pixmap.height()/2), iter->pixmap);
     }
     graphic_engine.pics_to_show.clear();
+    //paint foreground
+    QFont font("Time New Roma",15,QFont::Bold,false);
+    painter.setFont(font);
+    painter.setPen(QColor(Qt::white));
+    painter.drawText(10,20,"1 UP:");
+    painter.setPen(QColor(Qt::yellow));
+    painter.drawText(10,40,QString::number((int)game.player0->score,10));
+    
+    int bomb_num = 0;
+    if(graphic_engine.f1 != NULL)
+    {
+        bomb_num = graphic_engine.f1->bomb_list.size(); 
+        while(bomb_num--)
+        {
+            QPixmap tmp;
+            if(graphic_engine.f1->bomb_list[bomb_num] = Fighter::ATOMIC)
+                tmp = tmp.fromImage(QImage(":/images/Images/item_image/ItemBombAtomic.png"));
+            else if(graphic_engine.f1->bomb_list[bomb_num] = Fighter::DISPERSE)
+                tmp = tmp.fromImage(QImage(":/images/Images/item_image/ItemBombDisperse.png"));
+            painter.drawPixmap((tmp.width()+10)*bomb_num,this->height() - 30,tmp);
+        }
+    }
+   
 }
 

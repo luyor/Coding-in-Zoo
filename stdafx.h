@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <string>
+#include <QString>
 #include <iostream>
 #include <fstream>
 #include <vector>
