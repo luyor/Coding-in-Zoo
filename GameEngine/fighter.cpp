@@ -26,7 +26,7 @@ Fighter::Fighter(Point v,Point p,HitPoint* hit_point0,
     missile_time(100),my_missile_type(TRACKING),bullet_count(0)
 {
     for (int i=0;i<6;++i){
-        bomb_list.push_back(DISPERSE);
+        bomb_list.push_back(ATOMIC);
     }
 }
 
@@ -54,6 +54,7 @@ void Fighter::Hit(double damage)
 
 void Fighter::Destroy()
 {
+    emit graphic_engine.PlaySoundFighterDestroy();
     my_player->LoseLife();
     //add score
 }
@@ -223,9 +224,10 @@ void Fighter::ChangeStatus(double time, Game &my_game)
         }
         if (my_player->my_control->BombValue()){
             if (!bomb_list.empty()){
-                vector<BombType>::iterator it=bomb_list.end()-1;
-                switch(*it){
-                case ATOMIC:
+                vector<BombType>::iterator it=bomb_list.end()-1;              
+                switch(*it){               
+                case ATOMIC:  
+                    emit graphic_engine.PlaySoundBombFall();
                     FireAtomicBomb(my_game);
                     break;
                 case DISPERSE:

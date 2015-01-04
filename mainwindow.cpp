@@ -17,6 +17,7 @@
 
 MainWindow::MainWindow()
 {
+    installEventFilter(this);
     PaintWidget* centralwidget= new PaintWidget();
     setGeometry(100,100,500,520);
     this->setCentralWidget(centralwidget);
@@ -29,7 +30,6 @@ MainWindow::MainWindow()
 MainWindow::~MainWindow()
 {
     game.EndGame();
-    my_thread->EXIT=true;
     my_thread->quit();
 }
 
@@ -86,6 +86,27 @@ void MainWindow::createMenus()
         connect(Control,SIGNAL(triggered()),this,SLOT(KeyPressShow()));
         connect(ValueShow,SIGNAL(triggered()),this,SLOT(ValueShowWindow()));
 
+}
+
+
+bool MainWindow::eventFilter(QObject *watched, QEvent *event)
+{
+    if( watched == this )
+    {
+        //窗口停用，变为不活动的窗口
+        if(QEvent::WindowDeactivate == event->type())
+        {
+            //
+            //DEBUGP( "eventFilter" ) ;
+            control.PauseClicked = 1;  //或者关闭窗口,加入自己的操作.
+            return true ;
+        }
+        else
+        {
+            return false ;
+        }
+    }
+    return false ;
 }
 
 
@@ -171,7 +192,6 @@ Qt::Key setting(Qt::Key key,char a);
 
 
 
-
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     upkey =    setting(upkey,gamepara.up);
@@ -188,7 +208,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag )
         {
         control.UpPressed = 1;
-        //cout<<"1"<<endl;
         }
         flag = 1;
     }
@@ -200,7 +219,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag2 )
         {
         control.DownPressed = 1;
-        //cout<<"1"<<endl;
         }
         flag2 = 1;
     }
@@ -212,7 +230,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag3 )
         {
         control.LeftPressed = 1;
-        //cout<<"1"<<endl;
         }
         flag3 = 1;
     }
@@ -224,7 +241,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag4 )
         {
         control.RightPressed = 1;
-        //cout<<"1"<<endl;
         }
         flag4 = 1;
     }
@@ -236,7 +252,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag5 )
         {
         control.FirePressed = 1;
-        //cout<<"1"<<endl;
         }
         flag5 = 1;
     }
@@ -248,7 +263,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag6 )
         {
         control.BombClicked = 1;
-        //cout<<"1"<<endl;
         }
         flag6 = 1;
     }
@@ -260,7 +274,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag7 )
         {
         control.PauseClicked = 1;
-        //cout<<"1"<<endl;
         }
         flag7 = 1;
     }
@@ -272,7 +285,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag7 )
         {
         control2.PauseClicked = 1;
-        //cout<<"1"<<endl;
         }
         flag7 = 1;
     }
@@ -287,7 +299,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag21 )
         {
         control2.UpPressed = 1;
-        //cout<<"1"<<endl;
         }
         flag21 = 1;
     }
@@ -299,7 +310,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag22 )
         {
         control2.DownPressed = 1;
-        //cout<<"1"<<endl;
         }
         flag22 = 1;
     }
@@ -311,7 +321,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag23 )
         {
         control2.LeftPressed = 1;
-        //cout<<"1"<<endl;
         }
         flag23 = 1;
     }
@@ -323,7 +332,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag24 )
         {
         control2.RightPressed = 1;
-        //cout<<"1"<<endl;
         }
         flag24 = 1;
     }
@@ -335,7 +343,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag25 )
         {
         control2.FirePressed = 1;
-        //cout<<"1"<<endl;
         }
         flag25 = 1;
     }
@@ -347,7 +354,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if( !flag26 )
         {
         control2.BombClicked = 1;
-        //cout<<"1"<<endl;
         }
         flag26 = 1;
     }
@@ -364,7 +370,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         if( flag )
         {
         control.UpPressed = 0;
-        //cout<<"0"<<endl;
         }
         flag = 0;
 
@@ -376,7 +381,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         if( flag2 )
         {
         control.DownPressed = 0;
-        //cout<<"0"<<endl;
         }
         flag2 = 0;
     }
@@ -387,7 +391,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         if( flag3 )
         {
         control.LeftPressed = 0;
-        //cout<<"0"<<endl;
         }
         flag3 = 0;
     }
@@ -398,7 +401,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         if( flag4 )
         {
         control.RightPressed = 0;
-        //cout<<"0"<<endl;
         }
         flag4 = 0;
     }
@@ -409,7 +411,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         if( flag5 )
         {
         control.FirePressed = 0;
-        //cout<<"0"<<endl;
         }
         flag5 = 0;
     }
@@ -423,7 +424,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         if( flag21 )
         {
         control2.UpPressed = 0;
-        //cout<<"0"<<endl;
         }
         flag21 = 0;
 
@@ -435,7 +435,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         if( flag22 )
         {
         control2.DownPressed = 0;
-        //cout<<"0"<<endl;
         }
         flag22 = 0;
     }
@@ -446,7 +445,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         if( flag23 )
         {
         control2.LeftPressed = 0;
-        //cout<<"0"<<endl;
         }
         flag23 = 0;
     }
@@ -457,7 +455,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         if( flag24 )
         {
         control2.RightPressed = 0;
-        //cout<<"0"<<endl;
         }
         flag24 = 0;
     }
@@ -468,7 +465,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         if( flag25 )
         {
         control2.FirePressed = 0;
-        //cout<<"0"<<endl;
         }
         flag25 = 0;
     }
@@ -546,5 +542,4 @@ void MainWindow::Player2Mode()
 {
     my_thread->COOP();
 }
-
 

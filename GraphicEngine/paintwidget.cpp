@@ -7,10 +7,16 @@ PaintWidget::PaintWidget(QWidget *parent) :
    graphic_engine.back_ground = new QPixmap(":/images/Images/background_image/background.png");
    graphic_engine.title = new QPixmap(":/images/Images/background_image/Title.png");
    connect(&graphic_engine,SIGNAL(Update()),this,SLOT(PaintFrame()));
-   connect(&graphic_engine,SIGNAL(PlayBGM()),&se,SLOT(PlaySoundBGM()));
+   connect(&graphic_engine,SIGNAL(PlaySoundBGM()),&se,SLOT(PlaySoundBGM()));
    connect(&graphic_engine,SIGNAL(PlaySoundBulletYellow()),&se,SLOT(PlaySoundBulletYellow()));
    connect(&graphic_engine,SIGNAL(PlaySoundBulletBlue()),&se,SLOT(PlaySoundBulletBlue()));
    connect(&graphic_engine,SIGNAL(PlaySoundBulletPurple()),&se,SLOT(PlaySoundBulletPurple()));
+   connect(&graphic_engine,SIGNAL(PlaySoundEnemyHit()),&se,SLOT(PlaySoundEnemyHit()));
+   connect(&graphic_engine,SIGNAL(PlaySoundEnemyDestroy()),&se,SLOT(PlaySoundEnemyDestroy()));
+   connect(&graphic_engine,SIGNAL(PlaySoundBombFall()),&se,SLOT(PlaySoundBombFall()));
+   connect(&graphic_engine,SIGNAL(PlaySoundBombAtomic()),&se,SLOT(PlaySoundBombAtomic()));
+   connect(&graphic_engine,SIGNAL(PlaySoundBombDisperse()),&se,SLOT(PlaySoundBombDisperse()));
+   connect(&graphic_engine,SIGNAL(PlaySoundFighterDestroy()),&se,SLOT(PlaySoundFighterDestroy()));
 }
 
 void PaintWidget::paintEvent(QPaintEvent* event)
@@ -66,9 +72,9 @@ void PaintWidget::paintEvent(QPaintEvent* event)
             while(bomb_num--)
             {
                 QPixmap tmp;
-                if(graphic_engine.f1->bomb_list[bomb_num] = Fighter::ATOMIC)
+                if(graphic_engine.f1->bomb_list[bomb_num] == Fighter::ATOMIC)
                     tmp = tmp.fromImage(QImage(":/images/Images/item_image/ItemBombAtomic.png"));
-                else if(graphic_engine.f1->bomb_list[bomb_num] = Fighter::DISPERSE)
+                else if(graphic_engine.f1->bomb_list[bomb_num] == Fighter::DISPERSE)
                     tmp = tmp.fromImage(QImage(":/images/Images/item_image/ItemBombDisperse.png"));
                 painter.drawPixmap((tmp.width()+10)*bomb_num,this->height() - 30,tmp);
             }

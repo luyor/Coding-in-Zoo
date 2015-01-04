@@ -1,5 +1,6 @@
 #include "enemy.h"
-//#include "../GameDesign/enemy1.h"
+#include "../GameDesign/enemy1.h"
+#include "../res.h"
 
 Enemy::Enemy(Point v,Point p,double angle0,HitPoint* hit_point0,
              Graphic *graphic0,double health0,int HIT_SCORE0,int DESTROY_SCORE0):
@@ -10,9 +11,11 @@ Enemy::Enemy(Point v,Point p,double angle0,HitPoint* hit_point0,
 
 int Enemy::Hit(double damage)
 {
+    if (damage>0.5)emit graphic_engine.PlaySoundEnemyHit();
     my_graphics->GetSignal(Graphic::HIT);
     health-=damage;
     if (health<=0){
+        emit graphic_engine.PlaySoundEnemyDestroy();
         SetDestroy();
         return DESTROY_SCORE;
     }
@@ -22,5 +25,5 @@ int Enemy::Hit(double damage)
 
 void Enemy::Init()
 {
-
+    Enemy1::Init();
 }
