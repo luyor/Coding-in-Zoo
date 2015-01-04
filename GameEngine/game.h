@@ -20,7 +20,7 @@ public:
 
     Game();
     //clear all vector,set all to default
-    void Start(enum GameMode game_mode,int coins0,Control* control0,Control* control1);
+    void Start(enum GameMode game_mode,int coins0);
     void Init();
     void GameLoop();
     void EndGame(){END=true;}
@@ -36,6 +36,11 @@ public:
     Enemy* SelectNearestEnemy(Point p);
     
     Player *player0,*player1;
+    
+    //respond pause/insert coin key,return pause status
+    bool IsPaused();
+    
+    bool WELCOME;
 private:
     //private variables
     QTime physics_time;
@@ -67,9 +72,10 @@ private:
     //clean all objects that finish paint
     void AllPaint(double time);
     void AllClean();
-    //respond pause/insert coin key,return pause status
-    bool IsPaused();
-
+    
+    static Point FIGHTER1_INIT_POSITION;
+    static Point FIGHTER2_INIT_POSITION;
+    static Point FIGHTER_INIT_VELOCITY;
 };
 
 #endif // GAME_H

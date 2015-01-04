@@ -18,6 +18,7 @@ public:
     int max_life;
     int current_life;
     int score;
+    bool START;
 
 };
 

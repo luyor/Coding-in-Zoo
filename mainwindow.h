@@ -32,6 +32,8 @@ private slots:
     void Introduction();
     void KeyPressShow();
     void ValueShowWindow();
+    void Player1Mode();
+    void Player2Mode();
 
 protected:
     void keyPressEvent(QKeyEvent *event);

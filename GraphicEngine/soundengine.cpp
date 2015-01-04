@@ -3,7 +3,7 @@
 SoundEngine::SoundEngine(QObject *parent) :
     QObject(parent)
 {
-    PlaySoundBGM();
+    SoundBGM->setMedia(QUrl::fromLocalFile("BulletYellow.wav"));
 }
 
 void SoundEngine::PlaySoundBulletYellow()
@@ -23,8 +23,9 @@ void SoundEngine::PlaySoundBulletPurple()
 
 void SoundEngine::PlaySoundBGM()
 {
-    SoundBGM->setSource(QUrl::fromLocalFile("BGM1.wav"));
-    SoundBGM->setVolume(0.5f);
-    SoundBGM->setLoopCount(QSoundEffect::Infinite);
-    SoundBGM->play();
+    //SoundBGM->setSource(QUrl::fromLocalFile("BGM1.wav"));
+    //SoundBGM->setVolume(50);
+    //for(;;)
+    if(SoundBGM->state() == QMediaPlayer::StoppedState)
+        SoundBGM->play();
 }

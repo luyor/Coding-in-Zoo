@@ -165,7 +165,8 @@ void Fighter::ChangeStatus(double time, Game &my_game)
             if (bullet_time>bullet_frequency){
                 if (bullet_time>YELLOW_BULLET_STOP)
                     bullet_count=1;
-                else ++bullet_count;
+                else if (my_bullet_type==YELLOW)    
+                    ++bullet_count;
                 bullet_time=0;
                 switch(my_bullet_type){
                 case YELLOW:

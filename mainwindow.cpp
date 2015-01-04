@@ -29,6 +29,7 @@ MainWindow::MainWindow()
 MainWindow::~MainWindow()
 {
     game.EndGame();
+    my_thread->EXIT=true;
     my_thread->quit();
 }
 
@@ -38,14 +39,19 @@ void MainWindow::createMenus()
     fileMenu = menuBar()->addMenu(tr("&Game(G)"));
     QAction *setMode1 = new QAction(tr("&1 Player Mode"), this);
     fileMenu->addAction(setMode1);
+    connect(setMode1,SIGNAL(triggered()),this,SLOT(Player1Mode()));
     QAction *setMode2 = new QAction(tr("&2 Player Mode"), this);
     fileMenu->addAction(setMode2);
+    connect(setMode2,SIGNAL(triggered()),this,SLOT(Player2Mode()));
+
+   /*
     QAction *setLevel1 = new QAction(tr("& Level 1"), this);
     fileMenu->addAction(setLevel1);
     QAction *setLevel2 = new QAction(tr("& Level 2"), this);
     fileMenu->addAction(setLevel2);
     QAction *setLevel3 = new QAction(tr("& Level 3"), this);
     fileMenu->addAction(setLevel3);
+   */
 
 
     editMenu = menuBar()->addMenu(tr("&Option(O)"));
@@ -142,7 +148,8 @@ void MainWindow::ValueShowWindow()
     Dialog.exec();
 }
 
-bool flag,flag2,flag3,flag4,flag5,flag6;
+bool flag,flag2,flag3,flag4,flag5,flag6,flag7;
+bool flag21,flag22,flag23,flag24,flag25,flag26;
 
 Qt::Key upkey;
 Qt::Key downkey;
@@ -151,24 +158,37 @@ Qt::Key rightkey;
 Qt::Key firekey;
 Qt::Key bombkey;
 
+Qt::Key upkey2 = Qt::Key_Up;
+Qt::Key downkey2 = Qt::Key_Down;
+Qt::Key leftkey2 = Qt::Key_Left;
+Qt::Key rightkey2 = Qt::Key_Right;
+Qt::Key firekey2 = Qt::Key_BracketLeft;
+Qt::Key bombkey2 = Qt::Key_BracketRight;
+
+
+
 Qt::Key setting(Qt::Key key,char a);
+
+
+
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    upkey = setting(upkey,gamepara.up);
-    downkey = setting(downkey,gamepara.down);
-    leftkey = setting(leftkey,gamepara.left);
+    upkey =    setting(upkey,gamepara.up);
+    downkey =  setting(downkey,gamepara.down);
+    leftkey =  setting(leftkey,gamepara.left);
     rightkey = setting(rightkey,gamepara.right);
-    firekey = setting(firekey,gamepara.fire);
-    bombkey = setting(bombkey,gamepara.bomb);
+    firekey =  setting(firekey,gamepara.fire);
+    bombkey =  setting(bombkey,gamepara.bomb);
 
     if((event->key() == upkey)&&!(event->isAutoRepeat()))
     {
         flag = 0;
+
         if( !flag )
         {
         control.UpPressed = 1;
-
+        //cout<<"1"<<endl;
         }
         flag = 1;
     }
@@ -176,10 +196,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if((event->key() == downkey)&&!(event->isAutoRepeat()))
     {
         flag2 = 0;
+
         if( !flag2 )
         {
         control.DownPressed = 1;
-
+        //cout<<"1"<<endl;
         }
         flag2 = 1;
     }
@@ -187,10 +208,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if((event->key() == leftkey)&&!(event->isAutoRepeat()))
     {
         flag3 = 0;
+
         if( !flag3 )
         {
         control.LeftPressed = 1;
-
+        //cout<<"1"<<endl;
         }
         flag3 = 1;
     }
@@ -198,10 +220,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if((event->key() == rightkey)&&!(event->isAutoRepeat()))
     {
         flag4 = 0;
+
         if( !flag4 )
         {
         control.RightPressed = 1;
-
+        //cout<<"1"<<endl;
         }
         flag4 = 1;
     }
@@ -209,10 +232,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if((event->key() == firekey)&&!(event->isAutoRepeat()))
     {
         flag5 = 0;
+
         if( !flag5 )
         {
         control.FirePressed = 1;
-
+        //cout<<"1"<<endl;
         }
         flag5 = 1;
     }
@@ -220,13 +244,115 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if((event->key() == bombkey)&&!(event->isAutoRepeat()))
     {
         flag6 = 0;
+
         if( !flag6 )
         {
         control.BombClicked = 1;
-
+        //cout<<"1"<<endl;
         }
         flag6 = 1;
     }
+
+    if((event->key() == Qt::Key_B)&&!(event->isAutoRepeat()))
+    {
+        flag7 = 0;
+
+        if( !flag7 )
+        {
+        control.PauseClicked = 1;
+        //cout<<"1"<<endl;
+        }
+        flag7 = 1;
+    }
+
+    if((event->key() == Qt::Key_Backslash)&&!(event->isAutoRepeat()))
+    {
+        flag7 = 0;
+
+        if( !flag7 )
+        {
+        control2.PauseClicked = 1;
+        //cout<<"1"<<endl;
+        }
+        flag7 = 1;
+    }
+
+
+
+
+    if((event->key() == upkey2)&&!(event->isAutoRepeat()))
+    {
+        flag21 = 0;
+
+        if( !flag21 )
+        {
+        control2.UpPressed = 1;
+        //cout<<"1"<<endl;
+        }
+        flag21 = 1;
+    }
+
+    if((event->key() == downkey2)&&!(event->isAutoRepeat()))
+    {
+        flag22 = 0;
+
+        if( !flag22 )
+        {
+        control2.DownPressed = 1;
+        //cout<<"1"<<endl;
+        }
+        flag22 = 1;
+    }
+
+    if((event->key() == leftkey2)&&!(event->isAutoRepeat()))
+    {
+        flag23 = 0;
+
+        if( !flag23 )
+        {
+        control2.LeftPressed = 1;
+        //cout<<"1"<<endl;
+        }
+        flag23 = 1;
+    }
+
+    if((event->key() == rightkey2)&&!(event->isAutoRepeat()))
+    {
+        flag24 = 0;
+
+        if( !flag24 )
+        {
+        control2.RightPressed = 1;
+        //cout<<"1"<<endl;
+        }
+        flag24 = 1;
+    }
+
+    if((event->key() == firekey2)&&!(event->isAutoRepeat()))
+    {
+        flag25 = 0;
+
+        if( !flag25 )
+        {
+        control2.FirePressed = 1;
+        //cout<<"1"<<endl;
+        }
+        flag25 = 1;
+    }
+
+    if((event->key() == bombkey2)&&!(event->isAutoRepeat()))
+    {
+        flag26 = 0;
+
+        if( !flag26 )
+        {
+        control2.BombClicked = 1;
+        //cout<<"1"<<endl;
+        }
+        flag26 = 1;
+    }
+
+
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *event)
@@ -234,10 +360,11 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
 
     if((event->key() == upkey)&&!(event->isAutoRepeat())&&(control.UpPressed = 1))
     {
+
         if( flag )
         {
         control.UpPressed = 0;
-
+        //cout<<"0"<<endl;
         }
         flag = 0;
 
@@ -245,53 +372,107 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
 
     if((event->key() == downkey)&&!(event->isAutoRepeat())&&(control.DownPressed = 1))
     {
+
         if( flag2 )
         {
         control.DownPressed = 0;
-
+        //cout<<"0"<<endl;
         }
         flag2 = 0;
     }
 
     if((event->key() == leftkey)&&!(event->isAutoRepeat())&&(control.LeftPressed = 1))
     {
+
         if( flag3 )
         {
         control.LeftPressed = 0;
-
+        //cout<<"0"<<endl;
         }
         flag3 = 0;
     }
 
     if((event->key() == rightkey)&&!(event->isAutoRepeat())&&(control.RightPressed = 1))
     {
+
         if( flag4 )
         {
         control.RightPressed = 0;
-
+        //cout<<"0"<<endl;
         }
         flag4 = 0;
     }
 
     if((event->key() == firekey)&&!(event->isAutoRepeat())&&(control.FirePressed = 1))
     {
+
         if( flag5 )
         {
         control.FirePressed = 0;
-
+        //cout<<"0"<<endl;
         }
         flag5 = 0;
     }
 
-    if((event->key() == bombkey)&&!(event->isAutoRepeat())&&(control.BombClicked = 1))
-    {
-        if( flag6 )
-        {
-        control.BombClicked = 0;
 
+
+
+    if((event->key() == upkey2)&&!(event->isAutoRepeat())&&(control2.UpPressed = 1))
+    {
+
+        if( flag21 )
+        {
+        control2.UpPressed = 0;
+        //cout<<"0"<<endl;
         }
-        flag6 = 0;
+        flag21 = 0;
+
     }
+
+    if((event->key() == downkey2)&&!(event->isAutoRepeat())&&(control2.DownPressed = 1))
+    {
+
+        if( flag22 )
+        {
+        control2.DownPressed = 0;
+        //cout<<"0"<<endl;
+        }
+        flag22 = 0;
+    }
+
+    if((event->key() == leftkey2)&&!(event->isAutoRepeat())&&(control2.LeftPressed = 1))
+    {
+
+        if( flag23 )
+        {
+        control2.LeftPressed = 0;
+        //cout<<"0"<<endl;
+        }
+        flag23 = 0;
+    }
+
+    if((event->key() == rightkey2)&&!(event->isAutoRepeat())&&(control2.RightPressed = 1))
+    {
+
+        if( flag24 )
+        {
+        control2.RightPressed = 0;
+        //cout<<"0"<<endl;
+        }
+        flag24 = 0;
+    }
+
+    if((event->key() == firekey2)&&!(event->isAutoRepeat())&&(control2.FirePressed = 1))
+    {
+
+        if( flag25 )
+        {
+        control2.FirePressed = 0;
+        //cout<<"0"<<endl;
+        }
+        flag25 = 0;
+    }
+
 
 }
 
@@ -353,13 +534,17 @@ Qt::Key setting(Qt::Key key,char a)
         key = Qt::Key_Comma;
     else if(a == 46)
         key = Qt::Key_Period;
-
-
-
      return key;
 }
 
+void  MainWindow::Player1Mode()
+{
+    my_thread->Single();
+}
 
-
+void MainWindow::Player2Mode()
+{
+    my_thread->COOP();
+}
 
 
