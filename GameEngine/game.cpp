@@ -272,8 +272,10 @@ void Game::AllPaint(double time)
     graphic_engine.PaintBackground(time);
     Fighter *tmp0=NULL,*tmp1=NULL;
     for (vector<Fighter*>::iterator it=fighters.begin();it!=fighters.end();++it){
-        if ((*it)->GetPlayer()==player0)tmp0=*it;
-        if ((*it)->GetPlayer()==player1)tmp1=*it;
+        if(!(*it)->IsDestroyed()){
+            if ((*it)->GetPlayer()==player0)tmp0=*it;
+            if ((*it)->GetPlayer()==player1)tmp1=*it;
+        }
     }
     graphic_engine.PaintForeground(tmp0,tmp1);
     for(vector<Bullet*>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
@@ -373,7 +375,13 @@ void Game::AllClean()
 bool Game::IsPaused()
 {
     if (player0!=NULL&&player0->my_control->PauseValue()){
-        if(!player0->START||player0->IsDead()){
+        if (!player0->START){
+            Fighter *tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER1_INIT_POSITION,
+                                       &fighter_hitpoint,new Fighter1Graphic(),player0);   
+            FighterRegister(tmp);
+            player0->START=true;
+        }
+        else if(player0->IsDead()){
             if (coins>0){
                 --coins;
                 Fighter *tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER1_INIT_POSITION,
@@ -388,12 +396,18 @@ bool Game::IsPaused()
         }
     }
     if (player1!=NULL&&player1->my_control->PauseValue()){
-        if(!player1->START||player1->IsDead()){
+        if (!player1->START){
+            Fighter *tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER2_INIT_POSITION,
+                                       &fighter_hitpoint,new Fighter1Graphic(),player1);   
+            FighterRegister(tmp);
+            player1->START=true;
+        }
+        else if(player1->IsDead()){
             if (coins>0){
-                --coins;
                 Fighter *tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER2_INIT_POSITION,
                                            &fighter_hitpoint,new Fighter1Graphic(),player1);   
                 FighterRegister(tmp);
+                --coins;
                 player1->Revive();
             }
         }else{
