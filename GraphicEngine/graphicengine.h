@@ -24,10 +24,16 @@ public:
     vector<PicNode>pics_to_show;
 signals:
     void Update();
-    void PlayBGM();
+    void PlaySoundBGM();
+    void PlaySoundFighterDestroy();
+    void PlaySoundBombFall();
+    void PlaySoundBombAtomic();
+    void PlaySoundBombDisperse();
+    void PlaySoundEnemyDestroy();
     void PlaySoundBulletYellow();
     void PlaySoundBulletBlue();
     void PlaySoundBulletPurple();
+    void PlaySoundEnemyHit();
 };
 
 #endif // GRAPHICENGINE_H

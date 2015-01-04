@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "GameEngine/mythread.h"
+#include <QFocusEvent>
 
 namespace Ui {
 class MainWindow;
@@ -38,6 +39,7 @@ private slots:
 protected:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
+    bool eventFilter(QObject *o, QEvent *e);
 
 private:
     void createActions();

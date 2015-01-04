@@ -58,7 +58,8 @@ SOURCES += main.cpp\
     GraphicEngine/itemscore1000graphic.cpp \
     GraphicEngine/soundengine.cpp \
     GraphicEngine/bulletbluegraphic.cpp \
-    GraphicEngine/bulletpurplegraphic.cpp
+    GraphicEngine/bulletpurplegraphic.cpp \
+    UI/res.cpp
 
 HEADERS  += mainwindow.h \
     GameEngine/bomb.h \
@@ -113,7 +114,8 @@ HEADERS  += mainwindow.h \
     GraphicEngine/itemscore1000graphic.h \
     GraphicEngine/soundengine.h \
     GraphicEngine/bulletbluegraphic.h \
-    GraphicEngine/bulletpurplegraphic.h
+    GraphicEngine/bulletpurplegraphic.h \
+    UI/res.h
 
 FORMS    += mainwindow.ui
 

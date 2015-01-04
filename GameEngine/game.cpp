@@ -19,7 +19,7 @@ void Game::Init()
     Fighter::Init();
     Item::Init();
     Missile::Init();
-    Enemy1::Init();
+    Enemy::Init();
 }
 
 void Game::Start(enum GameMode game_mode,int coins0)
@@ -86,6 +86,7 @@ void Game::GameLoop()
         }else {
             switch(status){
             case MISSION_START:
+                emit graphic_engine.PlaySoundBGM();
                 graphic_engine.MissionStart(0);
                 status=MISSION_ON;
                 graphics_time.start();

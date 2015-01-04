@@ -1,4 +1,5 @@
 #include "bomb.h"
+#include "../res.h"
 
 const double Bomb::ATOMIC_FLYING_TIME=1;
 const double Bomb::EXPLODE_TIME=1;
@@ -25,10 +26,13 @@ void Bomb::ChangeStatus(double time, Game &my_game)
     switch(status){
     case FLYING:
         if (elapsed_time>flying_time){
-            if (flying_time==ATOMIC_FLYING_TIME)
+            if (flying_time==ATOMIC_FLYING_TIME){
+                emit graphic_engine.PlaySoundBombAtomic();
                 hit_point=&atomic_explode_hitpoint;
-            else
+            }else{
+                emit graphic_engine.PlaySoundBombDisperse();
                 hit_point=&disperse_explode_hitpoint;
+            }
             status=EXPLODE;
             elapsed_time=0;
             velocity=Point(0,0);
