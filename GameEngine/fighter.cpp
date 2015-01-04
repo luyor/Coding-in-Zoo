@@ -25,9 +25,6 @@ Fighter::Fighter(Point v,Point p,HitPoint* hit_point0,
     my_player(player),health(data.MAX_HEALTH),status(FLYING),bullet_time(100),my_bullet_type(PURPLE),
     missile_time(100),my_missile_type(TRACKING),bullet_count(0)
 {
-    for (int i=0;i<6;++i){
-        bomb_list.push_back(ATOMIC);
-    }
 }
 
 void Fighter::FighterMove(double time)

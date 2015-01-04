@@ -109,6 +109,30 @@ void PaintWidget::paintEvent(QPaintEvent* event)
             painter.setPen(QColor(Qt::red));
             painter.drawText(width()/2-140,height()/2,"- PAUSED -");
         }
+        //paint all_dead
+        if(game.ALLDEAD)
+            if(game.status == Game::GAME_OVER)
+            {
+                //paint game over
+                font.setPixelSize(50);
+                painter.setFont(font);
+                painter.setPen(QColor(Qt::red));
+                painter.drawText(width()/2-160,height()/2,"GAME OVER");
+            }
+            else
+            {
+                //paint credit
+                font.setPixelSize(50);
+                painter.setFont(font);
+                painter.setPen(QColor(Qt::red));
+                painter.drawText(width()/2-140,height()/2-40,"CONTINUE?");
+                painter.drawText(width()/2-10,height()/2+40,QString::number((int)(10-game.all_dead_time),10));
+
+                font.setPixelSize(20);
+                painter.setFont(font);
+                painter.setPen(QColor(Qt::yellow));
+                painter.drawText(width()/2-40,height()-20,"CREDIT "+QString::number(game.coins));
+            }
     }
 }
 
