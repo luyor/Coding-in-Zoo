@@ -105,9 +105,9 @@ void Game::GameLoop()
                     //EnemyBulletRegister(t);
                 }
                 AllClean();
-                /*if (design.MissionFinish()&&enemies.empty()){
+                if (design.MissionFinish()&&enemies.empty()&&enemy_bullets.empty()){
                     status=MISSION_END;
-                }*/
+                }
                 break;
             }
             case MISSION_END:
@@ -117,7 +117,7 @@ void Game::GameLoop()
                     graphic_engine.PaintBackground(time);
                     graphic_engine.MissionComplete(time);
                     if (graphic_engine.MissionCompleteFinish()){
-                        //design.NextMission();
+                        design.NextMission();
                         status=MISSION_START;
                     }
                 }
@@ -270,7 +270,8 @@ void Game::AllCheckCollision(double time)
 
 void Game::AllPaint(double time)
 {
-    graphic_engine.PaintBackground(time);
+    graphic_engine.pics_to_show.clear();
+    graphic_engine.PaintBackground(background_position);
     Fighter *tmp0=NULL,*tmp1=NULL;
     for (vector<Fighter*>::iterator it=fighters.begin();it!=fighters.end();++it){
         if(!(*it)->IsDestroyed()){
@@ -391,9 +392,10 @@ bool Game::IsPaused()
                 player0->Revive();
             }
         }else{
-            control.BombValue();
-            control2.BombValue();
+            control.Clean();
+            control2.Clean();
             PAUSED=!PAUSED;
+            emit graphic_engine.Update();
         }
     }
     if (player1!=NULL&&player1->my_control->PauseValue()){
@@ -412,9 +414,10 @@ bool Game::IsPaused()
                 player1->Revive();
             }
         }else{
-            control.BombValue();
-            control2.BombValue();
+            control.Clean();
+            control2.Clean();
             PAUSED=!PAUSED;
+            emit graphic_engine.Update();
         }
     }
     return PAUSED;

@@ -6,7 +6,7 @@ QImage* BulletPurpleGraphic::pics[] = {NULL};
 
 double BulletPurpleGraphic::TIME[] = {0};
 
-BulletPurpleGraphic::BulletPurpleGraphic():node(Point(0,0),QPixmap()),status(NORMAL)
+BulletPurpleGraphic::BulletPurpleGraphic(int l):level(l),node(Point(0,0),QPixmap()),status(NORMAL1)
 {
 
 }
@@ -33,14 +33,13 @@ void BulletPurpleGraphic::Paint(Point position,Point velocity,double angle,doubl
             if(elapsed_time > TIME[BulletPurpleGraphic::CREATE])
             {
                 elapsed_time = 0;
-                status = BulletPurpleGraphic::NORMAL;
-            }
-            break;
-        case BulletPurpleGraphic::NORMAL:
-            if(elapsed_time > TIME[BulletPurpleGraphic::NORMAL])
-            {
-                elapsed_time = 0;
-                status = BulletPurpleGraphic::NORMAL;
+                switch(level)
+                {
+                case 1:status = BulletPurpleGraphic::NORMAL1;break;
+                case 2:status = BulletPurpleGraphic::NORMAL2;break;
+                case 3:status = BulletPurpleGraphic::NORMAL3;break;
+                case 4:status = BulletPurpleGraphic::NORMAL4;break;
+                }
             }
             break;
         case BulletPurpleGraphic::DESTROY:
@@ -67,10 +66,16 @@ void BulletPurpleGraphic::Paint(Point position,Point velocity,double angle,doubl
 void BulletPurpleGraphic::InitBulletPurple()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL]         = new QImage(":/images/Images/bullet_images/bullet_purple.png");
+    pics[NORMAL1]        = new QImage(":/images/Images/bullet_images/bullet_purple.png");
+    pics[NORMAL2]        = new QImage(":/images/Images/bullet_images/bullet_purple_lv2.png");
+    pics[NORMAL3]        = new QImage(":/images/Images/bullet_images/bullet_purple_lv3.png");
+    pics[NORMAL4]        = new QImage(":/images/Images/bullet_images/bullet_purple_lv4.png");
     pics[DESTROY]        = NULL;
 
     TIME[CREATE]  = 0;
-    TIME[NORMAL]  = 0;
+    TIME[NORMAL1] = 0;
+    TIME[NORMAL2] = 0;
+    TIME[NORMAL3] = 0;
+    TIME[NORMAL4] = 0;
     TIME[DESTROY] = 0;
 }

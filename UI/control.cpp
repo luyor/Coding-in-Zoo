@@ -24,3 +24,14 @@ bool Control::PauseValue()
     PauseClicked = 0;
     return value;
 }
+
+void Control::Clean()
+{
+    LeftPressed=false;
+    RightPressed=false;
+    UpPressed=false;
+    DownPressed=false;
+    FirePressed=false;
+    BombClicked=false;
+    PauseClicked=false;
+}
