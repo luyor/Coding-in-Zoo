@@ -9,6 +9,11 @@ public:
     MyThread();
     ~MyThread();
     void run();
+    
+    void Single();
+    void COOP();
+    
+    bool EXIT;
 };
 
 #endif // MYTREAD_H

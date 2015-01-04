@@ -1,16 +1,30 @@
 #include "mythread.h"
 #include "res.h"
 
-MyThread::MyThread()
+MyThread::MyThread():EXIT(false)
 {
 }
 
 void MyThread::run()
 {
-    game.Start(Game::SINGLE,4,&control,NULL);
-    game.GameLoop();
+    while (!EXIT)
+        game.GameLoop();
+}
+
+void MyThread::Single()
+{
+    game.EndGame();
+    game.Start(Game::SINGLE,4);
+}
+
+void MyThread::COOP()
+{
+    game.EndGame();
+    game.Start(Game::COOP,4);
 }
 
 MyThread::~MyThread()
 {
 }
+
+

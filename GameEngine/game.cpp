@@ -2,7 +2,11 @@
 #include "../res.h"
 #include "../GameDesign/enemy1.h"
 
-Game::Game()
+Point Game::FIGHTER1_INIT_POSITION=Point(200,-50);
+Point Game::FIGHTER2_INIT_POSITION=Point(400,-50);
+Point Game::FIGHTER_INIT_VELOCITY=Point(0,200);
+
+Game::Game():player0(NULL),player1(NULL),WELCOME(true)
 {
     Init();
 }
@@ -18,18 +22,12 @@ void Game::Init()
     Enemy1::Init();
 }
 
-void Game::Start(enum GameMode game_mode,int coins0,Control* control0,Control* control1)
-{
-    background_position=0;
-    coins=coins0;
-    PAUSED=false;
-    END=false;
-    status=MISSION_START;
-
-    delete player0;
-    delete player1;
-    player0=new Player(data.MAX_LIFE,control0);
-    player1=new Player(data.MAX_LIFE,control1);
+void Game::Start(enum GameMode game_mode,int coins0)
+{   
+    if (player0!=NULL)delete player0;
+    if (player1!=NULL)delete player1;
+    player0=new Player(data.MAX_LIFE,&control);
+    player1=new Player(data.MAX_LIFE,&control2);
 
     for(vector<Bullet*>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
         delete (*it);
@@ -58,24 +56,34 @@ void Game::Start(enum GameMode game_mode,int coins0,Control* control0,Control* c
 
     design.Reset();
 
-    Fighter *tmp = new Fighter(Point(0,200),Point(200,-50),&fighter_hitpoint,new Fighter1Graphic(),player0);
+    Fighter *tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER1_INIT_POSITION,&fighter_hitpoint,new Fighter1Graphic(),player0);
 
     FighterRegister(tmp);
+    
+    player0->START=true;
     if(game_mode==COOP){
-        //register second fighter
+        tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER2_INIT_POSITION,&fighter_hitpoint,new Fighter1Graphic(),player1);
+        player1->START=true;
+        FighterRegister(tmp);
     }
-
-    //Enemy1 *t= new Enemy1(Point(0,-100),Point(200,400),-M_PI/2,&enemy1_hitpoint,10000,100,100);
-    //EnemyRegister(t);
-
-    //t= new Enemy1(Point(0,-100),Point(600,400),-M_PI/2,&enemy1_hitpoint,100,100,100);
-    //EnemyRegister(t);
+    
+    background_position=0;
+    coins=coins0;
+    WELCOME=false;
+    PAUSED=false;
+    END=false;
+    status=MISSION_START;
 }
 
 void Game::GameLoop()
 {
     while(!END){
-        if (!IsPaused()){
+        if (WELCOME){
+        }
+        else if (IsPaused()){
+            graphics_time.start();
+            physics_time.start();
+        }else {
             switch(status){
             case MISSION_START:
                 graphic_engine.MissionStart(0);
@@ -364,26 +372,36 @@ void Game::AllClean()
 
 bool Game::IsPaused()
 {
-    if (player0->my_control->PauseValue()){
-        if(player0->IsDead()){
+    if (player0!=NULL&&player0->my_control->PauseValue()){
+        if(!player0->START||player0->IsDead()){
             if (coins>0){
                 --coins;
-                //register fighter
+                Fighter *tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER1_INIT_POSITION,
+                                           &fighter_hitpoint,new Fighter1Graphic(),player0);   
+                FighterRegister(tmp);
                 player0->Revive();
             }
-        }else
+        }else{
+            control.BombValue();
+            control2.BombValue();
             PAUSED=!PAUSED;
+        }
     }
-    /*if (player1->my_control->PauseValue()){
-        if(player1->IsDead()){
+    if (player1!=NULL&&player1->my_control->PauseValue()){
+        if(!player1->START||player1->IsDead()){
             if (coins>0){
                 --coins;
-                //register fighter
+                Fighter *tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER2_INIT_POSITION,
+                                           &fighter_hitpoint,new Fighter1Graphic(),player1);   
+                FighterRegister(tmp);
                 player1->Revive();
             }
-        }else
+        }else{
+            control.BombValue();
+            control2.BombValue();
             PAUSED=!PAUSED;
-    }*/
+        }
+    }
     return PAUSED;
 }
 

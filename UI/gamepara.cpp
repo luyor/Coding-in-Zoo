@@ -6,9 +6,9 @@ GamePara::GamePara()
     backGroundSound = 50;
     bombSound = 50;
     KeybordOrJoypad = 0;  //1 is Keyboard and 0 is Joypad
-    fire = 44;
-    bomb = 46;
-    start = 32;
+    fire = 'C';
+    bomb = 'V';
+    start = 'B';
     LasterFire = 1;   //1 means fire is lasted
     up =  'W';
     down = 'S';

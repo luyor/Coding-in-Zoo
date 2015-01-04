@@ -11,6 +11,7 @@
 GraphicEngine graphic_engine;
 Data data;
 Control control;
+Control control2;
 GamePara gamepara;
 Game game;
 Design design;
