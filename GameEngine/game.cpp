@@ -435,7 +435,7 @@ bool Game::IsPaused()
         }
     }
     if (player1!=NULL&&player1->my_control->PauseValue()){
-        if (!player1->START){
+        if (status!=GAME_OVER&&!player1->START){
             Fighter *tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER2_INIT_POSITION,
                                        &fighter_hitpoint,new Fighter1Graphic(),player1);   
             --coins;

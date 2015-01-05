@@ -1,5 +1,6 @@
 #include "enemy.h"
 #include "../GameDesign/enemy1.h"
+#include "../GameDesign/enemy2.h"
 #include "../res.h"
 
 Enemy::Enemy(Point v,Point p,double angle0,HitPoint* hit_point0,
@@ -29,4 +30,5 @@ int Enemy::Hit(double damage)
 void Enemy::Init()
 {
     Enemy1::Init();
+    Enemy2::Init();
 }

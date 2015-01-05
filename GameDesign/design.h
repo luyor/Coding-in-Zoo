@@ -1,7 +1,7 @@
 #ifndef DESIGN_H
 #define DESIGN_H
 const int N_ENEMY = 10000;
-const int N_STAGE = 1;
+const int N_STAGE = 5;
 
 class Game;
 
@@ -42,11 +42,22 @@ public:
     void Reset()//reset level
     {
         CurrentEnemyNumber = 0;
+        CurrentStageNumber = 0;
+    }
+
+    bool TurnToNextStage()
+    {
+        CurrentStageNumber++;
+        if (EnemyLists[CurrentStageNumber][0].EnemyType == 0) return false;
+        else {
+            CurrentEnemyNumber = 0;
+            return true;
+        }
     }
 
     bool MissionFinish()
     {
-        if (!EnemyLists[CurrentEnemyNumber]) return true;
+        if (EnemyLists[CurrentStageNumber][CurrentEnemyNumber].EnemyType == 0) return true;
         else return false;
     }
 
