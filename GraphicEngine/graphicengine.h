@@ -19,9 +19,11 @@ public:
     void MissionComplete(double time){}
     void PaintBackground(double position);
     void PaintForeground(Fighter* fighter1, Fighter* fighter2);
-    bool MissionCompleteFinish(){return false;}
+    bool MissionCompleteFinish(){return true;}
     QPixmap* back_ground,*title;
     vector<PicNode>pics_to_show;
+    
+    bool END_PAINT;
 signals:
     void Update();
     void PlaySoundBGM();

@@ -1,7 +1,7 @@
 #ifndef ENEMY2_H
 #define ENEMY2_H
 
-#include "../GraphicEngine/enemy1graphic.h"
+#include "../GraphicEngine/enemy2graphic.h"
 #include "../GameEngine/enemy.h"
 
 class Fighter;
@@ -14,7 +14,7 @@ public:
     Enemy2(Point v, Point p,double angle0,HitPoint* hit_point0,
            int health0,int HIT_SCORE0,int DESTROY_SCORE0):
         Enemy(v,p,angle0,hit_point0,
-            new Enemy1Graphic(),health0,HIT_SCORE0,DESTROY_SCORE0),tar(NULL),fire_time(0)
+            new Enemy2Graphic(),health0,HIT_SCORE0,DESTROY_SCORE0),tar(NULL),fire_time(0)
     {
     }
     void ChangeStatus(double time, Game& my_game);

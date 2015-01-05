@@ -22,13 +22,16 @@ public:
     }my_item_type;
 
     Item(Point v,Point p,double angle0,HitPoint* hit_point0,Graphic *graphic0,enum ItemType type0);
-    double elapsed_time;
+    double elapsed_time,velocity_time;
 
     enum ItemType Hit(){SetDestroy();return my_item_type;}
     void ChangeStatus(double time, Game &my_game);
     static void Init();
 private:
     static const double CHANGE_TIME;
+    static const double SPEED;
+    static const double DOWN_SPEED;
+    static const double CHANGE_VELOCITY_TIME;
 };
 
 #endif // ITEM_H

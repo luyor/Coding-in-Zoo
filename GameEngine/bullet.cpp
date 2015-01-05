@@ -38,7 +38,7 @@ void Bullet::ChangeStatus(double time, Game &my_game)
 
 void Bullet::Init()
 {
-    Circle tmp(0,0,10);
+    Circle tmp(7,0,3);
     yellow_bullet_hitpoint.AddCircle(tmp);
     tmp=Circle(7,0,3);
     blue_bullet_hitpoint.AddCircle(tmp);
