@@ -11,16 +11,20 @@ public:
     enum PicStatus{
         EMPTY,
         CREATE,
-        NORMAL,
+        NORMAL1,
+        NORMAL2,
+        NORMAL3,
+        NORMAL4,
         DESTROY
     };
     enum PicStatus status;
     QImage* image_to_show;
     PicNode node;
+    int level;
     static QImage *pics[DESTROY + 1];
     static double TIME[DESTROY + 1];
     static void InitBulletPurple();
-    BulletPurpleGraphic();
+    BulletPurpleGraphic(int l);
     Point Size();
     void Paint(Point position,Point velocity,double angle,double time);
 };

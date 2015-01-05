@@ -14,7 +14,7 @@
 #include "../GameEngine/fighter.h"
 
 //*back_ground = QPixmap::fromImage(QImage());
-GraphicEngine::GraphicEngine() : bk_time(0), f1(NULL), f2(NULL)
+GraphicEngine::GraphicEngine() : bk(0), f1(NULL), f2(NULL)
 {
     Fighter1Graphic::InitFighter1();
     BulletYellowGraphic::InitBulletYellow();
@@ -35,7 +35,7 @@ void GraphicEngine::PaintForeground(Fighter* fighter1, Fighter* fighter2)
     f2 = fighter2;
 }
 
-void GraphicEngine::PaintBackground(double time)
+void GraphicEngine::PaintBackground(double position)
 {
-    bk_time += time;
+    bk=position;
 }

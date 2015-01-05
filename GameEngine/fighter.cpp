@@ -25,9 +25,6 @@ Fighter::Fighter(Point v,Point p,HitPoint* hit_point0,
     my_player(player),health(data.MAX_HEALTH),status(FLYING),bullet_time(100),my_bullet_type(PURPLE),
     missile_time(100),my_missile_type(TRACKING),bullet_count(0)
 {
-    for (int i=0;i<6;++i){
-        bomb_list.push_back(ATOMIC);
-    }
 }
 
 void Fighter::FighterMove(double time)
@@ -204,7 +201,7 @@ void Fighter::ChangeStatus(double time, Game &my_game)
                     break;
                  case PURPLE:
                     emit graphic_engine.PlaySoundBulletPurple();
-                    FirePurpleBullet(1,my_game);
+                    FirePurpleBullet(bullet_level,my_game);
                     break;
                 }
             }
@@ -280,7 +277,19 @@ void Fighter::FireBlueBullet(int k,Game &my_game)
 
 void Fighter::FirePurpleBullet(int k,Game &my_game)
 {
-    BulletPurpleGraphic *tmp=new BulletPurpleGraphic();
+    BulletPurpleGraphic *tmp=new BulletPurpleGraphic(k);
+    double damage;
+    switch(k){
+    case 1:damage=1;
+        break;
+    case 2:damage=2;
+        break;
+    case 3:damage=3;
+        break;
+    case 4:damage=4;
+        break;
+    }
+
     my_game.FriendlyBulletRegister(
         new Missile(500,
         Point(0,500),
@@ -288,7 +297,7 @@ void Fighter::FirePurpleBullet(int k,Game &my_game)
         M_PI/2,
         &blue_bullet_hitpoint,
         tmp,
-        1,
+        damage,
         my_player,
         M_PI*4,
         1000

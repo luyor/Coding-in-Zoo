@@ -7,31 +7,46 @@
 #include "../GraphicEngine/bulletyellowgraphic.h"
 
 const double STAY_RATIO = 0.3;
+const double max_turn_angle = M_PI / 72.0;
+const double DELTA = 0.0001;
+
+const double SLOW_BULLET = 50;
+const double NORMAL_BULLET = 100;
+const double FAST_BULLET = 150;
 
 HitPoint enemy1_hitpoint;
 
 void Enemy1::ChangeStatus(double time, Game &my_game)
 {
     double proper_angle;
-    fire_time += time;
-    if (fabs(velocity.y) > DELTA &&
-        position.y < (STAY_RATIO + ((rand() % 11) / 100.0))*data.PAINT_AREA_TOP_RIGHT.y) velocity = Point(0,0);
-    // I assume fighters[] started with 0
-    if (fabs(velocity.y) < DELTA) {
-        if (tar == 0) tar = my_game.SelectNearestFighter(position);
-        if (tar!=0&&tar->IsDestroyed()) tar = my_game.SelectNearestFighter(position);
-        if (tar!=0){
+    if (stay_time < 5) {
+        fire_time += time;
+        if (fabs(velocity.y) > DELTA &&
+            position.y < (STAY_RATIO + ((rand() % 11) / 100.0))*data.PAINT_AREA_TOP_RIGHT.y) velocity = Point(0,0);
+        // I assume fighters[] started with 0
+        if (fabs(velocity.y) < DELTA) {
+            if (tar == 0) tar = my_game.SelectNearestFighter(position);
+            if (tar!=0&&tar->IsDestroyed()) tar = my_game.SelectNearestFighter(position);
+            if (tar!=0){
 
-            proper_angle = AimAt(position, tar->GetPosition());
-            if (fabs(proper_angle - angle) < max_turn_angle) angle = proper_angle;
-            else {
-                if (proper_angle > angle) angle += max_turn_angle;
-                else angle -= max_turn_angle;
+                proper_angle = AimAt(position, tar->GetPosition());
+                if (fabs(proper_angle - angle) < max_turn_angle) angle = proper_angle;
+                else {
+                    if (proper_angle > angle) angle += max_turn_angle;
+                    else angle -= max_turn_angle;
+                }
+                if (fabs(proper_angle - angle) < DELTA && fire_time >=0.5) {
+                    Fire(my_game);
+                    stay_time++;
+                    fire_time = 0;
+                }
             }
-            if (fabs(proper_angle - angle) < DELTA && fire_time >=0.5) {
-                Fire(my_game);
-                fire_time = 0;
-            }
+        }
+    }
+    else {
+        if (fabs(velocity.y) < DELTA) {
+            velocity = Point(0, 100);
+            angle = M_PI/2;
         }
     }
 }

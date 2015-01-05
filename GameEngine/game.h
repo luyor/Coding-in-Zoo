@@ -40,21 +40,22 @@ public:
     //respond pause/insert coin key,return pause status
     bool IsPaused();
     
-    bool WELCOME;
+    bool WELCOME,ALLDEAD;
+    double all_dead_time;
+    int coins;
+    enum{
+        MISSION_START=0,
+        MISSION_ON,
+        MISSION_END,
+        GAME_OVER,
+        WIN_GAME
+    }status;
 private:
     //private variables
     QTime physics_time;
     QTime graphics_time;
-
-    enum{
-        MISSION_START=0,
-        MISSION_ON,
-        MISSION_END
-    }status;
-
     QTime my_time;
-    double background_position;
-    int coins;
+    double background_position;  
     bool PAUSED,END;
 
     vector<Bullet*> friendly_bullets;

@@ -33,10 +33,10 @@ void PaintWidget::paintEvent(QPaintEvent* event)
         {
             int bky1,bky2;
 
-            bky1 = (int)(graphic_engine.back_ground->height()-this->height()-graphic_engine.bk_time * data.BACKGROUND_SPEED);
+            bky1 = (int)(graphic_engine.back_ground->height()-this->height()-graphic_engine.bk);
             if(bky1 <= 0) bky1 = 0;
 
-            bky2 = (int)(graphic_engine.back_ground->height()-graphic_engine.bk_time * data.BACKGROUND_SPEED);
+            bky2 = (int)(graphic_engine.back_ground->height()-graphic_engine.bk);
             if(bky2 <= this->height()) bky2 = graphic_engine.back_ground->height();
 
             painter.drawPixmap(0,0,*graphic_engine.back_ground,
@@ -51,10 +51,10 @@ void PaintWidget::paintEvent(QPaintEvent* event)
             painter.drawPixmap((int)(iter->position.x-iter->pixmap.width()/2),
                                (int)(this->height() - iter->position.y - iter->pixmap.height()/2), iter->pixmap);
         }
-        graphic_engine.pics_to_show.clear();
         //paint foreground
         //player1
         QFont font("Time New Roma",15,QFont::Bold,false);
+        font.setPixelSize(20);
         painter.setFont(font);
         painter.setPen(QColor(Qt::white));
         painter.drawText(10,20,"1 UP:");
@@ -81,13 +81,13 @@ void PaintWidget::paintEvent(QPaintEvent* event)
         }
         //player2
         painter.setPen(QColor(Qt::white));
-        painter.drawText(this->width() - 65,20,"2 UP:");
+        painter.drawText(this->width() - 100,20,"2 UP:");
         painter.setPen(QColor(Qt::yellow));
         if(game.player1->START == false)
         {
             painter.drawText(this->width()-155,40,"PRESS START");
         }
-        else painter.drawText(10,40,QString::number((int)game.player1->score,10));
+        else painter.drawText(this->width() - 100,40,QString::number((int)game.player1->score,10));
         //bomb2
         if(graphic_engine.f2 != NULL)
         {
@@ -95,13 +95,44 @@ void PaintWidget::paintEvent(QPaintEvent* event)
             while(bomb_num--)
             {
                 QPixmap tmp;
-                if(graphic_engine.f2->bomb_list[bomb_num] = Fighter::ATOMIC)
+                if(graphic_engine.f2->bomb_list[bomb_num] == Fighter::ATOMIC)
                     tmp = tmp.fromImage(QImage(":/images/Images/item_image/ItemBombAtomic.png"));
-                else if(graphic_engine.f2->bomb_list[bomb_num] = Fighter::DISPERSE)
+                else if(graphic_engine.f2->bomb_list[bomb_num] == Fighter::DISPERSE)
                     tmp = tmp.fromImage(QImage(":/images/Images/item_image/ItemBombDisperse.png"));
                 painter.drawPixmap(this->width()-(tmp.width()+10)*(bomb_num+1),this->height() - 30,tmp);
             }
         }
+        //pause
+        if (game.IsPaused()){
+            font.setPixelSize(50);
+            painter.setFont(font);
+            painter.setPen(QColor(Qt::red));
+            painter.drawText(width()/2-140,height()/2,"- PAUSED -");
+        }
+        //paint all_dead
+        if(game.ALLDEAD)
+            if(game.status == Game::GAME_OVER)
+            {
+                //paint game over
+                font.setPixelSize(50);
+                painter.setFont(font);
+                painter.setPen(QColor(Qt::red));
+                painter.drawText(width()/2-160,height()/2,"GAME OVER");
+            }
+            else
+            {
+                //paint credit
+                font.setPixelSize(50);
+                painter.setFont(font);
+                painter.setPen(QColor(Qt::red));
+                painter.drawText(width()/2-140,height()/2-40,"CONTINUE?");
+                painter.drawText(width()/2-10,height()/2+40,QString::number((int)(10-game.all_dead_time),10));
+
+                font.setPixelSize(20);
+                painter.setFont(font);
+                painter.setPen(QColor(Qt::yellow));
+                painter.drawText(width()/2-40,height()-20,"CREDIT "+QString::number(game.coins));
+            }
     }
 }
 

@@ -16,7 +16,7 @@ public:
     bool BombValue();
     bool PauseValue();
 
-
+    void Clean();
 
 };
 

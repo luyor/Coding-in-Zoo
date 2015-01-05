@@ -59,7 +59,8 @@ SOURCES += main.cpp\
     GraphicEngine/soundengine.cpp \
     GraphicEngine/bulletbluegraphic.cpp \
     GraphicEngine/bulletpurplegraphic.cpp \
-    UI/res.cpp
+    UI/res.cpp \
+    GameDesign/enemy2.cpp
 
 HEADERS  += mainwindow.h \
     GameEngine/bomb.h \
@@ -115,7 +116,8 @@ HEADERS  += mainwindow.h \
     GraphicEngine/soundengine.h \
     GraphicEngine/bulletbluegraphic.h \
     GraphicEngine/bulletpurplegraphic.h \
-    UI/res.h
+    UI/res.h \
+    GameDesign/enemy2.h
 
 FORMS    += mainwindow.ui
 

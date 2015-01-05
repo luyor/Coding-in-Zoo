@@ -98,7 +98,8 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
         {
             //
             //DEBUGP( "eventFilter" ) ;
-            control.PauseClicked = 1;  //或者关闭窗口,加入自己的操作.
+            if (!game.IsPaused())
+                control.PauseClicked = 1;  //或者关闭窗口,加入自己的操作.
             return true ;
         }
         else

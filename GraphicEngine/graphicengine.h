@@ -13,11 +13,11 @@ class GraphicEngine :public QObject
     Q_OBJECT
 public:
     GraphicEngine();
-    double bk_time;
+    double bk;
     Fighter *f1, *f2;
     void MissionStart(double time){}
     void MissionComplete(double time){}
-    void PaintBackground(double time);
+    void PaintBackground(double position);
     void PaintForeground(Fighter* fighter1, Fighter* fighter2);
     bool MissionCompleteFinish(){return false;}
     QPixmap* back_ground,*title;

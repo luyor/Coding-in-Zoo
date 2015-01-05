@@ -34,5 +34,8 @@
         <file>Images/item_image/ItemBombAtomic.png</file>
         <file>Images/item_image/ItemBombDisperse.png</file>
         <file>Images/background_image/Title.png</file>
+        <file>Images/bullet_images/bullet_purple_lv2.png</file>
+        <file>Images/bullet_images/bullet_purple_lv3.png</file>
+        <file>Images/bullet_images/bullet_purple_lv4.png</file>
     </qresource>
 </RCC>
