@@ -70,6 +70,6 @@ void Enemy1::Destroy()
 
 void Enemy1::Init()
 {
-    Circle tmp(0,0,30);
+    Circle tmp(0,0,15);
     enemy1_hitpoint.AddCircle(tmp);
 }

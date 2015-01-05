@@ -6,6 +6,7 @@
 #include "item.h"
 #include "player.h"
 #include "../GraphicEngine/fighter1graphic.h"
+#include "../GraphicEngine/fighter2graphic.h"
 #include "../GraphicEngine/bulletyellowgraphic.h"
 #include "../GraphicEngine/bulletbluegraphic.h"
 #include "../GraphicEngine/bulletpurplegraphic.h"

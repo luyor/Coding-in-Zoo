@@ -1,83 +1,83 @@
-#include "fighter1graphic.h"
+#include "fighter2graphic.h"
 #include "res.h"
 #include <QMatrix>
 
-QImage* Fighter1Graphic::pics[] = {
+QImage* Fighter2Graphic::pics[] = {
     NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
 };
 
-double Fighter1Graphic::TIME[] = {0};
+double Fighter2Graphic::TIME[] = {0};
 
-Fighter1Graphic::Fighter1Graphic():node(Point(0,0),QPixmap()),status(EMPTY)
+Fighter2Graphic::Fighter2Graphic():node(Point(0,0),QPixmap()),status(EMPTY)
 {
 
 }
 
-void Fighter1Graphic::Paint(Point position,Point velocity,double angle,double time)
+void Fighter2Graphic::Paint(Point position,Point velocity,double angle,double time)
 {
     QMatrix matrix;
     QImage* img;
     image_to_show = new QImage;
     elapsed_time += time;
     //cout<< sig << "  " << elapsed_time << "    " << time <<endl;
-    if(sig == Graphic::CREATE)  status = Fighter1Graphic::CREATE;
-    if(sig == Graphic::HIT)     status = Fighter1Graphic::HIT1;
-    if(sig == Graphic::DESTROY) status = Fighter1Graphic::DESTROY1;
+    if(sig == Graphic::CREATE)  status = Fighter2Graphic::CREATE;
+    if(sig == Graphic::HIT)     status = Fighter2Graphic::HIT1;
+    if(sig == Graphic::DESTROY) status = Fighter2Graphic::DESTROY1;
     if(sig == Graphic::NO_SIGNAL)
     {
         switch(status)
         {
-        case Fighter1Graphic::CREATE:
-            if(elapsed_time > TIME[Fighter1Graphic::CREATE])
+        case Fighter2Graphic::CREATE:
+            if(elapsed_time > TIME[Fighter2Graphic::CREATE])
             {
                 elapsed_time = 0;
-                status = Fighter1Graphic::NORMAL;
+                status = Fighter2Graphic::NORMAL;
             }
             break;
-        case Fighter1Graphic::NORMAL:
-            if(elapsed_time > TIME[Fighter1Graphic::NORMAL])
+        case Fighter2Graphic::NORMAL:
+            if(elapsed_time > TIME[Fighter2Graphic::NORMAL])
             {
                 elapsed_time = 0;
-                status = Fighter1Graphic::NORMAL;
+                status = Fighter2Graphic::NORMAL;
             }
             break;
-        case Fighter1Graphic::HIT1:
-            if(elapsed_time > TIME[Fighter1Graphic::HIT1])
+        case Fighter2Graphic::HIT1:
+            if(elapsed_time > TIME[Fighter2Graphic::HIT1])
             {
                 elapsed_time = 0;
-                status = Fighter1Graphic::HIT2;
+                status = Fighter2Graphic::HIT2;
             }
             break;
-        case Fighter1Graphic::HIT2:
-            if(elapsed_time > TIME[Fighter1Graphic::HIT2])
+        case Fighter2Graphic::HIT2:
+            if(elapsed_time > TIME[Fighter2Graphic::HIT2])
             {
                 elapsed_time = 0;
-                status = Fighter1Graphic::NORMAL;
+                status = Fighter2Graphic::NORMAL;
             }
             break;
-        case Fighter1Graphic::DESTROY1:
-            if(elapsed_time > TIME[Fighter1Graphic::DESTROY1])
+        case Fighter2Graphic::DESTROY1:
+            if(elapsed_time > TIME[Fighter2Graphic::DESTROY1])
             {
                 elapsed_time = 0;
-                status = Fighter1Graphic::DESTROY2;
+                status = Fighter2Graphic::DESTROY2;
             }
             break;
-        case Fighter1Graphic::DESTROY2:
-            if(elapsed_time > TIME[Fighter1Graphic::DESTROY2])
+        case Fighter2Graphic::DESTROY2:
+            if(elapsed_time > TIME[Fighter2Graphic::DESTROY2])
             {
                 elapsed_time = 0;
-                status = Fighter1Graphic::DESTROY3;
+                status = Fighter2Graphic::DESTROY3;
             }
             break;
-        case Fighter1Graphic::DESTROY3:
-            if(elapsed_time > TIME[Fighter1Graphic::DESTROY3])
+        case Fighter2Graphic::DESTROY3:
+            if(elapsed_time > TIME[Fighter2Graphic::DESTROY3])
             {
                 elapsed_time = 0;
-                status = Fighter1Graphic::DESTROY_FINISH;
+                status = Fighter2Graphic::DESTROY_FINISH;
             }
             break;
-        case Fighter1Graphic::DESTROY_FINISH:
-            if(elapsed_time > TIME[Fighter1Graphic::DESTROY_FINISH])
+        case Fighter2Graphic::DESTROY_FINISH:
+            if(elapsed_time > TIME[Fighter2Graphic::DESTROY_FINISH])
             {
                 elapsed_time = 0;
                 finish = true;
@@ -98,18 +98,18 @@ void Fighter1Graphic::Paint(Point position,Point velocity,double angle,double ti
     delete image_to_show;
 }
 
-Point Fighter1Graphic::Size()
+Point Fighter2Graphic::Size()
 {
     if(pics[status] == NULL) return Point(0,0);
     return Point(pics[status]->width(),pics[status]->height());
 }
 
-void Fighter1Graphic::InitFighter1()
+void Fighter2Graphic::InitFighter2()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL]         = new QImage(":/images/Images/player_images/player1.png");
-    pics[HIT1]           = new QImage(":/images/Images/player_images/player1_hit1.png");
-    pics[HIT2]           = new QImage(":/images/Images/player_images/player1_hit2.png");
+    pics[NORMAL]         = new QImage(":/images/Images/player_images/player2.png");
+    pics[HIT1]           = new QImage(":/images/Images/player_images/player2_hit1.png");
+    pics[HIT2]           = new QImage(":/images/Images/player_images/player2_hit2.png");
     pics[DESTROY1]       = new QImage(":/images/Images/player_images/player_destroy1.png");
     pics[DESTROY2]       = new QImage(":/images/Images/player_images/player_destroy2.png");
     pics[DESTROY3]       = new QImage(":/images/Images/player_images/player_destroy3.png");

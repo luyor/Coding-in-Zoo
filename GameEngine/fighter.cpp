@@ -18,6 +18,12 @@ const double Fighter::MAX_MISSILE_LEVEL=4;
 const double Fighter::MAX_BOMB_NUMBER=6;
 const int Fighter::DISPERSE_BOMB_NUMBER=50;
 
+void Fighter::Init()
+{
+    Circle tmp(0,0,15);
+    fighter_hitpoint.AddCircle(tmp);
+}
+
 Fighter::Fighter(Point v,Point p,HitPoint* hit_point0,
                  Graphic *graphic0,Player* player):
     FlyingObject(v,p,M_PI/2,hit_point0,graphic0),
@@ -237,12 +243,6 @@ void Fighter::ChangeStatus(double time, Game &my_game)
         //cout<<velocity.x<<" "<<velocity.y<<endl;
 
     }
-}
-
-void Fighter::Init()
-{
-    Circle tmp(0,0,30);
-    fighter_hitpoint.AddCircle(tmp);
 }
 
 void Fighter::FireYellowBullet(double angle0,Game &my_game)

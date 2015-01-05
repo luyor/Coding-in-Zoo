@@ -1,11 +1,8 @@
 <RCC>
     <qresource prefix="/images">
         <file>Images/player_images/player1.png</file>
-        <file>Images/player_images/player1_destroy1.png</file>
-        <file>Images/player_images/player1_destroy2.png</file>
         <file>Images/player_images/player1_hit1.png</file>
         <file>Images/player_images/player1_hit2.png</file>
-        <file>Images/player_images/player1_hit3.png</file>
         <file>Images/bullet_images/BombAtomic.png</file>
         <file>Images/bullet_images/BombAtomicExplode0.png</file>
         <file>Images/bullet_images/BombAtomicExplode1.png</file>
@@ -37,5 +34,19 @@
         <file>Images/bullet_images/bullet_purple_lv2.png</file>
         <file>Images/bullet_images/bullet_purple_lv3.png</file>
         <file>Images/bullet_images/bullet_purple_lv4.png</file>
+        <file>Images/enemy_images/enemy2.png</file>
+        <file>Images/enemy_images/enemy2_hit1.png</file>
+        <file>Images/enemy_images/enemy2_hit2.png</file>
+        <file>Images/player_images/player2.png</file>
+        <file>Images/player_images/player2_hit1.png</file>
+        <file>Images/player_images/player2_hit2.png</file>
+        <file>Images/enemy_images/Enemy2.png</file>
+        <file>Images/enemy_images/Enemy2_hit1.png</file>
+        <file>Images/enemy_images/Enemy2_hit2.png</file>
+        <file>Images/player_images/player_destroy1.png</file>
+        <file>Images/player_images/player_destroy2.png</file>
+        <file>Images/player_images/player_destroy3.png</file>
+        <file>Images/enemy_images/Enemy2_destroy1.png</file>
+        <file>Images/enemy_images/Enemy2_destroy2.png</file>
     </qresource>
 </RCC>

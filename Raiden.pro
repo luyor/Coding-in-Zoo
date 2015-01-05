@@ -60,7 +60,11 @@ SOURCES += main.cpp\
     GraphicEngine/bulletbluegraphic.cpp \
     GraphicEngine/bulletpurplegraphic.cpp \
     UI/res.cpp \
-    GameDesign/enemy2.cpp
+    GameDesign/enemy2.cpp \
+    GraphicEngine/enemy2graphic.cpp \
+    GraphicEngine/fighter2graphic.cpp \
+    GraphicEngine/enemy3graphic.cpp \
+    GraphicEngine/enemy4graphic.cpp
 
 HEADERS  += mainwindow.h \
     GameEngine/bomb.h \
@@ -117,7 +121,11 @@ HEADERS  += mainwindow.h \
     GraphicEngine/bulletbluegraphic.h \
     GraphicEngine/bulletpurplegraphic.h \
     UI/res.h \
-    GameDesign/enemy2.h
+    GameDesign/enemy2.h \
+    GraphicEngine/enemy2graphic.h \
+    GraphicEngine/fighter2graphic.h \
+    GraphicEngine/enemy3graphic.h \
+    GraphicEngine/enemy4graphic.h
 
 FORMS    += mainwindow.ui
 

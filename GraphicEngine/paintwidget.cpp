@@ -21,7 +21,7 @@ PaintWidget::PaintWidget(QWidget *parent) :
 
 void PaintWidget::paintEvent(QPaintEvent* event)
 {
-    extern Data data;
+    graphic_engine.END_PAINT=false;
     QPainter painter(this);
     if(game.WELCOME == true)
     {
@@ -61,7 +61,7 @@ void PaintWidget::paintEvent(QPaintEvent* event)
         painter.setPen(QColor(Qt::yellow));
         if(game.player0->START == false)
         {
-            painter.drawText(this->width()-155,40,"PRESS START");
+            painter.drawText(10,40,"PRESS START");
         }
         else painter.drawText(10,40,QString::number((int)game.player0->score,10));
         //bomb1
@@ -134,5 +134,6 @@ void PaintWidget::paintEvent(QPaintEvent* event)
                 painter.drawText(width()/2-40,height()-20,"CREDIT "+QString::number(game.coins));
             }
     }
+    graphic_engine.END_PAINT=true;
 }
 

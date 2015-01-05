@@ -1,11 +1,11 @@
-#ifndef FIGHTER1GRAPHIC_H
-#define FIGHTER1GRAPHIC_H
+#ifndef FIGHTER2GRAPHIC_H
+#define FIGHTER2GRAPHIC_H
 
 #include "graphic.h"
 #include <QImage>
 #include "picnode.h"
 
-class Fighter1Graphic : public Graphic
+class Fighter2Graphic : public Graphic
 {
 public:
     enum PicStatus{
@@ -24,10 +24,10 @@ public:
     PicNode node;
     static QImage *pics[DESTROY_FINISH + 1];
     static double TIME[DESTROY_FINISH + 1];
-    static void InitFighter1();
-    Fighter1Graphic();
+    static void InitFighter2();
+    Fighter2Graphic();
     Point Size();
     void Paint(Point position,Point velocity,double angle,double time);
 };
 
-#endif // FIGHTER1GRAPHIC_H
+#endif // FIGHTER2GRAPHIC_H

@@ -1,6 +1,6 @@
 #include "game.h"
 #include "../res.h"
-#include "../GameDesign/enemy1.h"
+#include "enemy.h"
 
 Point Game::FIGHTER1_INIT_POSITION=Point(200,-50);
 Point Game::FIGHTER2_INIT_POSITION=Point(400,-50);
@@ -19,7 +19,6 @@ void Game::Init()
     Fighter::Init();
     Item::Init();
     Missile::Init();
-    Enemy::Init();
 }
 
 void Game::Start(enum GameMode game_mode,int coins0)
@@ -62,20 +61,17 @@ void Game::Start(enum GameMode game_mode,int coins0)
     
     player0->START=true;
     if(game_mode==COOP){
-        tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER2_INIT_POSITION,&fighter_hitpoint,new Fighter1Graphic(),player1);
+        tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER2_INIT_POSITION,&fighter_hitpoint,new Fighter2Graphic(),player1);
         player1->START=true;
         FighterRegister(tmp);
     }
     
-    background_position=0;
     coins=coins0;
     WELCOME=false;
     PAUSED=false;
     END=false;
     status=MISSION_START;
     ALLDEAD=false;
-    control.Clean();
-    control2.Clean();
 }
 
 void Game::GameLoop()
@@ -89,6 +85,11 @@ void Game::GameLoop()
         }else {
             switch(status){
             case MISSION_START:
+                cout<<"mission start"<<endl;
+                background_position=0;
+                control.Clean();
+                control2.Clean();
+                
                 emit graphic_engine.PlaySoundBGM();
                 graphic_engine.MissionStart(0);
                 status=MISSION_ON;
@@ -124,9 +125,9 @@ void Game::GameLoop()
                     graphic_engine.PaintBackground(time);
                     graphic_engine.MissionComplete(time);
                     if (graphic_engine.MissionCompleteFinish()){
-                        //if (design.TurnToNextStage())
-                        //    status=MISSION_START;
-                        //else status=WIN_GAME;
+                        if (design.TurnToNextStage())
+                            status=MISSION_START;
+                        else status=WIN_GAME;
                     }
                 }
                 break;
@@ -143,6 +144,7 @@ void Game::GameLoop()
                 break;
             }
             case WIN_GAME:
+                cout<<"win game"<<endl;
                 break;
            }         
        }
@@ -301,6 +303,7 @@ void Game::AllCheckCollision(double time)
 
 void Game::AllPaint(double time)
 {
+    while (graphic_engine.END_PAINT==false)return;
     graphic_engine.pics_to_show.clear();
     graphic_engine.PaintBackground(background_position);
     Fighter *tmp0=NULL,*tmp1=NULL;
@@ -351,12 +354,14 @@ void Game::AllClean()
             Player* p=(*it)->GetPlayer();
             delete (*it);
             fighters.erase(it);
-            if (!p->IsDead()){
+            if (p->IsDead()){
+                p->START=false;
+            }else{
                 Fighter *f;
                 if (p==player0)        
                     f=new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER1_INIT_POSITION,&fighter_hitpoint,new Fighter1Graphic(),p);
                 else 
-                    f=new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER2_INIT_POSITION,&fighter_hitpoint,new Fighter1Graphic(),p);
+                    f=new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER2_INIT_POSITION,&fighter_hitpoint,new Fighter2Graphic(),p);
                 FighterRegister(f);
             }
         }
@@ -437,7 +442,7 @@ bool Game::IsPaused()
     if (player1!=NULL&&player1->my_control->PauseValue()){
         if (status!=GAME_OVER&&!player1->START){
             Fighter *tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER2_INIT_POSITION,
-                                       &fighter_hitpoint,new Fighter1Graphic(),player1);   
+                                       &fighter_hitpoint,new Fighter2Graphic(),player1);   
             --coins;
             FighterRegister(tmp);
             player1->START=true;
@@ -445,7 +450,7 @@ bool Game::IsPaused()
         else if(player1->IsDead()){
             if (status!=GAME_OVER&&coins>0){
                 Fighter *tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER2_INIT_POSITION,
-                                           &fighter_hitpoint,new Fighter1Graphic(),player1);   
+                                           &fighter_hitpoint,new Fighter2Graphic(),player1);   
                 FighterRegister(tmp);
                 --coins;
                 player1->Revive();
