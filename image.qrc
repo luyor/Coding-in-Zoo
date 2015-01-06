@@ -22,14 +22,9 @@
         <file>Images/enemy_images/Enemy1_hit1.png</file>
         <file>Images/enemy_images/Enemy1_hit2.png</file>
         <file>Images/background_image/background.png</file>
-        <file>Images/item_image/ItemBulletLvup1.png</file>
-        <file>Images/item_image/ItemBulletLvup2.png</file>
-        <file>Images/item_image/ItemBulletLvup3.png</file>
         <file>Images/item_image/ItemScore1000.png</file>
         <file>Images/bullet_images/bullet_blue.png</file>
         <file>Images/bullet_images/bullet_purple.png</file>
-        <file>Images/item_image/ItemBombAtomic.png</file>
-        <file>Images/item_image/ItemBombDisperse.png</file>
         <file>Images/background_image/Title.png</file>
         <file>Images/bullet_images/bullet_purple_lv2.png</file>
         <file>Images/bullet_images/bullet_purple_lv3.png</file>
@@ -48,5 +43,19 @@
         <file>Images/player_images/player_destroy3.png</file>
         <file>Images/enemy_images/Enemy2_destroy1.png</file>
         <file>Images/enemy_images/Enemy2_destroy2.png</file>
+        <file>images/item_image/Life1.png</file>
+        <file>images/item_image/Life2.png</file>
+        <file>images/background_image/Title_bk.png</file>
+        <file>images/background_image/Door1.png</file>
+        <file>images/background_image/Door2.png</file>
+        <file>images/item_image/ItemBombAtomic.png</file>
+        <file>images/item_image/ItemBombDisperse.png</file>
+        <file>images/item_image/ItemBulletLvup1.png</file>
+        <file>images/item_image/ItemBulletLvup2.png</file>
+        <file>images/item_image/ItemBulletLvup3.png</file>
+        <file>images/item_image/ItemMissile1.png</file>
+        <file>images/item_image/ItemMissile2.png</file>
+        <file>images/background_image/BombAtomic.png</file>
+        <file>images/background_image/BombDisperse.png</file>
     </qresource>
 </RCC>

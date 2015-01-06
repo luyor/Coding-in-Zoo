@@ -95,9 +95,9 @@ void ItemBulletLvupGraphic::Paint(Point position,Point velocity,double angle,dou
 void ItemBulletLvupGraphic::InitItemBulletLvup()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL1]        = new QImage(":/images/Images/item_image/ItemBulletLvup1.png");
-    pics[NORMAL2]        = new QImage(":/images/Images/item_image/ItemBulletLvup2.png");
-    pics[NORMAL3]        = new QImage(":/images/Images/item_image/ItemBulletLvup3.png");
+    pics[NORMAL1]        = new QImage(":/images/images/item_image/ItemBulletLvup1.png");
+    pics[NORMAL2]        = new QImage(":/images/images/item_image/ItemBulletLvup2.png");
+    pics[NORMAL3]        = new QImage(":/images/images/item_image/ItemBulletLvup3.png");
     pics[DESTROY]        = NULL;
 
     TIME[CREATE]  = 0;

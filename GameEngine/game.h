@@ -16,11 +16,11 @@ public:
     enum GameMode{
         SINGLE=0,
         COOP
-    };
+    }game_mode;
 
     Game();
     //clear all vector,set all to default
-    void Start(enum GameMode game_mode,int coins0);
+    void Start(enum GameMode game_mode0,int coins0);
     void Init();
     void GameLoop();
     void EndGame(){END=true;}
@@ -40,7 +40,7 @@ public:
     //respond pause/insert coin key,return pause status
     bool IsPaused();
     
-    bool WELCOME,ALLDEAD;
+    bool WELCOME,ALLDEAD,LOCK;//lock is used to prevent access from start()
     double all_dead_time;
     int coins;
     enum{
@@ -73,6 +73,7 @@ private:
     //clean all objects that finish paint
     void AllPaint(double time);
     void AllClean();
+    void DeleteAllObject();
     
     static Point FIGHTER1_INIT_POSITION;
     static Point FIGHTER2_INIT_POSITION;

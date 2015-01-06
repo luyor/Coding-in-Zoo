@@ -9,6 +9,8 @@ Point Game::FIGHTER_INIT_VELOCITY=Point(0,200);
 Game::Game():player0(NULL),player1(NULL),WELCOME(true),ALLDEAD(false)
 {
     Init();
+    graphics_time.start();
+    physics_time.start();
 }
 
 void Game::Init()
@@ -21,50 +23,15 @@ void Game::Init()
     Missile::Init();
 }
 
-void Game::Start(enum GameMode game_mode,int coins0)
-{   
+void Game::Start(enum GameMode game_mode0,int coins0)
+{
     if (player0!=NULL)delete player0;
     if (player1!=NULL)delete player1;
     player0=new Player(data.MAX_LIFE,&control);
     player1=new Player(data.MAX_LIFE,&control2);
 
-    for(vector<Bullet*>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
-        delete (*it);
-    }
-    friendly_bullets.clear();
-    for(vector<Bullet*>::iterator it=enemy_bullets.begin();it!=enemy_bullets.end();++it){
-        delete (*it);
-    }
-    enemy_bullets.clear();
-    for(vector<Fighter*>::iterator it=fighters.begin();it!=fighters.end();++it){
-        delete (*it);
-    }
-    fighters.clear();
-    for(vector<Enemy*>::iterator it=enemies.begin();it!=enemies.end();++it){
-        delete (*it);
-    }
-    enemies.clear();
-    for(vector<Bomb*>::iterator it=bombs.begin();it!=bombs.end();++it){
-        delete (*it);
-    }
-    bombs.clear();
-    for(vector<Item*>::iterator it=items.begin();it!=items.end();++it){
-        delete (*it);
-    }
-    items.clear();
-
+    DeleteAllObject();
     design.Reset();
-
-    Fighter *tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER1_INIT_POSITION,&fighter_hitpoint,new Fighter1Graphic(),player0);
-
-    FighterRegister(tmp);
-    
-    player0->START=true;
-    if(game_mode==COOP){
-        tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER2_INIT_POSITION,&fighter_hitpoint,new Fighter2Graphic(),player1);
-        player1->START=true;
-        FighterRegister(tmp);
-    }
     
     coins=coins0;
     WELCOME=false;
@@ -72,30 +39,58 @@ void Game::Start(enum GameMode game_mode,int coins0)
     END=false;
     status=MISSION_START;
     ALLDEAD=false;
+    game_mode=game_mode0;
+    control.Clean();
+    control2.Clean();
+    graphic_engine.pics_to_show.clear();
 }
 
 void Game::GameLoop()
 {
+    LOCK=true;
     while(!END){
         if (WELCOME){
+            if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND){//flash a frame
+                graphic_engine.PaintTitle((double)graphics_time.restart()/1000);
+                emit graphic_engine.Update();
+            }
         }
         else if (IsPaused()){
             graphics_time.start();
             physics_time.start();
         }else {
             switch(status){
-            case MISSION_START:
-                cout<<"mission start"<<endl;
+            case MISSION_START:{
+                //cout<<"mission start"<<endl;
                 background_position=0;
                 control.Clean();
                 control2.Clean();
                 
                 emit graphic_engine.PlaySoundBGM();
-                graphic_engine.MissionStart(0);
                 status=MISSION_ON;
+                cout<<1<<endl;
                 graphics_time.start();
+                graphic_engine.MissionStart();
+                while (!graphic_engine.MissionStartFinish()){
+                    if (END)return;
+                    if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND){//flash a frame
+                        graphic_engine.PaintDoor((double)graphics_time.restart()/1000);
+                        emit graphic_engine.Update();
+                    }
+                }
+                Fighter *tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER1_INIT_POSITION,&fighter_hitpoint,new Fighter1Graphic(),player0);
+                FighterRegister(tmp);
+                player0->START=true;
+                if(game_mode==COOP){
+                    tmp = new Fighter(FIGHTER_INIT_VELOCITY,FIGHTER2_INIT_POSITION,&fighter_hitpoint,new Fighter2Graphic(),player1);
+                    player1->START=true;
+                    FighterRegister(tmp);
+                }
+
                 physics_time.start();
+                graphics_time.start();
                 break;
+            }
             case MISSION_ON:{
                 double time=(double)physics_time.restart()/1000;
                 AllChangeStatus(time);
@@ -119,16 +114,19 @@ void Game::GameLoop()
                 break;
             }
             case MISSION_END:
-                graphic_engine.MissionComplete(0);
+                graphic_engine.MissionComplete();
                 if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND){//flash a frame
                     double time=(double)graphics_time.restart()/1000;
                     graphic_engine.PaintBackground(time);
-                    graphic_engine.MissionComplete(time);
-                    if (graphic_engine.MissionCompleteFinish()){
-                        if (design.TurnToNextStage())
-                            status=MISSION_START;
-                        else status=WIN_GAME;
+                    while (!graphic_engine.MissionCompleteFinish()){
+                        if (graphics_time.elapsed()>=1000.0/data.FRAME_PER_SECOND){//flash a frame
+                            graphic_engine.PaintDoor((double)graphics_time.restart()/1000);
+                            emit graphic_engine.Update();
+                        }
                     }
+                    if (design.TurnToNextStage())
+                        status=MISSION_START;
+                    else status=WIN_GAME;
                 }
                 break;
             case GAME_OVER:{
@@ -149,6 +147,7 @@ void Game::GameLoop()
            }         
        }
     }
+    LOCK=false;
 }
 
 void Game::FighterRegister(Fighter* fighter)
@@ -495,4 +494,33 @@ Enemy* Game::SelectNearestEnemy(Point p)
         }
     }
     return t;
+}
+
+void Game::DeleteAllObject()
+{
+    for(vector<Bullet*>::iterator it=friendly_bullets.begin();it!=friendly_bullets.end();++it){
+        delete (*it);
+    }
+    friendly_bullets.clear();
+    for(vector<Bullet*>::iterator it=enemy_bullets.begin();it!=enemy_bullets.end();++it){
+        delete (*it);
+    }
+    enemy_bullets.clear();
+    for(vector<Fighter*>::iterator it=fighters.begin();it!=fighters.end();++it){
+        delete (*it);
+    }
+    fighters.clear();
+    for(vector<Enemy*>::iterator it=enemies.begin();it!=enemies.end();++it){
+        delete (*it);
+    }
+    enemies.clear();
+    for(vector<Bomb*>::iterator it=bombs.begin();it!=bombs.end();++it){
+        delete (*it);
+    }
+    bombs.clear();
+    for(vector<Item*>::iterator it=items.begin();it!=items.end();++it){
+        delete (*it);
+    }
+    items.clear();
+
 }

@@ -64,7 +64,11 @@ SOURCES += main.cpp\
     GraphicEngine/enemy2graphic.cpp \
     GraphicEngine/fighter2graphic.cpp \
     GraphicEngine/enemy3graphic.cpp \
-    GraphicEngine/enemy4graphic.cpp
+    GraphicEngine/enemy4graphic.cpp \
+    GraphicEngine/itemmissile1graphic.cpp \
+    GraphicEngine/itemmissile2graphic.cpp \
+    GraphicEngine/itembombatomicgraphic.cpp \
+    GraphicEngine/itembombdispersegraphic.cpp
 
 HEADERS  += mainwindow.h \
     GameEngine/bomb.h \
@@ -125,7 +129,11 @@ HEADERS  += mainwindow.h \
     GraphicEngine/enemy2graphic.h \
     GraphicEngine/fighter2graphic.h \
     GraphicEngine/enemy3graphic.h \
-    GraphicEngine/enemy4graphic.h
+    GraphicEngine/enemy4graphic.h \
+    GraphicEngine/itemmissile1graphic.h \
+    GraphicEngine/itemmissile2graphic.h \
+    GraphicEngine/itembombatomicgraphic.h \
+    GraphicEngine/itembombdispersegraphic.h
 
 FORMS    += mainwindow.ui
 
