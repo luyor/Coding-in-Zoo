@@ -64,8 +64,8 @@ void Enemy1::Fire(Game &my_game)
 
 void Enemy1::Destroy()
 {
-    Item *i=new Item(Point(0,0),position,M_PI/2,&item_hitpoint,new ItemBulletLvupGraphic(),Item::YELLOW_BULLET);
-    game.ItemRegister(i);
+    //Item *i=new Item(Point(0,0),position,M_PI/2,&item_hitpoint,new ItemBulletLvupGraphic(),Item::YELLOW_BULLET);
+    //game.ItemRegister(i);
 }
 
 void Enemy1::Init()

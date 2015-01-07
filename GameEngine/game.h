@@ -40,7 +40,7 @@ public:
     //respond pause/insert coin key,return pause status
     bool IsPaused();
     
-    bool WELCOME,ALLDEAD;
+    bool WELCOME,ALLDEAD,LOCK;//lock is used to prevent access from start()
     double all_dead_time;
     int coins;
     enum{
@@ -57,6 +57,7 @@ private:
     QTime my_time;
     double background_position;  
     bool PAUSED,END;
+    Fighter *fighter1_out,*fighter2_out;
 
     vector<Bullet*> friendly_bullets;
     vector<Bullet*> enemy_bullets;
@@ -64,6 +65,8 @@ private:
     vector<Enemy*> enemies;
     vector<Bomb*> bombs;
     vector<Item*> items;
+ 
+    vector<Enemy*> buffer_enemies;
 
     //private functions
     //change velocity,auto-destroy,create,move,fire
@@ -73,6 +76,7 @@ private:
     //clean all objects that finish paint
     void AllPaint(double time);
     void AllClean();
+    void DeleteAllExceptFighter();
     
     static Point FIGHTER1_INIT_POSITION;
     static Point FIGHTER2_INIT_POSITION;

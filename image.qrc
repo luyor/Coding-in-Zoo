@@ -21,32 +21,81 @@
         <file>Images/enemy_images/Enemy1_destroy2.png</file>
         <file>Images/enemy_images/Enemy1_hit1.png</file>
         <file>Images/enemy_images/Enemy1_hit2.png</file>
-        <file>Images/background_image/background.png</file>
-        <file>Images/item_image/ItemBulletLvup1.png</file>
-        <file>Images/item_image/ItemBulletLvup2.png</file>
-        <file>Images/item_image/ItemBulletLvup3.png</file>
         <file>Images/item_image/ItemScore1000.png</file>
         <file>Images/bullet_images/bullet_blue.png</file>
         <file>Images/bullet_images/bullet_purple.png</file>
-        <file>Images/item_image/ItemBombAtomic.png</file>
-        <file>Images/item_image/ItemBombDisperse.png</file>
         <file>Images/background_image/Title.png</file>
         <file>Images/bullet_images/bullet_purple_lv2.png</file>
         <file>Images/bullet_images/bullet_purple_lv3.png</file>
         <file>Images/bullet_images/bullet_purple_lv4.png</file>
-        <file>Images/enemy_images/enemy2.png</file>
-        <file>Images/enemy_images/enemy2_hit1.png</file>
-        <file>Images/enemy_images/enemy2_hit2.png</file>
         <file>Images/player_images/player2.png</file>
         <file>Images/player_images/player2_hit1.png</file>
         <file>Images/player_images/player2_hit2.png</file>
-        <file>Images/enemy_images/Enemy2.png</file>
-        <file>Images/enemy_images/Enemy2_hit1.png</file>
-        <file>Images/enemy_images/Enemy2_hit2.png</file>
         <file>Images/player_images/player_destroy1.png</file>
         <file>Images/player_images/player_destroy2.png</file>
         <file>Images/player_images/player_destroy3.png</file>
         <file>Images/enemy_images/Enemy2_destroy1.png</file>
         <file>Images/enemy_images/Enemy2_destroy2.png</file>
+        <file>images/item_image/Life1.png</file>
+        <file>images/item_image/Life2.png</file>
+        <file>images/background_image/Title_bk.png</file>
+        <file>images/background_image/Door1.png</file>
+        <file>images/background_image/Door2.png</file>
+        <file>images/item_image/ItemBombAtomic.png</file>
+        <file>images/item_image/ItemBombDisperse.png</file>
+        <file>images/item_image/ItemBulletLvup1.png</file>
+        <file>images/item_image/ItemBulletLvup2.png</file>
+        <file>images/item_image/ItemBulletLvup3.png</file>
+        <file>images/item_image/ItemMissile1.png</file>
+        <file>images/item_image/ItemMissile2.png</file>
+        <file>images/background_image/BombAtomic.png</file>
+        <file>images/background_image/BombDisperse.png</file>
+        <file>images/background_image/background1.png</file>
+        <file>images/background_image/background2.png</file>
+        <file>images/enemy_images/Boss_destroy1.png</file>
+        <file>images/enemy_images/Boss_destroy2.png</file>
+        <file>images/enemy_images/Boss_destroy3.png</file>
+        <file>images/enemy_images/Boss_destroy4.png</file>
+        <file>images/enemy_images/Boss_destroy5.png</file>
+        <file>images/enemy_images/Boss_destroy6.png</file>
+        <file>images/enemy_images/Boss_destroy7.png</file>
+        <file>images/enemy_images/Boss_destroy8.png</file>
+        <file>images/enemy_images/Boss_destroy9.png</file>
+        <file>images/enemy_images/Boss_destroy10.png</file>
+        <file>images/enemy_images/Boss_destroy11.png</file>
+        <file>images/enemy_images/Boss1.png</file>
+        <file>images/enemy_images/Boss1_hit1.png</file>
+        <file>images/enemy_images/Boss1_hit2.png</file>
+        <file>images/enemy_images/Boss2.png</file>
+        <file>images/enemy_images/Boss2_hit1.png</file>
+        <file>images/enemy_images/Boss2_hit2.png</file>
+        <file>images/enemy_images/Boss3.png</file>
+        <file>images/enemy_images/Boss3_hit1.png</file>
+        <file>images/enemy_images/Boss3_hit2.png</file>
+        <file>images/enemy_images/Enemy1.png</file>
+        <file>images/enemy_images/Enemy1_destroy1.png</file>
+        <file>images/enemy_images/Enemy1_destroy2.png</file>
+        <file>images/enemy_images/Enemy1_hit1.png</file>
+        <file>images/enemy_images/Enemy1_hit2.png</file>
+        <file>images/enemy_images/Enemy2_destroy1.png</file>
+        <file>images/enemy_images/Enemy2_destroy2.png</file>
+        <file>images/enemy_images/enemy2_hit1.png</file>
+        <file>images/enemy_images/enemy2_hit2.png</file>
+        <file>images/enemy_images/Enemy3.png</file>
+        <file>images/enemy_images/Enemy3_destroy1.png</file>
+        <file>images/enemy_images/Enemy3_destroy2.png</file>
+        <file>images/enemy_images/Enemy3_hit1.png</file>
+        <file>images/enemy_images/Enemy3_hit2.png</file>
+        <file>images/enemy_images/Enemy4.png</file>
+        <file>images/enemy_images/Enemy4_destroy1.png</file>
+        <file>images/enemy_images/Enemy4_destroy2.png</file>
+        <file>images/enemy_images/Enemy4_hit1.png</file>
+        <file>images/enemy_images/Enemy4_hit2.png</file>
+        <file>images/enemy_images/player_destroy1.png</file>
+        <file>images/enemy_images/player_destroy2.png</file>
+        <file>images/enemy_images/player_destroy3.png</file>
+        <file>images/enemy_images/Enemy2.png</file>
+        <file>images/bullet_images/EnemyBullet2.png</file>
+        <file>images/bullet_images/EnemyBullet3.png</file>
     </qresource>
 </RCC>

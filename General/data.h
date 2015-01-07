@@ -14,6 +14,8 @@ public:
     int MAX_HEALTH;
     int CRUSH_DAMAGE;
     static const double BACKGROUND_SPEED;
+    static const double TITLE_SPEED;
+    static const double DOOR_SPEED;
 private:
     static const Point DEFAULT_GAME_AREA_BOTTOM_LEFT;
     static const Point DEFAULT_GAME_AREA_TOP_RIGHT;

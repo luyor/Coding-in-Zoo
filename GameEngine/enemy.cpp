@@ -1,6 +1,11 @@
 #include "enemy.h"
 #include "../GameDesign/enemy1.h"
 #include "../GameDesign/enemy2.h"
+#include "../GameDesign/enemy3.h"
+#include "../GameDesign/enemy4.h"
+#include "../GameDesign/boss1.h"
+#include "../GameDesign/boss2.h"
+#include "../GameDesign/boss3.h"
 #include "../res.h"
 
 Enemy::Enemy(Point v,Point p,double angle0,HitPoint* hit_point0,
@@ -31,4 +36,9 @@ void Enemy::Init()
 {
     Enemy1::Init();
     Enemy2::Init();
+    Enemy3::Init();
+    Enemy4::Init();
+    Boss1::Init();
+    Boss2::Init();
+    Boss3::Init();
 }

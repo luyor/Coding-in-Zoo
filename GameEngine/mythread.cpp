@@ -14,12 +14,14 @@ void MyThread::run()
 void MyThread::Single()
 {
     game.EndGame();
+    while (game.LOCK){}
     game.Start(Game::SINGLE,4);
 }
 
 void MyThread::COOP()
 {
     game.EndGame();
+    while (game.LOCK){}
     game.Start(Game::COOP,4);
 }
 

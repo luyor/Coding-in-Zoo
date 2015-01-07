@@ -1,10 +1,11 @@
 #include "fighter.h"
 #include "game.h"
 #include "res.h"
+#include "../GraphicEngine/itembulletlvupgraphic.h"
 
 HitPoint fighter_hitpoint;
 
-const double Fighter::SPEED=100;
+const double Fighter::SPEED=120;
 const double Fighter::YELLOW_BULLET_FREQUENCY=0.1;
 const double Fighter::YELLOW_BULLET_STOP=0.3;
 const int Fighter::YELLOW_BULLET_NUMBER=4;
@@ -24,12 +25,24 @@ void Fighter::Init()
     fighter_hitpoint.AddCircle(tmp);
 }
 
+void Fighter::Reset(Point v,Point p)
+{
+    status=FLYING;
+    velocity=v;
+    position=p;
+    health=data.MAX_HEALTH;
+    bullet_time=100;
+    missile_time=100;
+    bullet_count=0;
+    elapsed_time=0;
+}
+
 Fighter::Fighter(Point v,Point p,HitPoint* hit_point0,
                  Graphic *graphic0,Player* player):
     FlyingObject(v,p,M_PI/2,hit_point0,graphic0),
     elapsed_time(0), bullet_level(1),missile_level(0),
-    my_player(player),health(data.MAX_HEALTH),status(FLYING),bullet_time(100),my_bullet_type(PURPLE),
-    missile_time(100),my_missile_type(TRACKING),bullet_count(0)
+    my_player(player),health(data.MAX_HEALTH),status(FLYING),bullet_time(100),my_bullet_type(YELLOW),
+    missile_time(100),my_missile_type(NO),bullet_count(0)
 {
 }
 
@@ -50,7 +63,6 @@ void Fighter::Hit(double damage)
 {
     my_graphics->GetSignal(Graphic::HIT);
     health-=damage;
-    //cout<<health<<endl;
     if (health<=0)
         SetDestroy();
 }
@@ -59,6 +71,9 @@ void Fighter::Destroy()
 {
     emit graphic_engine.PlaySoundFighterDestroy();
     my_player->LoseLife();
+    for (int i=0;i<bullet_level/2;++i){
+        game.ItemRegister(new Item(Point(0,0),position,M_PI/2,&item_hitpoint,new ItemBulletLvupGraphic(),Item::YELLOW_BULLET));
+    }
     //add score
 }
 
@@ -70,31 +85,52 @@ int Fighter::Crush()
 
 void Fighter::GetItem(enum Item::ItemType type)
 {
+    emit graphic_engine.PlaySoundItemGet();
     switch(type){
     case Item::YELLOW_BULLET:
-        if (my_bullet_type==YELLOW&&bullet_level<MAX_BULLET_LEVEL){
-            ++bullet_level;        
-        }else my_bullet_type=YELLOW;
+        if (my_bullet_type==YELLOW){
+            if (bullet_level<MAX_BULLET_LEVEL)
+                ++bullet_level;     
+        }else {
+            bullet_level=1;  
+            my_bullet_type=YELLOW;
+        }
         break;
     case Item::BLUE_BULLET:
-        if (my_bullet_type==BLUE&&bullet_level<MAX_BULLET_LEVEL){
-            ++bullet_level;
-        }else my_bullet_type=BLUE;
+        if (my_bullet_type==BLUE){
+            if (bullet_level<MAX_BULLET_LEVEL)
+                ++bullet_level;
+        }else {
+            bullet_level=1;  
+            my_bullet_type=BLUE;
+        }
         break;
     case Item::PURPLE_BULLET:
-        if (my_bullet_type==PURPLE&&bullet_level<MAX_BULLET_LEVEL){
-            ++bullet_level;
-        }else my_bullet_type=PURPLE;
+        if (my_bullet_type==PURPLE){
+            if (bullet_level<MAX_BULLET_LEVEL)
+                ++bullet_level;
+        }else {
+            bullet_level=1;  
+            my_bullet_type=PURPLE;
+        }
         break;
     case Item::TRACKING_MISSILE:
-        if (my_missile_type==TRACKING&&missile_level<MAX_MISSILE_LEVEL){
-            ++missile_level;
-        }else my_missile_type=TRACKING;
+        if (my_missile_type==TRACKING){
+            if (missile_level<MAX_MISSILE_LEVEL)
+                ++missile_level;
+        }else {
+            missile_level=1;
+            my_missile_type=TRACKING;
+        }
         break;
     case Item::STRAIGHT_MISSILE:
-        if (my_missile_type==STRAIGHT&&missile_level<MAX_MISSILE_LEVEL){
-            ++missile_level;
-        }else my_missile_type=STRAIGHT;
+        if (my_missile_type==STRAIGHT){
+            if (missile_level<MAX_MISSILE_LEVEL)
+                ++missile_level;
+        }else {
+            missile_level=1;
+            my_missile_type=STRAIGHT;
+        }
         break;
     case Item::ATOMIC_BOMB:
         if (bomb_list.size()<MAX_BOMB_NUMBER){
@@ -249,7 +285,7 @@ void Fighter::FireYellowBullet(double angle0,Game &my_game)
 {
     BulletYellowGraphic *tmp=new BulletYellowGraphic();
     my_game.FriendlyBulletRegister(
-        new Bullet(Point(200*cos(angle0),200*sin(angle0)),
+        new Bullet(Point(500*cos(angle0),500*sin(angle0)),
         Point(position.x,position.y+my_graphics->Size().y/2),
         angle0,
         &yellow_bullet_hitpoint,
@@ -264,7 +300,7 @@ void Fighter::FireBlueBullet(int k,Game &my_game)
 {
     BulletBlueGraphic *tmp=new BulletBlueGraphic();
     my_game.FriendlyBulletRegister(
-        new Bullet(Point(0,300),
+        new Bullet(Point(0,500),
         Point(position.x+k*tmp->Size().x,position.y+my_graphics->Size().y/2),
         M_PI/2,
         &blue_bullet_hitpoint,

@@ -100,11 +100,11 @@ Point Enemy2Graphic::Size()
 void Enemy2Graphic::InitEnemy2()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL]         = new QImage(":/images/Images/enemy_images/Enemy2.png");
-    pics[HIT1]           = new QImage(":/images/Images/enemy_images/Enemy2_hit1.png");
-    pics[HIT2]           = new QImage(":/images/Images/enemy_images/Enemy2_hit2.png");
-    pics[DESTROY1]       = new QImage(":/images/Images/enemy_images/Enemy2_destroy1.png");
-    pics[DESTROY2]       = new QImage(":/images/Images/enemy_images/Enemy2_destroy2.png");
+    pics[NORMAL]         = new QImage(":/images/images/enemy_images/Enemy2.png");
+    pics[HIT1]           = new QImage(":/images/images/enemy_images/enemy2_hit1.png");
+    pics[HIT2]           = new QImage(":/images/images/enemy_images/enemy2_hit2.png");
+    pics[DESTROY1]       = new QImage(":/images/images/enemy_images/Enemy2_destroy1.png");
+    pics[DESTROY2]       = new QImage(":/images/images/enemy_images/Enemy2_destroy2.png");
     pics[DESTROY_FINISH] = NULL;
     TIME[CREATE]         = 0;
     TIME[NORMAL]         = 0;

@@ -52,24 +52,28 @@ void Item::ChangeStatus(double time, Game &my_game)
         if (elapsed_time>CHANGE_TIME){
             my_item_type=STRAIGHT_MISSILE;
             elapsed_time=0;
+            my_graphics->GetSignal(Graphic::HIT);
         }
         break;
     case STRAIGHT_MISSILE:
         if (elapsed_time>CHANGE_TIME){
             my_item_type=TRACKING_MISSILE;
             elapsed_time=0;
+            my_graphics->GetSignal(Graphic::HIT);
         }
         break;
     case ATOMIC_BOMB:
         if (elapsed_time>CHANGE_TIME){
             my_item_type=DISPERSE_BOMB;
             elapsed_time=0;
+            my_graphics->GetSignal(Graphic::HIT);
         }
         break;
     case DISPERSE_BOMB:
         if (elapsed_time>CHANGE_TIME){
             my_item_type=ATOMIC_BOMB;
             elapsed_time=0;
+            my_graphics->GetSignal(Graphic::HIT);
         }
         break;
     case ADD_SCORE_100:

@@ -118,8 +118,8 @@ void Fighter1Graphic::InitFighter1()
     TIME[NORMAL]         = 0;
     TIME[HIT1]           = 0.1;
     TIME[HIT2]           = 0.1;
-    TIME[DESTROY1]       = 0.3;
-    TIME[DESTROY2]       = 0.3;
-    TIME[DESTROY3]       = 0.3;
+    TIME[DESTROY1]       = 0.2;
+    TIME[DESTROY2]       = 0.2;
+    TIME[DESTROY3]       = 0.2;
     TIME[DESTROY_FINISH] = 0;
 }

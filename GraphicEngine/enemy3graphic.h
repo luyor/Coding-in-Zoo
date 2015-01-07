@@ -23,7 +23,7 @@ public:
     PicNode node;
     static QImage *pics[DESTROY_FINISH + 1];
     static double TIME[DESTROY_FINISH + 1];
-    static void InitEnemy2();
+    static void InitEnemy3();
     Enemy3Graphic();
     Point Size();
     void Paint(Point position,Point velocity,double angle,double time);
