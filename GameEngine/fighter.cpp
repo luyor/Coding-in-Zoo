@@ -88,40 +88,45 @@ void Fighter::GetItem(enum Item::ItemType type)
     emit graphic_engine.PlaySoundItemGet();
     switch(type){
     case Item::YELLOW_BULLET:
-        if (my_bullet_type==YELLOW&&bullet_level<MAX_BULLET_LEVEL){
-            ++bullet_level;        
+        if (my_bullet_type==YELLOW){
+            if (bullet_level<MAX_BULLET_LEVEL)
+                ++bullet_level;     
         }else {
             bullet_level=1;  
             my_bullet_type=YELLOW;
         }
         break;
     case Item::BLUE_BULLET:
-        if (my_bullet_type==BLUE&&bullet_level<MAX_BULLET_LEVEL){
-            ++bullet_level;
+        if (my_bullet_type==BLUE){
+            if (bullet_level<MAX_BULLET_LEVEL)
+                ++bullet_level;
         }else {
             bullet_level=1;  
             my_bullet_type=BLUE;
         }
         break;
     case Item::PURPLE_BULLET:
-        if (my_bullet_type==PURPLE&&bullet_level<MAX_BULLET_LEVEL){
-            ++bullet_level;
+        if (my_bullet_type==PURPLE){
+            if (bullet_level<MAX_BULLET_LEVEL)
+                ++bullet_level;
         }else {
             bullet_level=1;  
             my_bullet_type=PURPLE;
         }
         break;
     case Item::TRACKING_MISSILE:
-        if (my_missile_type==TRACKING&&missile_level<MAX_MISSILE_LEVEL){
-            ++missile_level;
+        if (my_missile_type==TRACKING){
+            if (missile_level<MAX_MISSILE_LEVEL)
+                ++missile_level;
         }else {
             missile_level=1;
             my_missile_type=TRACKING;
         }
         break;
     case Item::STRAIGHT_MISSILE:
-        if (my_missile_type==STRAIGHT&&missile_level<MAX_MISSILE_LEVEL){
-            ++missile_level;
+        if (my_missile_type==STRAIGHT){
+            if (missile_level<MAX_MISSILE_LEVEL)
+                ++missile_level;
         }else {
             missile_level=1;
             my_missile_type=STRAIGHT;
