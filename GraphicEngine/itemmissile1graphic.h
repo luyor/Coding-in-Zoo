@@ -12,6 +12,7 @@ public:
         EMPTY,
         CREATE,
         NORMAL,
+        NORMAL1,
         DESTROY
     };
     enum PicStatus status;

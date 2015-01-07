@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "GameEngine/mythread.h"
+#include "GraphicEngine/paintwidget.h"
 #include <QFocusEvent>
 
 namespace Ui {
@@ -55,6 +56,7 @@ private:
     QString strippedName(const QString &fullFileName);
 
     MyThread* my_thread;
+    PaintWidget* centralwidget;
 
     QPlainTextEdit *textEdit;
     QString curFile;

@@ -46,6 +46,7 @@ public:
         verticalSlider_3->setObjectName(QStringLiteral("verticalSlider_3"));
         verticalSlider_3->setGeometry(QRect(390, 100, 41, 171));
         verticalSlider_3->setOrientation(Qt::Vertical);
+      
         layoutWidget = new QWidget(Dialog);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
         layoutWidget->setGeometry(QRect(220, 360, 311, 47));

@@ -9,7 +9,7 @@ QT       += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = he1
+TARGET = raiden
 TEMPLATE = app
 
 
@@ -66,9 +66,17 @@ SOURCES += main.cpp\
     GraphicEngine/enemy3graphic.cpp \
     GraphicEngine/enemy4graphic.cpp \
     GraphicEngine/itemmissile1graphic.cpp \
-    GraphicEngine/itemmissile2graphic.cpp \
     GraphicEngine/itembombatomicgraphic.cpp \
-    GraphicEngine/itembombdispersegraphic.cpp
+    GameDesign/enemy3.cpp \
+    GameDesign/enemy4.cpp \
+    GameDesign/boss1.cpp \
+    GraphicEngine/boss1graphic.cpp \
+    GraphicEngine/boss2graphic.cpp \
+    GraphicEngine/boss3graphic.cpp \
+    GraphicEngine/enemybullet2graphic.cpp \
+    GraphicEngine/enemybullet3graphic.cpp \
+    GameDesign/boss3.cpp \
+    GameDesign/boss2.cpp
 
 HEADERS  += mainwindow.h \
     GameEngine/bomb.h \
@@ -131,9 +139,18 @@ HEADERS  += mainwindow.h \
     GraphicEngine/enemy3graphic.h \
     GraphicEngine/enemy4graphic.h \
     GraphicEngine/itemmissile1graphic.h \
-    GraphicEngine/itemmissile2graphic.h \
     GraphicEngine/itembombatomicgraphic.h \
-    GraphicEngine/itembombdispersegraphic.h
+    GameDesign/enemy3.h \
+    GameDesign/enemy4.h \
+    GameDesign/boss1.h \
+    GraphicEngine/boss1graphic.h \
+    GraphicEngine/boss2graphic.h \
+    GraphicEngine/boss3graphic.h \
+    GraphicEngine/enemybullet2graphic.h \
+    GraphicEngine/enemybullet3graphic.h \
+    UI/soundui.h \
+    GameDesign/boss3.h \
+    GameDesign/boss2.h
 
 FORMS    += mainwindow.ui
 

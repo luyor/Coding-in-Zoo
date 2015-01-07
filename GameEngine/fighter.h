@@ -39,6 +39,7 @@ public:
     //check if acting when crush enemy
     bool IsActing(){if (status==ACTING)return true;return false;}
     Player* GetPlayer(){return my_player;}
+    void Reset(Point v,Point p);//reset position and status at beginning of a stage
 
     static void Init();//init hitpoint
     
@@ -72,7 +73,8 @@ private:
     }my_bullet_type;
     enum MissileType{
         TRACKING=0,
-        STRAIGHT
+        STRAIGHT,
+        NO
     }my_missile_type;
     
     

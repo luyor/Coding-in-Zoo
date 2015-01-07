@@ -1,50 +1,50 @@
-#include "itemmissile2graphic.h"
+#include "enemybullet3graphic.h"
 #include "res.h"
 #include <QMatrix>
 
-QImage* ItemMissile2Graphic::pics[] = {NULL};
+QImage* EnemyBullet3Graphic::pics[] = {NULL};
 
-double ItemMissile2Graphic::TIME[] = {0};
+double EnemyBullet3Graphic::TIME[] = {0};
 
-ItemMissile2Graphic::ItemMissile2Graphic():node(Point(0,0),QPixmap()),status(NORMAL)
+EnemyBullet3Graphic::EnemyBullet3Graphic():node(Point(0,0),QPixmap()),status(NORMAL)
 {
 
 }
 
-Point ItemMissile2Graphic::Size()
+Point EnemyBullet3Graphic::Size()
 {
     if(pics[status] == NULL) return Point(0,0);
     return Point(pics[status]->width(),pics[status]->height());
 }
 
-void ItemMissile2Graphic::Paint(Point position,Point velocity,double angle,double time)
+void EnemyBullet3Graphic::Paint(Point position,Point velocity,double angle,double time)
 {
     QMatrix matrix;
     QImage* img;
     image_to_show = new QImage;
     elapsed_time += time;
-    if(sig == Graphic::CREATE)  status = ItemMissile2Graphic::CREATE;
-    if(sig == Graphic::DESTROY) status = ItemMissile2Graphic::DESTROY;
+    if(sig == Graphic::CREATE)  status = EnemyBullet3Graphic::CREATE;
+    if(sig == Graphic::DESTROY) status = EnemyBullet3Graphic::DESTROY;
     if(sig == Graphic::NO_SIGNAL)
     {
         switch(status)
         {
-        case ItemMissile2Graphic::CREATE:
-            if(elapsed_time > TIME[ItemMissile2Graphic::CREATE])
+        case EnemyBullet3Graphic::CREATE:
+            if(elapsed_time > TIME[EnemyBullet3Graphic::CREATE])
             {
                 elapsed_time = 0;
-                status = ItemMissile2Graphic::NORMAL;
+                status = EnemyBullet3Graphic::NORMAL;
             }
             break;
-        case ItemMissile2Graphic::NORMAL:
-            if(elapsed_time > TIME[ItemMissile2Graphic::NORMAL])
+        case EnemyBullet3Graphic::NORMAL:
+            if(elapsed_time > TIME[EnemyBullet3Graphic::NORMAL])
             {
                 elapsed_time = 0;
-                status = ItemMissile2Graphic::NORMAL;
+                status = EnemyBullet3Graphic::NORMAL;
             }
             break;
-        case ItemMissile2Graphic::DESTROY:
-            if(elapsed_time > TIME[ItemMissile2Graphic::DESTROY])
+        case EnemyBullet3Graphic::DESTROY:
+            if(elapsed_time > TIME[EnemyBullet3Graphic::DESTROY])
             {
                 elapsed_time = 0;
                 finish = true;
@@ -64,10 +64,10 @@ void ItemMissile2Graphic::Paint(Point position,Point velocity,double angle,doubl
     delete image_to_show;
 }
 
-void ItemMissile2Graphic::InitItemMissile2()
+void EnemyBullet3Graphic::InitEnemyBullet3()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL]         = new QImage(":/images/images/item_image/ItemMissile2.png");
+    pics[NORMAL]         = new QImage(":/images/images/bullet_images/EnemyBullet3.png");
     pics[DESTROY]        = NULL;
 
     TIME[CREATE]  = 0;

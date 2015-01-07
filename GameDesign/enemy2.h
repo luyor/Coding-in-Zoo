@@ -4,6 +4,14 @@
 #include "../GraphicEngine/enemy2graphic.h"
 #include "../GameEngine/enemy.h"
 
+const double max_turn_angle = M_PI / 72.0;
+const double DELTA = 0.0001;
+
+const double SPEED = 25;
+const double SLOW_BULLET = 105;
+const double NORMAL_BULLET = 120;
+const double FAST_BULLET = 150;
+
 class Fighter;
 
 extern HitPoint enemy2_hitpoint;

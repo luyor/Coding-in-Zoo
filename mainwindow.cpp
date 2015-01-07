@@ -12,16 +12,16 @@
 #include "UI/ui_operation.h"
 #include "UI/valueshow.h"
 #include "UI/ui_valueshow.h"
-#include "GraphicEngine/paintwidget.h"
 #include "res.h"
 
 MainWindow::MainWindow()
 {
     installEventFilter(this);
-    PaintWidget* centralwidget= new PaintWidget();
+    centralwidget= new PaintWidget();
     setGeometry(100,100,500,520);
     this->setCentralWidget(centralwidget);
     createMenus();
+    this->setFixedSize( this->width (),this->height ());
     my_thread=new MyThread();
     my_thread->start();
 
@@ -36,7 +36,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::createMenus()
 {
-    fileMenu = menuBar()->addMenu(tr("&Game(G)"));
+    fileMenu = menuBar()->addMenu(tr("&Game(G)")); 
     QAction *setMode1 = new QAction(tr("&1 Player Mode"), this);
     fileMenu->addAction(setMode1);
     connect(setMode1,SIGNAL(triggered()),this,SLOT(Player1Mode()));
@@ -55,9 +55,11 @@ void MainWindow::createMenus()
 
 
     editMenu = menuBar()->addMenu(tr("&Option(O)"));
+    /*
     QAction *Screen = new QAction(tr("&Screen"), this);
     editMenu->addAction(Screen);
     connect(Screen,SIGNAL(triggered()),this,SLOT(ScreenSetting()));
+    */
 
     QAction *Sound = new QAction(tr("&Sound"), this);
     editMenu->addAction(Sound);
@@ -72,20 +74,19 @@ void MainWindow::createMenus()
     QAction *Introduction = new QAction(tr("&Introduction"), this);
     helpMenu->addAction(Introduction);
     connect(Introduction,SIGNAL(triggered()),this,SLOT(Introduction()));
-    QAction *Information = new QAction(tr("&Information"), this);
-    helpMenu->addAction(Information);
+
     QAction *AboutUs = new QAction(tr("&About Us"), this);
     helpMenu->addAction(AboutUs);
     connect(AboutUs,SIGNAL(triggered()),this,SLOT(about()));
 
-        controlMenu = menuBar()->addMenu(tr("&Control(C)"));
+      /*  controlMenu = menuBar()->addMenu(tr("&Control(C)"));
         QAction *Control =new QAction(tr("&KeyPressShow"),this);
         QAction *ValueShow =new QAction(tr("&ValueShow"),this);
         controlMenu->addAction(Control);
         controlMenu->addAction(ValueShow);
         connect(Control,SIGNAL(triggered()),this,SLOT(KeyPressShow()));
         connect(ValueShow,SIGNAL(triggered()),this,SLOT(ValueShowWindow()));
-
+     */
 }
 
 
@@ -114,24 +115,20 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 void MainWindow::about()
 {
    QMessageBox::about(this, tr("About Us"),
-            tr("This Part of Game Is Written By KiwiDc. ^_^\n\n"
-               "GropMember:\nLuYuhe\nYangJiaqi\nLuoyou\nLiuChengxian\n"));
+            tr("This Game Is Written By Our Group Members. ^_^\n\n"
+               "Group Member:\nLuYuhe\nYangJiaqi\nLuoyou\nLiuChengxian\n"));
 }
 
 void MainWindow::Introduction()
 {
     QMessageBox::about(this, tr("Introduction Of Game"),
-             tr("  When Earthrealm was young, Raiden was its protector "
-                "He fought the rogue Elder God Shinnok, who wished to"
-                "overthrow his fellow gods, in a war that threatened to "
-                "destroy Earthrealm itself. One of the casualties of the"
-                "war was the Saurian civilization (of which Reptile is a"
-                "descendant), forcing the remaining survivors to emigrate"
-                "to another world, which they named Zaterra. With the aid"
-                "of the Elder Gods, Raiden managed to defeat Shinnok, then"
-                "banished him to the Netherealm and secured Shinnok's amulet"
+             tr("Don't ask who is Raiden! That 's a word I"
+                " and the game 's characters use intentionally!"
+                " What we only know is that he is SLAUGHTER"
+                " who only want to kill more!"
                 ));
 }
+
 
 void MainWindow::ScreenSetting()
 {
@@ -141,13 +138,15 @@ void MainWindow::ScreenSetting()
 
 void MainWindow::SoundSetting()
 {
-    Sound Dialog;
-    Dialog.exec();
+    Sound MySound;
+    connect(MySound.ui->pushButton,SIGNAL(clicked()),&(this->centralwidget->se),SLOT(ChangeVolume()));
+    MySound.exec();
 }
 
 void MainWindow::DifficultySetting()
 {
     Difficulty Dialog;
+
     Dialog.exec();
 }
 

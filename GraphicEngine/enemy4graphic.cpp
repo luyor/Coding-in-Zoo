@@ -97,14 +97,14 @@ Point Enemy4Graphic::Size()
     return Point(pics[status]->width(),pics[status]->height());
 }
 
-void Enemy4Graphic::InitEnemy2()
+void Enemy4Graphic::InitEnemy4()
 {
     pics[CREATE]         = NULL;
-    pics[NORMAL]         = new QImage(":/images/Images/enemy_images/Enemy4.png");
-    pics[HIT1]           = new QImage(":/images/Images/enemy_images/Enemy4_hit1.png");
-    pics[HIT2]           = new QImage(":/images/Images/enemy_images/Enemy4_hit2.png");
-    pics[DESTROY1]       = new QImage(":/images/Images/enemy_images/Enemy4_destroy1.png");
-    pics[DESTROY2]       = new QImage(":/images/Images/enemy_images/Enemy4_destroy2.png");
+    pics[NORMAL]         = new QImage(":/images/images/enemy_images/Enemy4.png");
+    pics[HIT1]           = new QImage(":/images/images/enemy_images/Enemy4_hit1.png");
+    pics[HIT2]           = new QImage(":/images/images/enemy_images/Enemy4_hit2.png");
+    pics[DESTROY1]       = new QImage(":/images/images/enemy_images/Enemy4_destroy1.png");
+    pics[DESTROY2]       = new QImage(":/images/images/enemy_images/Enemy4_destroy2.png");
     pics[DESTROY_FINISH] = NULL;
     TIME[CREATE]         = 0;
     TIME[NORMAL]         = 0;

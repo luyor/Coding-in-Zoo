@@ -25,6 +25,10 @@ void ItemBombAtomicGraphic::Paint(Point position,Point velocity,double angle,dou
     elapsed_time += time;
     if(sig == Graphic::CREATE)  status = ItemBombAtomicGraphic::CREATE;
     if(sig == Graphic::DESTROY) status = ItemBombAtomicGraphic::DESTROY;
+    if (sig == Graphic::HIT){
+        if (status==ItemBombAtomicGraphic::NORMAL)status=ItemBombAtomicGraphic::NORMAL1;
+                else status=ItemBombAtomicGraphic::NORMAL;
+    }
     if(sig == Graphic::NO_SIGNAL)
     {
         switch(status)
@@ -68,6 +72,7 @@ void ItemBombAtomicGraphic::InitItemBombAtomic()
 {
     pics[CREATE]         = NULL;
     pics[NORMAL]         = new QImage(":/images/images/item_image/ItemBombAtomic.png");
+    pics[NORMAL1]         = new QImage(":/images/images/item_image/ItemBombDisperse.png");
     pics[DESTROY]        = NULL;
 
     TIME[CREATE]  = 0;

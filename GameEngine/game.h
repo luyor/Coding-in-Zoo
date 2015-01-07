@@ -16,11 +16,11 @@ public:
     enum GameMode{
         SINGLE=0,
         COOP
-    }game_mode;
+    };
 
     Game();
     //clear all vector,set all to default
-    void Start(enum GameMode game_mode0,int coins0);
+    void Start(enum GameMode game_mode,int coins0);
     void Init();
     void GameLoop();
     void EndGame(){END=true;}
@@ -57,6 +57,7 @@ private:
     QTime my_time;
     double background_position;  
     bool PAUSED,END;
+    Fighter *fighter1_out,*fighter2_out;
 
     vector<Bullet*> friendly_bullets;
     vector<Bullet*> enemy_bullets;
@@ -64,6 +65,8 @@ private:
     vector<Enemy*> enemies;
     vector<Bomb*> bombs;
     vector<Item*> items;
+ 
+    vector<Enemy*> buffer_enemies;
 
     //private functions
     //change velocity,auto-destroy,create,move,fire
@@ -73,7 +76,7 @@ private:
     //clean all objects that finish paint
     void AllPaint(double time);
     void AllClean();
-    void DeleteAllObject();
+    void DeleteAllExceptFighter();
     
     static Point FIGHTER1_INIT_POSITION;
     static Point FIGHTER2_INIT_POSITION;

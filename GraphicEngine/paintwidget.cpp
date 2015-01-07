@@ -6,10 +6,11 @@ PaintWidget::PaintWidget(QWidget *parent) :
 {
    se.PlaySoundBGM();
 
-   graphic_engine.back_ground = new QPixmap(":/images/Images/background_image/background.png");
+   graphic_engine.back_ground[0] = new QPixmap(":/images/images/background_image/background1.png");
+   graphic_engine.back_ground[1] = new QPixmap(":/images/images/background_image/background2.png");
    graphic_engine.title = new QPixmap(":/images/Images/background_image/Title.png");
    graphic_engine.bomb_atomic = new QPixmap(":/images/images/background_image/BombAtomic.png");
-   graphic_engine.bomb_disperse = new QPixmap(":/images/images/background_image/BombAtomic.png");
+   graphic_engine.bomb_disperse = new QPixmap(":/images/images/background_image/BombDisperse.png");
    graphic_engine.life1 = new QPixmap(":/images/images/item_image/Life1.png"); //aiur
    graphic_engine.life2 = new QPixmap(":/images/images/item_image/Life2.png"); //aiur
    graphic_engine.bk_title = new QPixmap(":/images/images/background_image/Title_bk.png");
@@ -27,6 +28,9 @@ PaintWidget::PaintWidget(QWidget *parent) :
    connect(&graphic_engine,SIGNAL(PlaySoundBombAtomic()),&se,SLOT(PlaySoundBombAtomic()));
    connect(&graphic_engine,SIGNAL(PlaySoundBombDisperse()),&se,SLOT(PlaySoundBombDisperse()));
    connect(&graphic_engine,SIGNAL(PlaySoundFighterDestroy()),&se,SLOT(PlaySoundFighterDestroy()));
+   connect(&graphic_engine,SIGNAL(NextBGM()),&se,SLOT(NextBGM()));
+   connect(&graphic_engine,SIGNAL(ResetBGM()),&se,SLOT(ResetBGM()));
+   connect(&graphic_engine,SIGNAL(PlaySoundItemGet()),&se,SLOT(PlaySoundItemGet()));
 }
 
 void PaintWidget::paintEvent(QPaintEvent* event)
@@ -51,17 +55,16 @@ void PaintWidget::paintEvent(QPaintEvent* event)
     }
     else{
         //paint background
-        if(graphic_engine.back_ground != NULL)
+        if(graphic_engine.back_ground[se.BGM_index-1] != NULL)
         {
             int bky1,bky2;
-
-            bky1 = (int)(graphic_engine.back_ground->height()-this->height()-graphic_engine.bk);
+            bky1 = (int)(graphic_engine.back_ground[se.BGM_index-1]->height()-this->height()-graphic_engine.bk);
             if(bky1 <= 0) bky1 = 0;
 
-            bky2 = (int)(graphic_engine.back_ground->height()-graphic_engine.bk);
-            if(bky2 <= this->height()) bky2 = graphic_engine.back_ground->height();
+            bky2 = (int)(graphic_engine.back_ground[se.BGM_index-1]->height()-graphic_engine.bk);
+            if(bky2 <= this->height()) bky2 = graphic_engine.back_ground[se.BGM_index-1]->height();
 
-            painter.drawPixmap(0,0,*graphic_engine.back_ground,
+            painter.drawPixmap(0,0,*graphic_engine.back_ground[se.BGM_index-1],
                                0,bky1,
                               this->width(),bky2);
         }
@@ -83,7 +86,7 @@ void PaintWidget::paintEvent(QPaintEvent* event)
         painter.setPen(QColor(Qt::yellow));
         if(game.player0->START == false)
         {
-            painter.drawText(this->width()-155,40,"PRESS START");
+            painter.drawText(10,40,"PRESS START");
 
         }
         else{
@@ -178,7 +181,6 @@ void PaintWidget::paintEvent(QPaintEvent* event)
     //paint door close
     if(graphic_engine.door_close)
     {
-        cout<<"close"<<endl;
         int y1,y2;
         y1 =-250 + (int)(data.DOOR_SPEED*graphic_engine.door_time);
         if(y1>0){

@@ -25,6 +25,10 @@ void ItemMissile1Graphic::Paint(Point position,Point velocity,double angle,doubl
     elapsed_time += time;
     if(sig == Graphic::CREATE)  status = ItemMissile1Graphic::CREATE;
     if(sig == Graphic::DESTROY) status = ItemMissile1Graphic::DESTROY;
+    if (sig == Graphic::HIT){
+        if (status==ItemMissile1Graphic::NORMAL)status=ItemMissile1Graphic::NORMAL1;
+                else status=ItemMissile1Graphic::NORMAL;
+    }
     if(sig == Graphic::NO_SIGNAL)
     {
         switch(status)
@@ -68,6 +72,7 @@ void ItemMissile1Graphic::InitItemMissile1()
 {
     pics[CREATE]         = NULL;
     pics[NORMAL]         = new QImage(":/images/images/item_image/ItemMissile1.png");
+    pics[NORMAL1]         = new QImage(":/images/images/item_image/ItemMissile1.png");
     pics[DESTROY]        = NULL;
 
     TIME[CREATE]  = 0;

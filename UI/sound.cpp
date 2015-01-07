@@ -40,11 +40,20 @@ void Sound::on_pushButton_clicked()
     if(d == 0)
         gamepara.bombSound = 0;
 
-
     this->close();
 }
 
 void Sound::on_pushButton_2_clicked()
 {
     this->close();
+}
+
+void Sound::on_verticalSlider_sliderMoved(int position)
+{
+     gamepara.backGroundSound = position;
+}
+
+void Sound::on_verticalSlider_2_sliderMoved(int position)
+{
+     gamepara.bombSound = position;
 }

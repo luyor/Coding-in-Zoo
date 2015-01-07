@@ -7,15 +7,20 @@
 #include "bombdispersegraphic.h"
 #include "enemy1graphic.h"
 #include "enemybullet1graphic.h"
+#include "enemybullet2graphic.h"
+#include "enemybullet3graphic.h"
 #include "itembulletlvupgraphic.h"
 #include "itemscore1000graphic.h"
 #include "bulletbluegraphic.h"
 #include "bulletpurplegraphic.h"
 #include "enemy2graphic.h"
+#include "enemy3graphic.h"
+#include "enemy4graphic.h"
+#include "boss1graphic.h"
+#include "boss2graphic.h"
+#include "boss3graphic.h"
 #include "itemmissile1graphic.h"
-#include "itemmissile2graphic.h"
 #include "itembombatomicgraphic.h"
-#include "itembombdispersegraphic.h"
 #include "../GameEngine/fighter.h"
 
 GraphicEngine::GraphicEngine() : door_open(false),door_close(false),title_time(0),door_time(0),bk(0), f1(NULL), f2(NULL), END_PAINT(true)
@@ -28,15 +33,22 @@ GraphicEngine::GraphicEngine() : door_open(false),door_close(false),title_time(0
     BombDisperseGraphic::InitBombDisperse();
     Enemy1Graphic::InitEnemy1();
     Enemy2Graphic::InitEnemy2();
+    Enemy3Graphic::InitEnemy3();
+    Enemy4Graphic::InitEnemy4();
+    Boss1Graphic::InitBoss1();
+    Boss2Graphic::InitBoss2();
+    Boss3Graphic::InitBoss3();
+    
     EnemyBullet1Graphic::InitEnemyBullet1();
+    EnemyBullet2Graphic::InitEnemyBullet2();
+    EnemyBullet3Graphic::InitEnemyBullet3();
     ItemBulletLvupGraphic::InitItemBulletLvup();
     ItemScore1000Graphic::InitItemScore1000();
     BulletBlueGraphic::InitBulletBlue();
     BulletPurpleGraphic::InitBulletPurple();
     ItemMissile1Graphic::InitItemMissile1();
-    ItemMissile2Graphic::InitItemMissile2();
     ItemBombAtomicGraphic::InitItemBombAtomic();
-    ItemBombDisperseGraphic::InitItemBombDisperse();
+    Enemy4Graphic::InitEnemy4();
 }
 
 void GraphicEngine::MissionStart()

@@ -1,5 +1,6 @@
 #ifndef DESIGN_H
 #define DESIGN_H
+
 const int N_ENEMY = 10000;
 const int N_STAGE = 5;
 

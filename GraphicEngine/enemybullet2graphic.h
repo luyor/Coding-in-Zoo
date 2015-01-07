@@ -1,11 +1,11 @@
-#ifndef ITEMBOMBDISPERSEGRAPHIC_H
-#define ITEMBOMBDISPERSEGRAPHIC_H
+#ifndef EnemyBullet2Graphic_H
+#define EnemyBullet2Graphic_H
 
 #include "graphic.h"
 #include <QImage>
 #include "picnode.h"
 
-class ItemBombDisperseGraphic :public Graphic
+class EnemyBullet2Graphic :public Graphic
 {
 public:
     enum PicStatus{
@@ -19,10 +19,10 @@ public:
     PicNode node;
     static QImage *pics[DESTROY + 1];
     static double TIME[DESTROY + 1];
-    static void InitItemBombDisperse();
-    ItemBombDisperseGraphic();
+    static void InitEnemyBullet2();
+    EnemyBullet2Graphic();
     Point Size();
     void Paint(Point position,Point velocity,double angle,double time);
 };
 
-#endif // ITEMBOMBDISPERSEGRAPHIC_H
+#endif // EnemyBullet2Graphic_H

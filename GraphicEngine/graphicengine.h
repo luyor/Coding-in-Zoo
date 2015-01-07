@@ -27,7 +27,7 @@ public:
     void PaintTitle(double time);
     bool MissionStartFinish();
     bool MissionCompleteFinish();
-    QPixmap *back_ground,
+    QPixmap *back_ground[2],
             *title,
             *bk_title,
             *bomb_atomic,
@@ -50,6 +50,9 @@ signals:
     void PlaySoundBulletBlue();
     void PlaySoundBulletPurple();
     void PlaySoundEnemyHit();
+    void NextBGM();
+    void ResetBGM();
+    void PlaySoundItemGet();
 };
 
 #endif // GRAPHICENGINE_H

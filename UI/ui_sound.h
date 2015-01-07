@@ -21,6 +21,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QWidget>
+#include "../res.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -50,6 +51,8 @@ public:
         verticalSlider->setObjectName(QStringLiteral("verticalSlider"));
         verticalSlider->setGeometry(QRect(110, 100, 41, 171));
         verticalSlider->setOrientation(Qt::Vertical);
+        verticalSlider->setValue(gamepara.backGroundSound);
+        
         layoutWidget = new QWidget(Sound);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
         layoutWidget->setGeometry(QRect(210, 360, 311, 47));
@@ -79,6 +82,7 @@ public:
         verticalSlider_2->setObjectName(QStringLiteral("verticalSlider_2"));
         verticalSlider_2->setGeometry(QRect(380, 100, 41, 171));
         verticalSlider_2->setOrientation(Qt::Vertical);
+        verticalSlider_2->setValue(gamepara.backGroundSound);
 
         retranslateUi(Sound);
 

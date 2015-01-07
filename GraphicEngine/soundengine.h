@@ -11,6 +11,7 @@ class SoundEngine : public QObject
     Q_OBJECT
 public:
     explicit SoundEngine(QObject *parent = 0);
+    int BGM_index;
     //QSoundEffect* SoundBGM = new QSoundEffect(this);
     QMediaPlaylist* BGMList = new QMediaPlaylist;
     QMediaPlayer* SoundBGM = new QMediaPlayer;
@@ -19,13 +20,18 @@ public:
     QMediaPlayer* SoundBombAtomic = new QMediaPlayer;
     QMediaPlayer* SoundBombDisperse = new QMediaPlayer;
     QMediaPlayer* SoundEnemyDestroy = new QMediaPlayer;
-    QSound* SoundBulletYellow = new QSound("BulletYellow.wav",this);
-    QSound* SoundBulletBlue = new QSound("BulletBlue.wav",this);
-    QSound* SoundBulletPurple = new QSound("BulletPurple.wav",this);
-    QSound* SoundEnemyHit = new QSound("EnemyHit.wav",this);
 
+    QSoundEffect* SoundBulletYellow = new QSoundEffect(this);
+    QSoundEffect* SoundBulletBlue = new QSoundEffect(this);
+    QSoundEffect* SoundBulletPurple = new QSoundEffect(this);
+    QSoundEffect* SoundEnemyHit = new QSoundEffect(this);
+    QSoundEffect* SoundItemGet = new QSoundEffect(this);
+    int vbgm,veffect;
 
 public slots:
+    void NextBGM();
+    void ResetBGM();
+    void ChangeVolume();
     void PlaySoundBGM();
     void PlaySoundFighterDestroy();
     void PlaySoundBombFall();
@@ -36,6 +42,7 @@ public slots:
     void PlaySoundBulletBlue();
     void PlaySoundBulletPurple();
     void PlaySoundEnemyHit();
+    void PlaySoundItemGet();
 };
 
 #endif // SOUNDENGINE_H
